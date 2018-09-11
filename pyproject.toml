@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "option"
-version = "0.1.1"
+version = "0.1.2"
 description = "Rust like Option type in Python"
 authors = ["Peijun Ma <peijun.ma@protonmail.com>"]
 readme = "README.md"
@@ -16,3 +16,4 @@ python = ">=3.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
+mypy = "^0.620.0"

@@ -28,7 +28,7 @@ from .types_ import A, NoneError, T, U, _NoneError
 class Option(Generic[T]):
     __slots__ = ('_val', '_is_some')
 
-    def __init__(self, value: T, is_some: bool, *, _force: bool = False):
+    def __init__(self, value: T, is_some: bool, *, _force: bool = False) -> None:
         if not _force:
             raise TypeError(
                 'Cannot directly initialize, '
@@ -80,8 +80,11 @@ class Option(Generic[T]):
     def unwrap_or_else(self, callback: Callable[[], U]) -> Union[T, U]:
         return self._val if self._is_some else callback()
 
-    def map(self, callback: Callable[[T], U]) -> 'Option[U]':
-        return self.some(callback(self._val)) if self._is_some else NONE
+    def map(self, callback: Callable[[T], U]) -> 'Union[Option[U], Option[None]]':
+        if self._is_some:
+            return type(self).some(callback(self._val))
+        else:
+            return NONE
 
     def map_or(self, callback: Callable[[T], U], default: A) -> Union[U, A]:
         return callback(self._val) if self._is_some else default
@@ -89,13 +92,16 @@ class Option(Generic[T]):
     def map_or_else(self, callback: Callable[[T], U], default: Callable[[], A]) -> Union[U, A]:
         return callback(self._val) if self._is_some else default()
 
-    def filter(self, predicate: Callable[[T], bool]) -> 'Option[T]':
-        return self if self._is_some and predicate(self._val) else NONE
+    def filter(self, predicate: Callable[[T], bool]) -> 'Union[Option[T], Option[None]]':
+        if self._is_some and predicate(self._val):
+            return self
+        else:
+            return NONE
 
     def __hash__(self):
         return hash((self.__class__, self._is_some, self._val))
 
-    def __eq__(self, other: 'Option'):
+    def __eq__(self, other):
         return (isinstance(other, type(self))
                 and self._is_some == other._is_some
                 and self._val == other._val)
