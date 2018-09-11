@@ -151,9 +151,7 @@ class Option(Generic[T]):
     ) -> 'Union[Option[V], Option[None]]':
         if self._is_some:
             return type(self).maybe(self._val.get(key, default))
-        elif default:
-            return type(self).maybe(default)
-        return NONE
+        return type(self).maybe(default)
 
 
 def some(val: T) -> Option[T]:
