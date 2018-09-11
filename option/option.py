@@ -20,9 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from typing import Callable, Generic, Union
+from typing import Callable, Generic, Mapping, Union
 
-from .types_ import A, NoneError, T, U, _NoneError
+from .types_ import A, K, NoneError, T, U, V, _NoneError
 
 
 class Option(Generic[T]):
@@ -143,6 +143,17 @@ class Option(Generic[T]):
 
     def __repr__(self):
         return 'none' if self.is_none else f'some({self._val!r})'
+
+    def get(
+            self: 'Option[Mapping[K,V]]',
+            key: K,
+            default=None
+    ) -> 'Union[Option[V], Option[None]]':
+        if self._is_some:
+            return type(self).maybe(self._val.get(key, default))
+        elif default:
+            return type(self).maybe(default)
+        return NONE
 
 
 def some(val: T) -> Option[T]:

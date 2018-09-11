@@ -219,3 +219,14 @@ def test_lt_gt_type_error(self, other):
         self > other
     with pytest.raises(TypeError):
         self >= other
+
+
+@pytest.mark.parametrize('obj,key,default,exp', [
+    (NONE, 1, None, NONE),
+    (NONE, 1, 1, some(1)),
+    (some({}), '', None, NONE),
+    (some({'': ''}), '', None, some('')),
+    (some({'': ''}), 'aaa', 11, some(11)),
+])
+def test_get(obj, key, default, exp):
+    assert obj.get(key, default) == exp

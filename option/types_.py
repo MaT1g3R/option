@@ -33,4 +33,7 @@ T = TypeVar('T')
 U = TypeVar('U')
 A = TypeVar('A')
 
+K = TypeVar('K')
+V = TypeVar('V')
+
 E = TypeVar('E')
