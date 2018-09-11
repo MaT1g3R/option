@@ -1,12 +1,14 @@
 [tool.poetry]
 name = "option"
-version = "0.1.3"
+version = "0.1.4"
 description = "Rust like Option type in Python"
 authors = ["Peijun Ma <peijun.ma@protonmail.com>"]
 readme = "README.md"
 license = "MIT"
+repository="https://github.com/MaT1g3R/option"
+homepage="https://github.com/MaT1g3R/option"
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "Topic :: Software Development :: Libraries",
 ]
