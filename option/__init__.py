@@ -30,5 +30,5 @@
 from .option_ import NONE, Option, maybe, some
 from .types_ import NoneError
 
-__version__ = '0.1.6'
+__version__ = '0.1.7'
 __all__ = ['NONE', 'Option', 'some', 'maybe', 'NoneError']
