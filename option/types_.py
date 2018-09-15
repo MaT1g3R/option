@@ -27,7 +27,7 @@ class NoneError(ValueError):
     pass
 
 
-_NoneError = NoneError("Value is None.")
+_NoneError = NoneError("Value is NONE.")
 
 T = TypeVar('T')
 U = TypeVar('U')

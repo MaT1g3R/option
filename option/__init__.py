@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from .option import NONE, Option, maybe, some
+from .option_ import NONE, Option, maybe, some
 from .types_ import NoneError
 
 __version__ = '0.1.5'
