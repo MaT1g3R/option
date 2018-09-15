@@ -4,7 +4,7 @@ test:
 	python -m pytest -vvv -s tests
 
 cov:
-	python -m pytest -vvv -s --cov=ene tests
+	python -m pytest -vvv -s --cov=option tests
 	pip install codecov
 	codecov
 
