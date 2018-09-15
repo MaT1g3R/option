@@ -20,12 +20,39 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+"""This module contains the Option class."""
+
 from typing import Callable, Generic, Mapping, Union
 
 from option.types_ import A, K, NoneError, T, U, V, _NoneError
 
 
 class Option(Generic[T]):
+    """
+    :py:class:`Option` represents an optional value. Every :py:class:`Option`
+    is either ``some`` and contains a value, or :py:const:`NONE` and
+    does not.
+
+    To create a ``some`` value, please use :py:meth:`Option.some` or :py:func:`some`.
+
+    To create a ``NONE`` value, please use :py:meth:`Option.none` or import the
+    constant :py:const:`NONE` directly.
+
+    To let :py:class:`Option` guess the type of :py:class:`Option` to create,
+    please use :py:meth:`Option.maybe` or :py:func:`maybe`.
+
+    Calling the ``__init__``  method directly will raise a ``TypeError``.
+
+    Examples:
+        >>> Option.some(1)
+        some(1)
+        >>> Option.none()
+        NONE
+        >>> Option.maybe(1)
+        some(1)
+        >>> Option.maybe(None)
+        NONE
+    """
     __slots__ = ('_val', '_is_some', '_type')
 
     def __init__(self, value: T, is_some: bool, *, _force: bool = False) -> None:

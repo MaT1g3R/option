@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+# pylint: skip-file
+
 from .option_ import NONE, Option, maybe, some
 from .types_ import NoneError
 

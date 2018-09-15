@@ -40,10 +40,34 @@
 </div>
 <div class="section" id="module-option.option_">
 <span id="option-option-module"></span><h2>option.option_ module<a class="headerlink" href="#module-option.option_" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the Option class.</p>
 <dl class="class">
 <dt id="option.option_.Option">
 <em class="property">class </em><code class="descclassname">option.option_.</code><code class="descname">Option</code><span class="sig-paren">(</span><em>value: T</em>, <em>is_some: bool</em>, <em>*</em>, <em>_force: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/option/option_.html#Option"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
+<p><a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> represents an optional value. Every <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>
+is either <code class="docutils literal notranslate"><span class="pre">some</span></code> and contains a value, or <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> and
+does not.</p>
+<p>To create a <code class="docutils literal notranslate"><span class="pre">some</span></code> value, please use <a class="reference internal" href="#option.option_.Option.some" title="option.option_.Option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.some()</span></code></a> or <a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-func docutils literal notranslate"><span class="pre">some()</span></code></a>.</p>
+<p>To create a <code class="docutils literal notranslate"><span class="pre">NONE</span></code> value, please use <a class="reference internal" href="#option.option_.Option.none" title="option.option_.Option.none"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.none()</span></code></a> or import the
+constant <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> directly.</p>
+<p>To let <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> guess the type of <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> to create,
+please use <a class="reference internal" href="#option.option_.Option.maybe" title="option.option_.Option.maybe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.maybe()</span></code></a> or <a class="reference internal" href="#option.option_.maybe" title="option.option_.maybe"><code class="xref py py-func docutils literal notranslate"><span class="pre">maybe()</span></code></a>.</p>
+<p>Calling the <code class="docutils literal notranslate"><span class="pre">__init__</span></code>  method directly will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+<dl class="docutils">
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">some</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">some(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">none</span><span class="p">()</span>
+<span class="go">NONE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">some(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">NONE</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <dl class="classmethod">
 <dt id="option.option_.Option.some">
 <em class="property">classmethod </em><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.some" title="Permalink to this definition">¶</a></dt>
@@ -373,6 +397,29 @@ default: The defauilt value.</dd>
 <dt id="option.Option">
 <em class="property">class </em><code class="descclassname">option.</code><code class="descname">Option</code><span class="sig-paren">(</span><em>value: T</em>, <em>is_some: bool</em>, <em>*</em>, <em>_force: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/option/option_.html#Option"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
+<p><a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> represents an optional value. Every <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>
+is either <code class="docutils literal notranslate"><span class="pre">some</span></code> and contains a value, or <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> and
+does not.</p>
+<p>To create a <code class="docutils literal notranslate"><span class="pre">some</span></code> value, please use <a class="reference internal" href="#option.Option.some" title="option.Option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.some()</span></code></a> or <a class="reference internal" href="#option.some" title="option.some"><code class="xref py py-func docutils literal notranslate"><span class="pre">some()</span></code></a>.</p>
+<p>To create a <code class="docutils literal notranslate"><span class="pre">NONE</span></code> value, please use <a class="reference internal" href="#option.Option.none" title="option.Option.none"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.none()</span></code></a> or import the
+constant <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> directly.</p>
+<p>To let <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> guess the type of <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> to create,
+please use <a class="reference internal" href="#option.Option.maybe" title="option.Option.maybe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.maybe()</span></code></a> or <a class="reference internal" href="#option.maybe" title="option.maybe"><code class="xref py py-func docutils literal notranslate"><span class="pre">maybe()</span></code></a>.</p>
+<p>Calling the <code class="docutils literal notranslate"><span class="pre">__init__</span></code>  method directly will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+<dl class="docutils">
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">some</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">some(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">none</span><span class="p">()</span>
+<span class="go">NONE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">some(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">NONE</span>
+</pre></div>
+</div>
+</dd>
+</dl>
 <dl class="classmethod">
 <dt id="option.Option.some">
 <em class="property">classmethod </em><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.some" title="Permalink to this definition">¶</a></dt>
