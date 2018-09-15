@@ -11,10 +11,6 @@ cov:
 docs:
 	PYTHONPATH=.. make -C docs html
 
-publish:
-	poetry build
-	poetry publish
-
 lint:
 	mypy option
 	pylint option

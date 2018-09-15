@@ -25,6 +25,14 @@ script:
       make test;
     fi
 
+after_success:
+  - if [[ $UPLOAD_COV == "true" ]]; then
+      if [[ $(./check_publish) == "true" ]]; then
+        poetry build;
+        poetry publish -u $PYPI_USER -p $PYPI_PASS;
+      fi
+    fi
+
 before_deploy:
   - make docs
 
