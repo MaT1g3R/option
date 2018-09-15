@@ -19,3 +19,4 @@ python = ">=3.6"
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
 mypy = "^0.620.0"
+Sphinx = "^1.8"
