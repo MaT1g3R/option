@@ -10,6 +10,7 @@ matrix:
       dist: xenial
       sudo: false
       python: '3.7'
+      env: UPLOAD_COV=true
 
 env: UPLOAD_COV=true
 install:
@@ -17,7 +18,11 @@ install:
 
 script:
   - make lint
-  - if [[ $UPLOAD_COV == 'true' ]]; then make cov; else make test; fi
+  - if [[ $UPLOAD_COV == "true" ]]; then
+      make cov;
+    else
+      make test;
+    fi
 
 before_deploy:
   - make docs
