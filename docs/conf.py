@@ -18,6 +18,7 @@
 
 
 # -- Project information -----------------------------------------------------
+from option import __version__
 
 project = 'Option'
 copyright = '2018, Peijun Ma'
@@ -26,8 +27,7 @@ author = 'Peijun Ma'
 # The short X.Y version
 version = ''
 # The full version, including alpha/beta/rc tags
-release = '0.1.6'
-
+release = __version__
 
 # -- General configuration ---------------------------------------------------
 
@@ -73,7 +73,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = None
 
-
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
@@ -108,7 +107,6 @@ html_static_path = ['_static']
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'Optiondoc'
 
-
 # -- Options for LaTeX output ------------------------------------------------
 
 latex_elements = {
@@ -137,7 +135,6 @@ latex_documents = [
      'Peijun Ma', 'manual'),
 ]
 
-
 # -- Options for manual page output ------------------------------------------
 
 # One entry per manual page. List of tuples
@@ -146,7 +143,6 @@ man_pages = [
     (master_doc, 'option', 'Option Documentation',
      [author], 1)
 ]
-
 
 # -- Options for Texinfo output ----------------------------------------------
 
@@ -158,7 +154,6 @@ texinfo_documents = [
      author, 'Option', 'One line description of project.',
      'Miscellaneous'),
 ]
-
 
 # -- Options for Epub output -------------------------------------------------
 
@@ -176,6 +171,5 @@ epub_title = project
 
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
-
 
 # -- Extension configuration -------------------------------------------------
