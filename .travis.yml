@@ -1,0 +1,22 @@
+language: python
+python:
+  - "3.6"
+  - "3.7"
+
+install:
+  - make ci_install
+
+script:
+  - make lint
+  - if [[ $TRAVIS_PYTHON_VERSION == '3.7' ]]; then make cov; else make test; fi
+
+after_script:
+  - make docs
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
