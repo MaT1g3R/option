@@ -1,3 +1,4 @@
+dist: xenial
 language: python
 python:
   - "3.6"
@@ -18,5 +19,6 @@ deploy:
   skip_cleanup: true
   github-token: $GITHUB_TOKEN
   keep-history: true
+  local-dir: docs/_build/html
   on:
     branch: master
