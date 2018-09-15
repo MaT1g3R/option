@@ -1,0 +1,11 @@
+language: python
+python:
+  - "3.6"
+  - "3.7"
+
+install:
+  - make ci_install
+
+script:
+  - make lint
+  - if [[ $TRAVIS_PYTHON_VERSION == '3.7' ]]; then make cov; else make test; fi
