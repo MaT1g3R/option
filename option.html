@@ -76,19 +76,19 @@ please use <a class="reference internal" href="#option.option_.Option.maybe" tit
 </dl>
 <dl class="classmethod">
 <dt id="option.option_.Option.some">
-<em class="property">classmethod </em><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#Option.some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.some" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.some" title="Permalink to this definition">¶</a></dt>
 <dd><p>Some value <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
 </dd></dl>
 
 <dl class="classmethod">
 <dt id="option.option_.Option.none">
-<em class="property">classmethod </em><code class="descname">none</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; option.option_.Option[NoneType][None]<a class="reference internal" href="_modules/option/option_.html#Option.none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.none" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">none</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; option.option_.Option[None]<a class="reference internal" href="_modules/option/option_.html#Option.none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.none" title="Permalink to this definition">¶</a></dt>
 <dd><p>No Value.</p>
 </dd></dl>
 
 <dl class="classmethod">
 <dt id="option.option_.Option.maybe">
-<em class="property">classmethod </em><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#Option.maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.maybe" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.maybe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shortcut method to return <code class="docutils literal notranslate"><span class="pre">some</span></code> or <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> based on <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -218,7 +218,7 @@ it is recommnded to use <code class="xref py py-meth docutils literal notranslat
 
 <dl class="method">
 <dt id="option.option_.Option.unwrap_or_else">
-<code class="descname">unwrap_or_else</code><span class="sig-paren">(</span><em>callback: Callable[[], U]</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap_or_else" title="Permalink to this definition">¶</a></dt>
+<code class="descname">unwrap_or_else</code><span class="sig-paren">(</span><em>callback: Callable[U]</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap_or_else" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the contained value or computes it from <code class="docutils literal notranslate"><span class="pre">callback</span></code>.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -239,7 +239,7 @@ otherwise <code class="docutils literal notranslate"><span class="pre">callback(
 
 <dl class="method">
 <dt id="option.option_.Option.map">
-<code class="descname">map</code><span class="sig-paren">(</span><em>callback: Callable[[T], U]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~U][U], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/option_.html#Option.map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map" title="Permalink to this definition">¶</a></dt>
+<code class="descname">map</code><span class="sig-paren">(</span><em>callback: Callable[T, U]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[U], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">callback</span></code> with the contained value as its argument or
 returns <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</p>
 <dl class="docutils">
@@ -261,7 +261,7 @@ contained value is <code class="docutils literal notranslate"><span class="pre">
 
 <dl class="method">
 <dt id="option.option_.Option.map_or">
-<code class="descname">map_or</code><span class="sig-paren">(</span><em>callback: Callable[[T], U], default: A</em><span class="sig-paren">)</span> &#x2192; Union[U, A]<a class="reference internal" href="_modules/option/option_.html#Option.map_or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map_or" title="Permalink to this definition">¶</a></dt>
+<code class="descname">map_or</code><span class="sig-paren">(</span><em>callback: Callable[T, U], default: A</em><span class="sig-paren">)</span> &#x2192; Union[U, A]<a class="reference internal" href="_modules/option/option_.html#Option.map_or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map_or" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">callback</span></code> to the contained value or returns <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -286,7 +286,7 @@ it is recommended to use <a class="reference internal" href="#option.option_.Opt
 
 <dl class="method">
 <dt id="option.option_.Option.map_or_else">
-<code class="descname">map_or_else</code><span class="sig-paren">(</span><em>callback: Callable[[T], U], default: Callable[[], A]</em><span class="sig-paren">)</span> &#x2192; Union[U, A]<a class="reference internal" href="_modules/option/option_.html#Option.map_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map_or_else" title="Permalink to this definition">¶</a></dt>
+<code class="descname">map_or_else</code><span class="sig-paren">(</span><em>callback: Callable[T, U], default: Callable[A]</em><span class="sig-paren">)</span> &#x2192; Union[U, A]<a class="reference internal" href="_modules/option/option_.html#Option.map_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map_or_else" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">callback</span></code> to the contained value or computes a default
 with <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
 <dl class="docutils">
@@ -309,7 +309,7 @@ otherwise the result of <code class="docutils literal notranslate"><span class="
 
 <dl class="method">
 <dt id="option.option_.Option.filter">
-<code class="descname">filter</code><span class="sig-paren">(</span><em>predicate: Callable[[T], bool]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~T][T], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/option_.html#Option.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.filter" title="Permalink to this definition">¶</a></dt>
+<code class="descname">filter</code><span class="sig-paren">(</span><em>predicate: Callable[T, bool]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[T], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>,
 otherwise filter the contained value by <code class="docutils literal notranslate"><span class="pre">predicate</span></code>.</p>
 <dl class="docutils">
@@ -340,7 +340,7 @@ otherwise filter the contained value by <code class="docutils literal notranslat
 
 <dl class="method">
 <dt id="option.option_.Option.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>key: K</em>, <em>default=None</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~V][V], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/option_.html#Option.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.get" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>key: K</em>, <em>default=None</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[V], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a mapping value by key in the contained value or returns
 <code class="docutils literal notranslate"><span class="pre">default</span></code> if the key doesn’t exist.</p>
 <dl class="docutils">
@@ -377,13 +377,13 @@ default: The defauilt value.</dd>
 
 <dl class="function">
 <dt id="option.option_.some">
-<code class="descclassname">option.option_.</code><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.some" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">option.option_.</code><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.some" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shortcut function to <a class="reference internal" href="#option.option_.Option.some" title="option.option_.Option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.some()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="option.option_.maybe">
-<code class="descclassname">option.option_.</code><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.maybe" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">option.option_.</code><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.maybe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shortcut function to <a class="reference internal" href="#option.option_.Option.maybe" title="option.option_.Option.maybe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.maybe()</span></code></a>.</p>
 </dd></dl>
 
