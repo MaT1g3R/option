@@ -23,6 +23,7 @@ from option import __version__
 project = 'Option'
 copyright = '2018, Peijun Ma'
 author = 'Peijun Ma'
+autodoc_member_order = 'bysource'
 
 # The short X.Y version
 version = ''

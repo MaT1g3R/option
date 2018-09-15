@@ -44,6 +44,70 @@
 <dt id="option.option_.Option">
 <em class="property">class </em><code class="descclassname">option.option_.</code><code class="descname">Option</code><span class="sig-paren">(</span><em>value: T</em>, <em>is_some: bool</em>, <em>*</em>, <em>_force: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/option/option_.html#Option"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
+<dl class="classmethod">
+<dt id="option.option_.Option.some">
+<em class="property">classmethod </em><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.some" title="Permalink to this definition">¶</a></dt>
+<dd><p>Some value <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="option.option_.Option.none">
+<em class="property">classmethod </em><code class="descname">none</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; option.option_.Option[None]<a class="reference internal" href="_modules/option/option_.html#Option.none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.none" title="Permalink to this definition">¶</a></dt>
+<dd><p>No Value.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="option.option_.Option.maybe">
+<em class="property">classmethod </em><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.maybe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortcut method to return <a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a> or <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> based on <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>val: Some value.</dd>
+<dt>Returns:</dt>
+<dd><code class="xref py py-meth docutils literal notranslate"><span class="pre">some`(val)</span> <span class="pre">if</span> <span class="pre">the</span> <span class="pre">``val`()</span></code> is not None, otherwise <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">some(0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">NONE</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="option.option_.Option.is_some">
+<code class="descname">is_some</code><a class="headerlink" href="#option.option_.Option.is_some" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the option is a <a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a> value.</p>
+<dl class="docutils">
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">is_some</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">is_some</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="option.option_.Option.is_none">
+<code class="descname">is_none</code><a class="headerlink" href="#option.option_.Option.is_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the option is a <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> value.</p>
+<dl class="docutils">
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">is_none</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">is_none</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="method">
 <dt id="option.option_.Option.except_">
 <code class="descname">except_</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/option_.html#Option.except_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.except_" title="Permalink to this definition">¶</a></dt>
@@ -70,30 +134,52 @@
 </dd></dl>
 
 <dl class="method">
-<dt id="option.option_.Option.filter">
-<code class="descname">filter</code><span class="sig-paren">(</span><em>predicate: Callable[T, bool]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[T], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>,
-otherwise filter the contained value by <code class="docutils literal notranslate"><span class="pre">predicate</span></code>.</p>
+<dt id="option.option_.Option.unwrap">
+<code class="descname">unwrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/option_.html#Option.unwrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value in the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> if it is <a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a>.</p>
 <dl class="docutils">
-<dt>Args:</dt>
-<dd>predicate: The fitler function.</dd>
 <dt>Returns:</dt>
-<dd><dl class="first last docutils">
-<dt><code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> if the contained value is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>, otherwise:</dt>
-<dd><ul class="first last simple">
-<li>The option itself if the predicate returns True</li>
-<li><code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> if the predicate returns False</li>
-</ul>
+<dd>The <cite>:py:meth:`some</cite> value of the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>.</dd>
+<dt>Raises:</dt>
+<dd>NoneError if the value is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">NONE</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">except</span> <span class="n">NoneError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">Value is NONE.</span>
+</pre></div>
+</div>
 </dd>
 </dl>
-</dd>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="option.option_.Option.value">
+<code class="descname">value</code><a class="headerlink" href="#option.option_.Option.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property version of <a class="reference internal" href="#option.option_.Option.unwrap" title="option.option_.Option.unwrap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.option_.Option.unwrap_or">
+<code class="descname">unwrap_or</code><span class="sig-paren">(</span><em>default: U</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap_or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the contained value or <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>default: The default value.</dd>
+<dt>Returns:</dt>
+<dd>The contained value if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a>,
+otherwise <code class="docutils literal notranslate"><span class="pre">default</span></code>.</dd>
+<dt>Notes:</dt>
+<dd>If you wish to use a result of a function call as the default,
+it is recommnded to use <code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap_or_elsed()</span></code> instead.</dd>
 <dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">NONE</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">some(1)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">True</span><span class="p">)</span>
-<span class="go">NONE</span>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">0</span>
 </pre></div>
 </div>
 </dd>
@@ -101,66 +187,20 @@ otherwise filter the contained value by <code class="docutils literal notranslat
 </dd></dl>
 
 <dl class="method">
-<dt id="option.option_.Option.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>key: K</em>, <em>default=None</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[V], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.get" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets a mapping value by key in the contained value or returns
-<code class="docutils literal notranslate"><span class="pre">default</span></code> if the key doesn’t exist.</p>
+<dt id="option.option_.Option.unwrap_or_else">
+<code class="descname">unwrap_or_else</code><span class="sig-paren">(</span><em>callback: Callable[U]</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap_or_else" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the contained value or computes it from <code class="docutils literal notranslate"><span class="pre">callback</span></code>.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>key: The mapping key.
-default: The defauilt value.</dd>
+<dd>callback: The the default callback.</dd>
 <dt>Returns:</dt>
-<dd><ul class="first last simple">
-<li><dl class="first docutils">
-<dt><a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a> of the mapping value if the key exists</dt>
-<dd>and the value is not None.</dd>
-</dl>
-</li>
-<li><code class="xref py py-meth docutils literal notranslate"><span class="pre">some`(default)</span> <span class="pre">if</span> <span class="pre">``default`()</span></code> is not None.</li>
-<li><code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> if <code class="docutils literal notranslate"><span class="pre">default</span></code> is None.</li>
-</ul>
-</dd>
+<dd>The contained value if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a>,
+otherwise <code class="docutils literal notranslate"><span class="pre">callback()</span></code>.</dd>
 <dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">({</span><span class="s1">&#39;hi&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
-<span class="go">some(1)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">({})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
-<span class="go">some(12)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
-<span class="go">some(12)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
-<span class="go">NONE</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="option.option_.Option.is_none">
-<code class="descname">is_none</code><a class="headerlink" href="#option.option_.Option.is_none" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the option is a <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> value.</p>
-<dl class="docutils">
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">is_none</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">is_none</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="option.option_.Option.is_some">
-<code class="descname">is_some</code><a class="headerlink" href="#option.option_.Option.is_some" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the option is a <a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a> value.</p>
-<dl class="docutils">
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">is_some</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">is_some</span>
-<span class="go">False</span>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">111</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="s1">&#39;ha&#39;</span><span class="p">)</span>
+<span class="go">&#39;ha&#39;</span>
 </pre></div>
 </div>
 </dd>
@@ -237,171 +277,10 @@ otherwise the result of <code class="docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="classmethod">
-<dt id="option.option_.Option.maybe">
-<em class="property">classmethod </em><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.maybe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shortcut method to return <a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a> or <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> based on <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>val: Some value.</dd>
-<dt>Returns:</dt>
-<dd><code class="xref py py-meth docutils literal notranslate"><span class="pre">some`(val)</span> <span class="pre">if</span> <span class="pre">the</span> <span class="pre">``val`()</span></code> is not None, otherwise <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">some(0)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-<span class="go">NONE</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="option.option_.Option.none">
-<em class="property">classmethod </em><code class="descname">none</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; option.option_.Option[None]<a class="reference internal" href="_modules/option/option_.html#Option.none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.none" title="Permalink to this definition">¶</a></dt>
-<dd><p>No Value.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="option.option_.Option.some">
-<em class="property">classmethod </em><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.some" title="Permalink to this definition">¶</a></dt>
-<dd><p>Some value <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
-</dd></dl>
-
 <dl class="method">
-<dt id="option.option_.Option.unwrap">
-<code class="descname">unwrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/option_.html#Option.unwrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the value in the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> if it is <a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a>.</p>
-<dl class="docutils">
-<dt>Returns:</dt>
-<dd>The <cite>:py:meth:`some</cite> value of the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>.</dd>
-<dt>Raises:</dt>
-<dd>NoneError if the value is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">NONE</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
-<span class="gp">... </span><span class="k">except</span> <span class="n">NoneError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="go">Value is NONE.</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="option.option_.Option.unwrap_or">
-<code class="descname">unwrap_or</code><span class="sig-paren">(</span><em>default: U</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap_or" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the contained value or <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>default: The default value.</dd>
-<dt>Returns:</dt>
-<dd>The contained value if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a>,
-otherwise <code class="docutils literal notranslate"><span class="pre">default</span></code>.</dd>
-<dt>Notes:</dt>
-<dd>If you wish to use a result of a function call as the default,
-it is recommnded to use <code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap_or_elsed()</span></code> instead.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">0</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="option.option_.Option.unwrap_or_else">
-<code class="descname">unwrap_or_else</code><span class="sig-paren">(</span><em>callback: Callable[U]</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap_or_else" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the contained value or computes it from <code class="docutils literal notranslate"><span class="pre">callback</span></code>.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>callback: The the default callback.</dd>
-<dt>Returns:</dt>
-<dd>The contained value if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a>,
-otherwise <code class="docutils literal notranslate"><span class="pre">callback()</span></code>.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">111</span><span class="p">)</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="s1">&#39;ha&#39;</span><span class="p">)</span>
-<span class="go">&#39;ha&#39;</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="option.option_.Option.value">
-<code class="descname">value</code><a class="headerlink" href="#option.option_.Option.value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Property version of <a class="reference internal" href="#option.option_.Option.unwrap" title="option.option_.Option.unwrap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap()</span></code></a>.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="option.option_.maybe">
-<code class="descclassname">option.option_.</code><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.maybe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shortcut function to <a class="reference internal" href="#option.option_.Option.maybe" title="option.option_.Option.maybe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.maybe()</span></code></a>.</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="option.option_.some">
-<code class="descclassname">option.option_.</code><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.some" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shortcut function to <a class="reference internal" href="#option.option_.Option.some" title="option.option_.Option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.some()</span></code></a>.</p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-option.types_">
-<span id="option-types-module"></span><h2>option.types_ module<a class="headerlink" href="#module-option.types_" title="Permalink to this headline">¶</a></h2>
-<dl class="exception">
-<dt id="option.types_.NoneError">
-<em class="property">exception </em><code class="descclassname">option.types_.</code><code class="descname">NoneError</code><a class="reference internal" href="_modules/option/types_.html#NoneError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.types_.NoneError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></p>
-</dd></dl>
-
-</div>
-<div class="section" id="module-option">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-option" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
-<dt id="option.Option">
-<em class="property">class </em><code class="descclassname">option.</code><code class="descname">Option</code><span class="sig-paren">(</span><em>value: T</em>, <em>is_some: bool</em>, <em>*</em>, <em>_force: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/option/option_.html#Option"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
-<dl class="method">
-<dt id="option.Option.except_">
-<code class="descname">except_</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/option_.html#Option.except_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.except_" title="Permalink to this definition">¶</a></dt>
-<dd><p>Unwraps the option. Raises an exception if the value is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>msg: The exception message.</dd>
-<dt>Returns:</dt>
-<dd>The wrapped value.</dd>
-<dt>Raises:</dt>
-<dd>NoneError with message provided by <code class="docutils literal notranslate"><span class="pre">msg</span></code> if the value is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">except_</span><span class="p">(</span><span class="s1">&#39;sd&#39;</span><span class="p">)</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">NONE</span><span class="o">.</span><span class="n">except_</span><span class="p">(</span><span class="s1">&#39;Oh No!&#39;</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">except</span> <span class="n">NoneError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="go">Oh No!</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="option.Option.filter">
-<code class="descname">filter</code><span class="sig-paren">(</span><em>predicate: Callable[T, bool]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[T], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.filter" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> if the <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>,
+<dt id="option.option_.Option.filter">
+<code class="descname">filter</code><span class="sig-paren">(</span><em>predicate: Callable[T, bool]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[T], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>,
 otherwise filter the contained value by <code class="docutils literal notranslate"><span class="pre">predicate</span></code>.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -430,8 +309,8 @@ otherwise filter the contained value by <code class="docutils literal notranslat
 </dd></dl>
 
 <dl class="method">
-<dt id="option.Option.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>key: K</em>, <em>default=None</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[V], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.get" title="Permalink to this definition">¶</a></dt>
+<dt id="option.option_.Option.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>key: K</em>, <em>default=None</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[V], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a mapping value by key in the contained value or returns
 <code class="docutils literal notranslate"><span class="pre">default</span></code> if the key doesn’t exist.</p>
 <dl class="docutils">
@@ -441,7 +320,7 @@ default: The defauilt value.</dd>
 <dt>Returns:</dt>
 <dd><ul class="first last simple">
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="#option.some" title="option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a> of the mapping value if the key exists</dt>
+<dt><a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a> of the mapping value if the key exists</dt>
 <dd>and the value is not None.</dd>
 </dl>
 </li>
@@ -464,16 +343,62 @@ default: The defauilt value.</dd>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="option.Option.is_none">
-<code class="descname">is_none</code><a class="headerlink" href="#option.Option.is_none" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the option is a <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> value.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="option.option_.some">
+<code class="descclassname">option.option_.</code><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.some" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortcut function to <a class="reference internal" href="#option.option_.Option.some" title="option.option_.Option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.some()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="option.option_.maybe">
+<code class="descclassname">option.option_.</code><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.maybe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortcut function to <a class="reference internal" href="#option.option_.Option.maybe" title="option.option_.Option.maybe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.maybe()</span></code></a>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-option.types_">
+<span id="option-types-module"></span><h2>option.types_ module<a class="headerlink" href="#module-option.types_" title="Permalink to this headline">¶</a></h2>
+<dl class="exception">
+<dt id="option.types_.NoneError">
+<em class="property">exception </em><code class="descclassname">option.types_.</code><code class="descname">NoneError</code><a class="reference internal" href="_modules/option/types_.html#NoneError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.types_.NoneError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-option">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-option" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="option.Option">
+<em class="property">class </em><code class="descclassname">option.</code><code class="descname">Option</code><span class="sig-paren">(</span><em>value: T</em>, <em>is_some: bool</em>, <em>*</em>, <em>_force: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/option/option_.html#Option"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
+<dl class="classmethod">
+<dt id="option.Option.some">
+<em class="property">classmethod </em><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.some" title="Permalink to this definition">¶</a></dt>
+<dd><p>Some value <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="option.Option.none">
+<em class="property">classmethod </em><code class="descname">none</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; option.option_.Option[None]<a class="reference internal" href="_modules/option/option_.html#Option.none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.none" title="Permalink to this definition">¶</a></dt>
+<dd><p>No Value.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="option.Option.maybe">
+<em class="property">classmethod </em><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.maybe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortcut method to return <a class="reference internal" href="#option.some" title="option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a> or <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> based on <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
 <dl class="docutils">
+<dt>Args:</dt>
+<dd>val: Some value.</dd>
+<dt>Returns:</dt>
+<dd><code class="xref py py-meth docutils literal notranslate"><span class="pre">some`(val)</span> <span class="pre">if</span> <span class="pre">the</span> <span class="pre">``val`()</span></code> is not None, otherwise <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>.</dd>
 <dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">is_none</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">is_none</span>
-<span class="go">True</span>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">some(0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">NONE</span>
 </pre></div>
 </div>
 </dd>
@@ -490,6 +415,121 @@ default: The defauilt value.</dd>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">is_some</span>
 <span class="go">False</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="option.Option.is_none">
+<code class="descname">is_none</code><a class="headerlink" href="#option.Option.is_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the option is a <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> value.</p>
+<dl class="docutils">
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">is_none</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">is_none</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.Option.except_">
+<code class="descname">except_</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/option_.html#Option.except_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.except_" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unwraps the option. Raises an exception if the value is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>msg: The exception message.</dd>
+<dt>Returns:</dt>
+<dd>The wrapped value.</dd>
+<dt>Raises:</dt>
+<dd>NoneError with message provided by <code class="docutils literal notranslate"><span class="pre">msg</span></code> if the value is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">except_</span><span class="p">(</span><span class="s1">&#39;sd&#39;</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">NONE</span><span class="o">.</span><span class="n">except_</span><span class="p">(</span><span class="s1">&#39;Oh No!&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">except</span> <span class="n">NoneError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">Oh No!</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.Option.unwrap">
+<code class="descname">unwrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/option_.html#Option.unwrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.unwrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value in the <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> if it is <a class="reference internal" href="#option.some" title="option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a>.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>The <cite>:py:meth:`some</cite> value of the <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>.</dd>
+<dt>Raises:</dt>
+<dd>NoneError if the value is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">NONE</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">except</span> <span class="n">NoneError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">Value is NONE.</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="option.Option.value">
+<code class="descname">value</code><a class="headerlink" href="#option.Option.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property version of <a class="reference internal" href="#option.Option.unwrap" title="option.Option.unwrap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.Option.unwrap_or">
+<code class="descname">unwrap_or</code><span class="sig-paren">(</span><em>default: U</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.unwrap_or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the contained value or <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>default: The default value.</dd>
+<dt>Returns:</dt>
+<dd>The contained value if the <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <a class="reference internal" href="#option.some" title="option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a>,
+otherwise <code class="docutils literal notranslate"><span class="pre">default</span></code>.</dd>
+<dt>Notes:</dt>
+<dd>If you wish to use a result of a function call as the default,
+it is recommnded to use <code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap_or_elsed()</span></code> instead.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.Option.unwrap_or_else">
+<code class="descname">unwrap_or_else</code><span class="sig-paren">(</span><em>callback: Callable[U]</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.unwrap_or_else" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the contained value or computes it from <code class="docutils literal notranslate"><span class="pre">callback</span></code>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>callback: The the default callback.</dd>
+<dt>Returns:</dt>
+<dd>The contained value if the <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <a class="reference internal" href="#option.some" title="option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a>,
+otherwise <code class="docutils literal notranslate"><span class="pre">callback()</span></code>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">111</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="s1">&#39;ha&#39;</span><span class="p">)</span>
+<span class="go">&#39;ha&#39;</span>
 </pre></div>
 </div>
 </dd>
@@ -566,19 +606,30 @@ otherwise the result of <code class="docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="classmethod">
-<dt id="option.Option.maybe">
-<em class="property">classmethod </em><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.maybe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shortcut method to return <a class="reference internal" href="#option.some" title="option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a> or <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> based on <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
+<dl class="method">
+<dt id="option.Option.filter">
+<code class="descname">filter</code><span class="sig-paren">(</span><em>predicate: Callable[T, bool]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[T], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> if the <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>,
+otherwise filter the contained value by <code class="docutils literal notranslate"><span class="pre">predicate</span></code>.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>val: Some value.</dd>
+<dd>predicate: The fitler function.</dd>
 <dt>Returns:</dt>
-<dd><code class="xref py py-meth docutils literal notranslate"><span class="pre">some`(val)</span> <span class="pre">if</span> <span class="pre">the</span> <span class="pre">``val`()</span></code> is not None, otherwise <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>.</dd>
+<dd><dl class="first last docutils">
+<dt><code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> if the contained value is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>, otherwise:</dt>
+<dd><ul class="first last simple">
+<li>The option itself if the predicate returns True</li>
+<li><code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> if the predicate returns False</li>
+</ul>
+</dd>
+</dl>
+</dd>
 <dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">some(0)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">NONE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">some(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">True</span><span class="p">)</span>
 <span class="go">NONE</span>
 </pre></div>
 </div>
@@ -586,90 +637,39 @@ otherwise the result of <code class="docutils literal notranslate"><span class="
 </dl>
 </dd></dl>
 
-<dl class="classmethod">
-<dt id="option.Option.none">
-<em class="property">classmethod </em><code class="descname">none</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; option.option_.Option[None]<a class="reference internal" href="_modules/option/option_.html#Option.none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.none" title="Permalink to this definition">¶</a></dt>
-<dd><p>No Value.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="option.Option.some">
-<em class="property">classmethod </em><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.some" title="Permalink to this definition">¶</a></dt>
-<dd><p>Some value <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
-</dd></dl>
-
 <dl class="method">
-<dt id="option.Option.unwrap">
-<code class="descname">unwrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/option_.html#Option.unwrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.unwrap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the value in the <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> if it is <a class="reference internal" href="#option.some" title="option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a>.</p>
-<dl class="docutils">
-<dt>Returns:</dt>
-<dd>The <cite>:py:meth:`some</cite> value of the <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>.</dd>
-<dt>Raises:</dt>
-<dd>NoneError if the value is <code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code>.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">NONE</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
-<span class="gp">... </span><span class="k">except</span> <span class="n">NoneError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="go">Value is NONE.</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="option.Option.unwrap_or">
-<code class="descname">unwrap_or</code><span class="sig-paren">(</span><em>default: U</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.unwrap_or" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the contained value or <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
+<dt id="option.Option.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>key: K</em>, <em>default=None</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[V], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets a mapping value by key in the contained value or returns
+<code class="docutils literal notranslate"><span class="pre">default</span></code> if the key doesn’t exist.</p>
 <dl class="docutils">
 <dt>Args:</dt>
-<dd>default: The default value.</dd>
+<dd>key: The mapping key.
+default: The defauilt value.</dd>
 <dt>Returns:</dt>
-<dd>The contained value if the <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <a class="reference internal" href="#option.some" title="option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a>,
-otherwise <code class="docutils literal notranslate"><span class="pre">default</span></code>.</dd>
-<dt>Notes:</dt>
-<dd>If you wish to use a result of a function call as the default,
-it is recommnded to use <code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap_or_elsed()</span></code> instead.</dd>
+<dd><ul class="first last simple">
+<li><dl class="first docutils">
+<dt><a class="reference internal" href="#option.some" title="option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a> of the mapping value if the key exists</dt>
+<dd>and the value is not None.</dd>
+</dl>
+</li>
+<li><code class="xref py py-meth docutils literal notranslate"><span class="pre">some`(default)</span> <span class="pre">if</span> <span class="pre">``default`()</span></code> is not None.</li>
+<li><code class="xref py py-const docutils literal notranslate"><span class="pre">NONE</span></code> if <code class="docutils literal notranslate"><span class="pre">default</span></code> is None.</li>
+</ul>
+</dd>
 <dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">0</span>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">({</span><span class="s1">&#39;hi&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+<span class="go">some(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">({})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">some(12)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">some(12)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+<span class="go">NONE</span>
 </pre></div>
 </div>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="option.Option.unwrap_or_else">
-<code class="descname">unwrap_or_else</code><span class="sig-paren">(</span><em>callback: Callable[U]</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.Option.unwrap_or_else" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the contained value or computes it from <code class="docutils literal notranslate"><span class="pre">callback</span></code>.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>callback: The the default callback.</dd>
-<dt>Returns:</dt>
-<dd>The contained value if the <a class="reference internal" href="#option.Option" title="option.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <a class="reference internal" href="#option.some" title="option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">some()</span></code></a>,
-otherwise <code class="docutils literal notranslate"><span class="pre">callback()</span></code>.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">111</span><span class="p">)</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="s1">&#39;ha&#39;</span><span class="p">)</span>
-<span class="go">&#39;ha&#39;</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="option.Option.value">
-<code class="descname">value</code><a class="headerlink" href="#option.Option.value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Property version of <a class="reference internal" href="#option.Option.unwrap" title="option.Option.unwrap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap()</span></code></a>.</p>
 </dd></dl>
 
 </dd></dl>
