@@ -10,3 +10,7 @@ docs:
 publish:
 	poetry build
 	poetry publish
+
+lint:
+	mypy option
+	pylint option
