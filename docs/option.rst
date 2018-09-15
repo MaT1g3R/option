@@ -1,7 +1,7 @@
 option package
 ==============
 
-Submodules
+Modules
 ----------
 
 option.option\_ module
@@ -21,10 +21,3 @@ option.types\_ module
     :show-inheritance:
 
 
-Module contents
----------------
-
-.. automodule:: option
-    :members:
-    :undoc-members:
-    :show-inheritance:

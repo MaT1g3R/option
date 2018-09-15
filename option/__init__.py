@@ -22,6 +22,11 @@
 
 # pylint: skip-file
 
+"""
+.. data:: NONE
+
+    Represents a None value.
+"""
 from .option_ import NONE, Option, maybe, some
 from .types_ import NoneError
 

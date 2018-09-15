@@ -55,7 +55,13 @@
 <span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
 <span class="c1"># SOFTWARE.</span>
 
-<span class="sd">&quot;&quot;&quot;This module contains the Option class.&quot;&quot;&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains the Option class.</span>
+
+<span class="sd">.. data:: NONE</span>
+
+<span class="sd">    Represents a None value.</span>
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Union</span>
 
@@ -65,13 +71,13 @@
 <div class="viewcode-block" id="Option"><a class="viewcode-back" href="../../option.html#option.option_.Option">[docs]</a><span class="k">class</span> <span class="nc">Option</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    :py:class:`Option` represents an optional value. Every :py:class:`Option`</span>
-<span class="sd">    is either ``some`` and contains a value, or :py:const:`NONE` and</span>
+<span class="sd">    is either ``some`` and contains a value, or :py:data:`NONE` and</span>
 <span class="sd">    does not.</span>
 
 <span class="sd">    To create a ``some`` value, please use :py:meth:`Option.some` or :py:func:`some`.</span>
 
-<span class="sd">    To create a ``NONE`` value, please use :py:meth:`Option.none` or import the</span>
-<span class="sd">    constant :py:const:`NONE` directly.</span>
+<span class="sd">    To create a :py:data:`NONE` value, please use :py:meth:`Option.none` or import the</span>
+<span class="sd">    constant :py:data:`NONE` directly.</span>
 
 <span class="sd">    To let :py:class:`Option` guess the type of :py:class:`Option` to create,</span>
 <span class="sd">    please use :py:meth:`Option.maybe` or :py:func:`maybe`.</span>
@@ -113,13 +119,13 @@
 <div class="viewcode-block" id="Option.maybe"><a class="viewcode-back" href="../../option.html#option.option_.Option.maybe">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">maybe</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Option[T]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Shortcut method to return ``some`` or :py:const:`NONE` based on ``val``.</span>
+<span class="sd">        Shortcut method to return ``some`` or :py:data:`NONE` based on ``val``.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            val: Some value.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            ``some(val)`` if the ``val`` is not None, otherwise :py:const:`NONE`.</span>
+<span class="sd">            ``some(val)`` if the ``val`` is not None, otherwise :py:data:`NONE`.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; Option.maybe(0)</span>
@@ -160,7 +166,7 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_none</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns ``True`` if the option is a :py:const:`NONE` value.</span>
+<span class="sd">        Returns ``True`` if the option is a :py:data:`NONE` value.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; some(0).is_none</span>
@@ -172,7 +178,7 @@
 
 <div class="viewcode-block" id="Option.except_"><a class="viewcode-back" href="../../option.html#option.option_.Option.except_">[docs]</a>    <span class="k">def</span> <span class="nf">except_</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Unwraps the option. Raises an exception if the value is :py:const:`NONE`.</span>
+<span class="sd">        Unwraps the option. Raises an exception if the value is :py:data:`NONE`.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            msg: The exception message.</span>
@@ -181,7 +187,7 @@
 <span class="sd">            The wrapped value.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            NoneError with message provided by ``msg`` if the value is :py:const:`NONE`.</span>
+<span class="sd">            NoneError with message provided by ``msg`` if the value is :py:data:`NONE`.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; some(0).except_(&#39;sd&#39;)</span>
@@ -204,7 +210,7 @@
 <span class="sd">            The ```some`` value of the :py:class:`Option`.</span>
 
 <span class="sd">        Raises:</span>
-<span class="sd">            NoneError if the value is :py:const:`NONE`.</span>
+<span class="sd">            NoneError if the value is :py:data:`NONE`.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; some(0).unwrap()</span>
@@ -269,14 +275,14 @@
 <div class="viewcode-block" id="Option.map"><a class="viewcode-back" href="../../option.html#option.option_.Option.map">[docs]</a>    <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T</span><span class="p">],</span> <span class="n">U</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Union[Option[U], Option[None]]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Applies the ``callback`` with the contained value as its argument or</span>
-<span class="sd">        returns :py:const:`NONE`.</span>
+<span class="sd">        returns :py:data:`NONE`.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            callback: The callback to apply to the contained value.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            The ``callback`` result wrapped in an :class:`Option` if the</span>
-<span class="sd">            contained value is ``some``, otherwise :py:const:`NONE`</span>
+<span class="sd">            contained value is ``some``, otherwise :py:data:`NONE`</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; some(10).map(lambda x: x * x)</span>
@@ -336,16 +342,16 @@
 
 <div class="viewcode-block" id="Option.filter"><a class="viewcode-back" href="../../option.html#option.option_.Option.filter">[docs]</a>    <span class="k">def</span> <span class="nf">filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predicate</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T</span><span class="p">],</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Union[Option[T], Option[None]]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns :py:const:`NONE` if the :py:class:`Option` is :py:const:`NONE`,</span>
+<span class="sd">        Returns :py:data:`NONE` if the :py:class:`Option` is :py:data:`NONE`,</span>
 <span class="sd">        otherwise filter the contained value by ``predicate``.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            predicate: The fitler function.</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">            :py:const:`NONE` if the contained value is :py:const:`NONE`, otherwise:</span>
+<span class="sd">            :py:data:`NONE` if the contained value is :py:data:`NONE`, otherwise:</span>
 <span class="sd">                * The option itself if the predicate returns True</span>
-<span class="sd">                * :py:const:`NONE` if the predicate returns False</span>
+<span class="sd">                * :py:data:`NONE` if the predicate returns False</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; some(0).filter(lambda x: x % 2 == 1)</span>
@@ -377,7 +383,7 @@
 <span class="sd">            * ``some`` variant of the mapping value if the key exists</span>
 <span class="sd">               and the value is not None.</span>
 <span class="sd">            * ``some(default)`` if ``default`` is not None.</span>
-<span class="sd">            * :py:const:`NONE` if ``default`` is None.</span>
+<span class="sd">            * :py:data:`NONE` if ``default`` is None.</span>
 
 <span class="sd">        Examples:</span>
 <span class="sd">            &gt;&gt;&gt; some({&#39;hi&#39;: 1}).get(&#39;hi&#39;)</span>
