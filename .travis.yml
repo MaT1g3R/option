@@ -35,3 +35,6 @@ deploy:
   local-dir: docs/_build/html
   on:
     branch: master
+
+notifications:
+  email: false
