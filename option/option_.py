@@ -51,13 +51,13 @@ class Option(Generic[T]):
     @classmethod
     def maybe(cls, val: T) -> 'Option[T]':
         """
-        Shortcut method to return :py:meth:`some` or :py:const:`NONE` based on ``val``.
+        Shortcut method to return ``some`` or :py:const:`NONE` based on ``val``.
 
         Args:
             val: Some value.
 
         Returns:
-            :py:meth:`some`(val) if the ``val`` is not None, otherwise :py:const:`NONE`.
+            ``some(val)`` if the ``val`` is not None, otherwise :py:const:`NONE`.
 
         Examples:
             >>> Option.maybe(0)
@@ -72,7 +72,7 @@ class Option(Generic[T]):
         Returns the truth value of the :py:class:`Option` based on its value.
 
         Returns:
-            True if the :py:class:`Option` is :py:meth:`some` value, otherwise False.
+            True if the :py:class:`Option` is ``some`` value, otherwise False.
 
         Examples:
             >>> bool(some(False))
@@ -85,7 +85,7 @@ class Option(Generic[T]):
     @property
     def is_some(self) -> bool:
         """
-        Returns ``True`` if the option is a :py:meth:`some` value.
+        Returns ``True`` if the option is a ``some`` value.
 
         Examples:
             >>> some(0).is_some
@@ -136,10 +136,10 @@ class Option(Generic[T]):
 
     def unwrap(self) -> T:
         """
-        Returns the value in the :py:class:`Option` if it is :py:meth:`some`.
+        Returns the value in the :py:class:`Option` if it is ``some``.
 
         Returns:
-            The `:py:meth:`some` value of the :py:class:`Option`.
+            The ```some`` value of the :py:class:`Option`.
 
         Raises:
             NoneError if the value is :py:const:`NONE`.
@@ -170,7 +170,7 @@ class Option(Generic[T]):
             default: The default value.
 
         Returns:
-            The contained value if the :py:class:`Option` is :py:meth:`some`,
+            The contained value if the :py:class:`Option` is ``some``,
             otherwise ``default``.
 
         Notes:
@@ -193,7 +193,7 @@ class Option(Generic[T]):
             callback: The the default callback.
 
         Returns:
-            The contained value if the :py:class:`Option` is :py:meth:`some`,
+            The contained value if the :py:class:`Option` is ``some``,
             otherwise ``callback()``.
 
         Examples:
@@ -214,7 +214,7 @@ class Option(Generic[T]):
 
         Returns:
             The ``callback`` result wrapped in an :class:`Option` if the
-            contained value is :py:meth:`some`, otherwise :py:const:`NONE`
+            contained value is ``some``, otherwise :py:const:`NONE`
 
         Examples:
             >>> some(10).map(lambda x: x * x)
@@ -236,7 +236,7 @@ class Option(Generic[T]):
             default: The default value.
 
         Returns:
-            The ``callback`` result if the contained value is :py:meth:`some`,
+            The ``callback`` result if the contained value is ``some``,
             otherwise ``default``.
 
         Notes:
@@ -261,7 +261,7 @@ class Option(Generic[T]):
             default: The callback fot the default value.
 
         Returns:
-            The ``callback`` result if the contained value is :py:meth:`some`,
+            The ``callback`` result if the contained value is ``some``,
             otherwise the result of ``default``.
 
         Examples:
@@ -312,9 +312,9 @@ class Option(Generic[T]):
             default: The defauilt value.
 
         Returns:
-            * :py:meth:`some` of the mapping value if the key exists
+            * ``some`` variant of the mapping value if the key exists
                and the value is not None.
-            * :py:meth:`some`(default) if ``default`` is not None.
+            * ``some(default)`` if ``default`` is not None.
             * :py:const:`NONE` if ``default`` is None.
 
         Examples:
