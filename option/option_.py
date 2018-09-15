@@ -51,13 +51,13 @@ class Option(Generic[T]):
     @classmethod
     def maybe(cls, val: T) -> 'Option[T]':
         """
-        Shortcut method to return :meth:`some` or :const:`NONE` based on ``val``.
+        Shortcut method to return :py:meth:`some` or :py:const:`NONE` based on ``val``.
 
         Args:
             val: Some value.
 
         Returns:
-            :meth:`some`(val) if the ``val`` is not None, otherwise :const:`NONE`.
+            :py:meth:`some`(val) if the ``val`` is not None, otherwise :py:const:`NONE`.
 
         Examples:
             >>> Option.maybe(0)
@@ -69,10 +69,10 @@ class Option(Generic[T]):
 
     def __bool__(self):
         """
-        Returns the truth value of the :class:`Option` based on its value.
+        Returns the truth value of the :py:class:`Option` based on its value.
 
         Returns:
-            True if the :class:`Option` is :meth:`some` value, otherwise False.
+            True if the :py:class:`Option` is :py:meth:`some` value, otherwise False.
 
         Examples:
             >>> bool(some(False))
@@ -85,7 +85,7 @@ class Option(Generic[T]):
     @property
     def is_some(self) -> bool:
         """
-        Returns ``True`` if the option is a :meth:`some` value.
+        Returns ``True`` if the option is a :py:meth:`some` value.
 
         Examples:
             >>> some(0).is_some
@@ -98,7 +98,7 @@ class Option(Generic[T]):
     @property
     def is_none(self) -> bool:
         """
-        Returns ``True`` if the option is a :const:`NONE` value.
+        Returns ``True`` if the option is a :py:const:`NONE` value.
 
         Examples:
             >>> some(0).is_none
@@ -110,7 +110,7 @@ class Option(Generic[T]):
 
     def except_(self, msg) -> T:
         """
-        Unwraps the option. Raises an exception if the value is :const:`NONE`.
+        Unwraps the option. Raises an exception if the value is :py:const:`NONE`.
 
         Args:
             msg: The exception message.
@@ -119,7 +119,7 @@ class Option(Generic[T]):
             The wrapped value.
 
         Raises:
-            NoneError with message provided by ``msg`` if the value is :const:`NONE`.
+            NoneError with message provided by ``msg`` if the value is :py:const:`NONE`.
 
         Examples:
             >>> some(0).except_('sd')
@@ -136,13 +136,13 @@ class Option(Generic[T]):
 
     def unwrap(self) -> T:
         """
-        Returns the value in the :class:`Option` if it is :meth:`some`.
+        Returns the value in the :py:class:`Option` if it is :py:meth:`some`.
 
         Returns:
-            The `:meth:`some` value of the :class:`Option`.
+            The `:py:meth:`some` value of the :py:class:`Option`.
 
         Raises:
-            NoneError if the value is :const:`NONE`.
+            NoneError if the value is :py:const:`NONE`.
 
         Examples:
             >>> some(0).unwrap()
@@ -157,7 +157,7 @@ class Option(Generic[T]):
 
     @property
     def value(self) -> T:
-        """Property version of :meth:`unwrap`."""
+        """Property version of :py:meth:`unwrap`."""
         if self._is_some:
             return self._val
         raise _NoneError
@@ -170,12 +170,12 @@ class Option(Generic[T]):
             default: The default value.
 
         Returns:
-            The contained value if the :class:`Option` is :meth:`some`,
+            The contained value if the :py:class:`Option` is :py:meth:`some`,
             otherwise ``default``.
 
         Notes:
             If you wish to use a result of a function call as the default,
-            it is recommnded to use :meth:`unwrap_or_elsed` instead.
+            it is recommnded to use :py:meth:`unwrap_or_elsed` instead.
 
         Examples:
             >>> some(0).unwrap_or(3)
@@ -193,7 +193,7 @@ class Option(Generic[T]):
             callback: The the default callback.
 
         Returns:
-            The contained value if the :class:`Option` is :meth:`some`,
+            The contained value if the :py:class:`Option` is :py:meth:`some`,
             otherwise ``callback()``.
 
         Examples:
@@ -207,14 +207,14 @@ class Option(Generic[T]):
     def map(self, callback: Callable[[T], U]) -> 'Union[Option[U], Option[None]]':
         """
         Applies the ``callback`` with the contained value as its argument or
-        returns :const:`NONE`.
+        returns :py:const:`NONE`.
 
         Args:
             callback: The callback to apply to the contained value.
 
         Returns:
-            The ``callback`` result wrapped in an :calss:`Option` if the
-            contained value is :meth:`some`, otherwise :const:`NONE`
+            The ``callback`` result wrapped in an :class:`Option` if the
+            contained value is :py:meth:`some`, otherwise :py:const:`NONE`
 
         Examples:
             >>> some(10).map(lambda x: x * x)
@@ -236,12 +236,12 @@ class Option(Generic[T]):
             default: The default value.
 
         Returns:
-            The ``callback`` result if the contained value is :meth:`some`,
+            The ``callback`` result if the contained value is :py:meth:`some`,
             otherwise ``default``.
 
         Notes:
             If you wish to use the result of a function call as ``default``,
-            it is recommended to use :meth:`map_or_else` instead.
+            it is recommended to use :py:meth:`map_or_else` instead.
 
         Examples:
             >>> some(0).map_or(lambda x: x + 1, 1000)
@@ -261,7 +261,7 @@ class Option(Generic[T]):
             default: The callback fot the default value.
 
         Returns:
-            The ``callback`` result if the contained value is :meth:`some`,
+            The ``callback`` result if the contained value is :py:meth:`some`,
             otherwise the result of ``default``.
 
         Examples:
@@ -274,16 +274,16 @@ class Option(Generic[T]):
 
     def filter(self, predicate: Callable[[T], bool]) -> 'Union[Option[T], Option[None]]':
         """
-        Returns :const:`NONE` if the :class:`Option` is :const:`NONE`,
+        Returns :py:const:`NONE` if the :py:class:`Option` is :py:const:`NONE`,
         otherwise filter the contained value by ``predicate``.
 
         Args:
             predicate: The fitler function.
 
         Returns:
-            :const:`NONE` if the contained value is :const:`NONE`, otherwise:
+            :py:const:`NONE` if the contained value is :py:const:`NONE`, otherwise:
                 * The option itself if the predicate returns True
-                * :const:`NONE` if the predicate returns False
+                * :py:const:`NONE` if the predicate returns False
 
         Examples:
             >>> some(0).filter(lambda x: x % 2 == 1)
@@ -312,10 +312,10 @@ class Option(Generic[T]):
             default: The defauilt value.
 
         Returns:
-            * :meth:`some` of the mapping value if the key exists
+            * :py:meth:`some` of the mapping value if the key exists
                and the value is not None.
-            * :meth:`some`(default) if ``default`` is not None.
-            * :const:`NONE` if ``default`` is None.
+            * :py:meth:`some`(default) if ``default`` is not None.
+            * :py:const:`NONE` if ``default`` is None.
 
         Examples:
             >>> some({'hi': 1}).get('hi')
@@ -379,12 +379,12 @@ class Option(Generic[T]):
 
 
 def some(val: T) -> Option[T]:
-    """Shortcut function to :meth:`Option.some`."""
+    """Shortcut function to :py:meth:`Option.some`."""
     return Option.some(val)
 
 
 def maybe(val: T) -> Option[T]:
-    """Shortcut function to :meth:`Option.maybe`."""
+    """Shortcut function to :py:meth:`Option.maybe`."""
     return Option.maybe(val)
 
 
