@@ -6,7 +6,7 @@ authors = ["Peijun Ma <peijun.ma@protonmail.com>"]
 readme = "README.md"
 license = "MIT"
 repository="https://github.com/MaT1g3R/option"
-homepage="https://github.com/MaT1g3R/option"
+homepage="https://mat1g3r.github.io/option/"
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
