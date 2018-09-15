@@ -16,6 +16,7 @@ disable=no-name-in-module,
         protected-access,
         assigning-non-slot,
         unused-import,
+        unsubscriptable-object,
 
 [REPORTS]
 evaluation=10.0 - ((float(5 * error + warning + refactor + convention) / statement) * 10)
