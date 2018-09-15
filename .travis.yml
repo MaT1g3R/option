@@ -1,17 +1,25 @@
-dist: xenial
 language: python
-python:
-  - "3.6"
-  - "3.7"
 
+matrix:
+  include:
+    - os: linux
+      dist: xenial
+      sudo: false
+      python: '3.6'
+    - os: linux
+      dist: xenial
+      sudo: false
+      python: '3.7'
+
+env: UPLOAD_COV=true
 install:
   - make ci_install
 
 script:
   - make lint
-  - if [[ $TRAVIS_PYTHON_VERSION == '3.7' ]]; then make cov; else make test; fi
+  - if [[ $UPLOAD_COV == 'true' ]]; then make cov; else make test; fi
 
-after_script:
+before_deploy:
   - make docs
 
 deploy:
