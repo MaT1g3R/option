@@ -6,6 +6,7 @@ matrix:
       dist: xenial
       sudo: false
       python: '3.6'
+      env: UPLOAD_COV=false
     - os: linux
       dist: xenial
       sudo: true
