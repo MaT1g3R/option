@@ -120,7 +120,7 @@ var Search = {
     this.out = $('#search-results');
     this.title = $('<h2>' + _('Searching') + '</h2>').appendTo(this.out);
     this.dots = $('<span></span>').appendTo(this.title);
-    this.status = $('<p style="display: NONE"></p>').appendTo(this.out);
+    this.status = $('<p style="display: none"></p>').appendTo(this.out);
     this.output = $('<ul class="search"/>').appendTo(this.out);
 
     $('#search-progress').text(_('Preparing search...'));
@@ -235,7 +235,7 @@ var Search = {
       // results left, load the summary and display it
       if (results.length) {
         var item = results.pop();
-        var listItem = $('<li style="display:NONE"></li>');
+        var listItem = $('<li style="display:none"></li>');
         if (DOCUMENTATION_OPTIONS.FILE_SUFFIX === '') {
           // dirhtml builder
           var dirname = item[0] + '/';
@@ -351,7 +351,7 @@ var Search = {
             anchor = fullname;
           else if (anchor == '-')
             anchor = objnames[match[1]][1] + '-' + fullname;
-          // add custom score for Some objects according to scorer
+          // add custom score for some objects according to scorer
           if (Scorer.objPrio.hasOwnProperty(match[2])) {
             score += Scorer.objPrio[match[2]];
           } else {
@@ -428,7 +428,7 @@ var Search = {
       if (fileMap[file].length != searchterms.length)
           continue;
 
-      // ensure that NONE of the excluded terms is in the search result
+      // ensure that none of the excluded terms is in the search result
       for (i = 0; i < excluded.length; i++) {
         if (terms[excluded[i]] == file ||
             titleterms[excluded[i]] == file ||
