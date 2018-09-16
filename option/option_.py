@@ -30,16 +30,16 @@ This module contains the Option class.
 
 from typing import Callable, Generic, Mapping, Union
 
-from option.types_ import A, K, NoneError, T, U, V, _NoneError
+from option.types_ import A, K, T, U, V, _NoneError
 
 
 class Option(Generic[T]):
     """
     :py:class:`Option` represents an optional value. Every :py:class:`Option`
-    is either ``some`` and contains a value, or :py:data:`NONE` and
+    is either ``Some`` and contains a value, or :py:data:`NONE` and
     does not.
 
-    To create a ``some`` value, please use :py:meth:`Option.some` or :py:func:`some`.
+    To create a ``Some`` value, please use :py:meth:`Option.Some` or :py:func:`Some`.
 
     To create a :py:data:`NONE` value, please use :py:meth:`Option.none` or import the
     constant :py:data:`NONE` directly.
@@ -50,12 +50,12 @@ class Option(Generic[T]):
     Calling the ``__init__``  method directly will raise a ``TypeError``.
 
     Examples:
-        >>> Option.some(1)
-        some(1)
-        >>> Option.none()
+        >>> Option.Some(1)
+        Some(1)
+        >>> Option.NONE()
         NONE
         >>> Option.maybe(1)
-        some(1)
+        Some(1)
         >>> Option.maybe(None)
         NONE
     """
@@ -72,43 +72,43 @@ class Option(Generic[T]):
         self._type = type(self)
 
     @classmethod
-    def some(cls, val: T) -> 'Option[T]':
+    def Some(cls, val: T) -> 'Option[T]':
         """Some value ``val``."""
         return cls(val, True, _force=True)
 
     @classmethod
-    def none(cls) -> 'Option[None]':
+    def NONE(cls) -> 'Option[None]':
         """No Value."""
         return NONE
 
     @classmethod
     def maybe(cls, val: T) -> 'Option[T]':
         """
-        Shortcut method to return ``some`` or :py:data:`NONE` based on ``val``.
+        Shortcut method to return ``Some`` or :py:data:`NONE` based on ``val``.
 
         Args:
             val: Some value.
 
         Returns:
-            ``some(val)`` if the ``val`` is not None, otherwise :py:data:`NONE`.
+            ``Some(val)`` if the ``val`` is not None, otherwise :py:data:`NONE`.
 
         Examples:
             >>> Option.maybe(0)
-            some(0)
+            Some(0)
             >>> Option.maybe(None)
             NONE
         """
-        return NONE if val is None else cls.some(val)
+        return NONE if val is None else cls.Some(val)
 
     def __bool__(self):
         """
         Returns the truth value of the :py:class:`Option` based on its value.
 
         Returns:
-            True if the :py:class:`Option` is ``some`` value, otherwise False.
+            True if the :py:class:`Option` is ``Some`` value, otherwise False.
 
         Examples:
-            >>> bool(some(False))
+            >>> bool(Some(False))
             True
             >>> bool(NONE)
             False
@@ -118,10 +118,10 @@ class Option(Generic[T]):
     @property
     def is_some(self) -> bool:
         """
-        Returns ``True`` if the option is a ``some`` value.
+        Returns ``True`` if the option is a ``Some`` value.
 
         Examples:
-            >>> some(0).is_some
+            >>> Some(0).is_some
             True
             >>> NONE.is_some
             False
@@ -134,7 +134,7 @@ class Option(Generic[T]):
         Returns ``True`` if the option is a :py:data:`NONE` value.
 
         Examples:
-            >>> some(0).is_none
+            >>> Some(0).is_none
             False
             >>> NONE.is_none
             True
@@ -152,37 +152,37 @@ class Option(Generic[T]):
             The wrapped value.
 
         Raises:
-            NoneError with message provided by ``msg`` if the value is :py:data:`NONE`.
+            ValueErro with message provided by ``msg`` if the value is :py:data:`NONE`.
 
         Examples:
-            >>> some(0).except_('sd')
+            >>> Some(0).except_('sd')
             0
             >>> try:
             ...     NONE.except_('Oh No!')
-            ... except NoneError as e:
+            ... except ValueError as e:
             ...     print(e)
             Oh No!
         """
         if self._is_some:
             return self._val
-        raise NoneError(msg)
+        raise ValueError(msg)
 
     def unwrap(self) -> T:
         """
-        Returns the value in the :py:class:`Option` if it is ``some``.
+        Returns the value in the :py:class:`Option` if it is ``Some``.
 
         Returns:
-            The ```some`` value of the :py:class:`Option`.
+            The ```Some`` value of the :py:class:`Option`.
 
         Raises:
-            NoneError if the value is :py:data:`NONE`.
+            ValueError if the value is :py:data:`NONE`.
 
         Examples:
-            >>> some(0).unwrap()
+            >>> Some(0).unwrap()
             0
             >>> try:
             ...     NONE.unwrap()
-            ... except NoneError as e:
+            ... except ValueError as e:
             ...     print(e)
             Value is NONE.
         """
@@ -203,7 +203,7 @@ class Option(Generic[T]):
             default: The default value.
 
         Returns:
-            The contained value if the :py:class:`Option` is ``some``,
+            The contained value if the :py:class:`Option` is ``Some``,
             otherwise ``default``.
 
         Notes:
@@ -211,7 +211,7 @@ class Option(Generic[T]):
             it is recommnded to use :py:meth:`unwrap_or_elsed` instead.
 
         Examples:
-            >>> some(0).unwrap_or(3)
+            >>> Some(0).unwrap_or(3)
             0
             >>> NONE.unwrap_or(0)
             0
@@ -226,11 +226,11 @@ class Option(Generic[T]):
             callback: The the default callback.
 
         Returns:
-            The contained value if the :py:class:`Option` is ``some``,
+            The contained value if the :py:class:`Option` is ``Some``,
             otherwise ``callback()``.
 
         Examples:
-            >>> some(0).unwrap_or_else(lambda: 111)
+            >>> Some(0).unwrap_or_else(lambda: 111)
             0
             >>> NONE.unwrap_or_else(lambda: 'ha')
             'ha'
@@ -247,16 +247,16 @@ class Option(Generic[T]):
 
         Returns:
             The ``callback`` result wrapped in an :class:`Option` if the
-            contained value is ``some``, otherwise :py:data:`NONE`
+            contained value is ``Some``, otherwise :py:data:`NONE`
 
         Examples:
-            >>> some(10).map(lambda x: x * x)
-            some(100)
+            >>> Some(10).map(lambda x: x * x)
+            Some(100)
             >>> NONE.map(lambda x: x * x)
             NONE
         """
         if self._is_some:
-            return self._type.some(callback(self._val))
+            return self._type.Some(callback(self._val))
         else:
             return NONE
 
@@ -269,7 +269,7 @@ class Option(Generic[T]):
             default: The default value.
 
         Returns:
-            The ``callback`` result if the contained value is ``some``,
+            The ``callback`` result if the contained value is ``Some``,
             otherwise ``default``.
 
         Notes:
@@ -277,7 +277,7 @@ class Option(Generic[T]):
             it is recommended to use :py:meth:`map_or_else` instead.
 
         Examples:
-            >>> some(0).map_or(lambda x: x + 1, 1000)
+            >>> Some(0).map_or(lambda x: x + 1, 1000)
             1
             >>> NONE.map_or(lambda x: x * x, 1)
             1
@@ -294,11 +294,11 @@ class Option(Generic[T]):
             default: The callback fot the default value.
 
         Returns:
-            The ``callback`` result if the contained value is ``some``,
+            The ``callback`` result if the contained value is ``Some``,
             otherwise the result of ``default``.
 
         Examples:
-            >>> some(0).map_or_else(lambda x: x * x, lambda: 1)
+            >>> Some(0).map_or_else(lambda x: x * x, lambda: 1)
             0
             >>> NONE.map_or_else(lambda x: x * x, lambda: 1)
             1
@@ -319,10 +319,10 @@ class Option(Generic[T]):
                 * :py:data:`NONE` if the predicate returns False
 
         Examples:
-            >>> some(0).filter(lambda x: x % 2 == 1)
+            >>> Some(0).filter(lambda x: x % 2 == 1)
             NONE
-            >>> some(1).filter(lambda x: x % 2 == 1)
-            some(1)
+            >>> Some(1).filter(lambda x: x % 2 == 1)
+            Some(1)
             >>> NONE.filter(lambda x: True)
             NONE
         """
@@ -345,18 +345,18 @@ class Option(Generic[T]):
             default: The defauilt value.
 
         Returns:
-            * ``some`` variant of the mapping value if the key exists
+            * ``Some`` variant of the mapping value if the key exists
                and the value is not None.
-            * ``some(default)`` if ``default`` is not None.
+            * ``Some(default)`` if ``default`` is not None.
             * :py:data:`NONE` if ``default`` is None.
 
         Examples:
-            >>> some({'hi': 1}).get('hi')
-            some(1)
-            >>> some({}).get('hi', 12)
-            some(12)
+            >>> Some({'hi': 1}).get('hi')
+            Some(1)
+            >>> Some({}).get('hi', 12)
+            Some(12)
             >>> NONE.get('hi', 12)
-            some(12)
+            Some(12)
             >>> NONE.get('hi')
             NONE
         """
@@ -408,12 +408,12 @@ class Option(Generic[T]):
         return NotImplemented
 
     def __repr__(self):
-        return 'NONE' if self.is_none else f'some({self._val!r})'
+        return 'NONE' if self.is_none else f'Some({self._val!r})'
 
 
-def some(val: T) -> Option[T]:
-    """Shortcut function to :py:meth:`Option.some`."""
-    return Option.some(val)
+def Some(val: T) -> Option[T]:
+    """Shortcut function to :py:meth:`Option.Some`."""
+    return Option.Some(val)
 
 
 def maybe(val: T) -> Option[T]:

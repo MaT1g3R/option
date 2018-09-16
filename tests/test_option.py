@@ -22,7 +22,7 @@
 
 import pytest
 
-from option import NONE, NoneError, Option, maybe, some
+from option import NONE, Option, Some, maybe
 
 
 @pytest.mark.parametrize('is_some', [True, False])
@@ -34,7 +34,7 @@ def test_no_init(is_some):
             Option(None, False)
 
 
-@pytest.mark.parametrize('obj', [Option.some(1), some(1)])
+@pytest.mark.parametrize('obj', [Option.Some(1), Some(1)])
 def test_some(obj):
     assert obj.is_some is True
     assert obj.is_none is False
@@ -42,7 +42,7 @@ def test_some(obj):
     assert obj._val == 1
 
 
-@pytest.mark.parametrize('obj', [Option.none(), NONE])
+@pytest.mark.parametrize('obj', [Option.NONE(), NONE])
 def test_none(obj):
     assert obj.is_some is False
     assert obj.is_none is True
@@ -71,7 +71,7 @@ def test_maybe(obj, is_some):
 
 
 @pytest.mark.parametrize('obj,truth', [
-    (some(1), True),
+    (Some(1), True),
     (NONE, False)
 ])
 def test_bool(obj, truth):
@@ -79,7 +79,7 @@ def test_bool(obj, truth):
 
 
 @pytest.mark.parametrize('obj,raise_', [
-    (some(1), False),
+    (Some(1), False),
     (NONE, True)
 ])
 def test_except(obj, raise_):
@@ -91,23 +91,23 @@ def test_except(obj, raise_):
 
 
 @pytest.mark.parametrize('obj,raise_', [
-    (some(1), False),
-    (some(None), False),
+    (Some(1), False),
+    (Some(None), False),
     (NONE, True)
 ])
 def test_value(obj, raise_):
     if raise_:
-        with pytest.raises(NoneError):
+        with pytest.raises(ValueError):
             obj.value
-        with pytest.raises(NoneError):
+        with pytest.raises(ValueError):
             obj.unwrap()
     else:
         assert obj.value == obj.unwrap() == obj._val
 
 
 @pytest.mark.parametrize('obj,default,exp', [
-    (some(0), 1, 0),
-    (some(False), 1, False),
+    (Some(0), 1, 0),
+    (Some(False), 1, False),
     (NONE, 0, 0)
 ])
 def test_unwrap_or(obj, default, exp):
@@ -120,18 +120,18 @@ def _raise(*args):
 
 
 @pytest.mark.parametrize('obj,func,exp', [
-    (some(1), lambda x: x * 2, some(2)),
+    (Some(1), lambda x: x * 2, Some(2)),
     (NONE, _raise, NONE),
-    (some('asd'), len, some(3))
+    (Some('asd'), len, Some(3))
 ])
 def test_map(obj, func, exp):
     assert obj.map(func) == exp
 
 
 @pytest.mark.parametrize('obj,func,default,exp', [
-    (some(1), lambda x: x * 2, 100, 2),
+    (Some(1), lambda x: x * 2, 100, 2),
     (NONE, _raise, 100, 100),
-    (some('asd'), len, 100, 3)
+    (Some('asd'), len, 100, 3)
 ])
 def test_map_or(obj, func, default, exp):
     assert obj.map_or(func, default) == exp
@@ -139,8 +139,8 @@ def test_map_or(obj, func, default, exp):
 
 
 @pytest.mark.parametrize('obj,filt,exp', [
-    (some(1), lambda x: x % 2 == 0, NONE),
-    (some('asd'), lambda s: len(s) < 10, some('asd')),
+    (Some(1), lambda x: x % 2 == 0, NONE),
+    (Some('asd'), lambda s: len(s) < 10, Some('asd')),
     (NONE, lambda x: True, NONE),
     (NONE, _raise, NONE)
 ])
@@ -149,9 +149,9 @@ def test_filter(obj, filt, exp):
 
 
 @pytest.mark.parametrize('a,b,exp', [
-    (some(1), NONE, NONE),
-    (NONE, some(1), NONE),
-    (some(2), some('asd'), some('asd')),
+    (Some(1), NONE, NONE),
+    (NONE, Some(1), NONE),
+    (Some(2), Some('asd'), Some('asd')),
     (NONE, NONE, NONE)
 ])
 def test_and(a, b, exp):
@@ -159,9 +159,9 @@ def test_and(a, b, exp):
 
 
 @pytest.mark.parametrize('a,b,exp', [
-    (some(1), some(2), some(1)),
-    (some(1), NONE, some(1)),
-    (NONE, some(1), some(1)),
+    (Some(1), Some(2), Some(1)),
+    (Some(1), NONE, Some(1)),
+    (NONE, Some(1), Some(1)),
     (NONE, NONE, NONE),
 ])
 def test_or(a, b, exp):
@@ -169,9 +169,9 @@ def test_or(a, b, exp):
 
 
 @pytest.mark.parametrize('self,other', [
-    (some(1), some(1)),
-    (some([1, 2]), some([1, 2])),
-    (some({'': 'asd'}), some({'': 'asd'})),
+    (Some(1), Some(1)),
+    (Some([1, 2]), Some([1, 2])),
+    (Some({'': 'asd'}), Some({'': 'asd'})),
     (NONE, NONE)
 ])
 def test_eq(self, other):
@@ -179,18 +179,18 @@ def test_eq(self, other):
 
 
 @pytest.mark.parametrize('self,other', [
-    (some(1), some(2)),
-    (NONE, some(1)),
-    (some(1), NONE),
+    (Some(1), Some(2)),
+    (NONE, Some(1)),
+    (Some(1), NONE),
 ])
 def test_ne(self, other):
     assert self != other
 
 
 @pytest.mark.parametrize('self,other', [
-    (some(1), some(2)),
-    (NONE, some(0)),
-    (NONE, some(False)),
+    (Some(1), Some(2)),
+    (NONE, Some(0)),
+    (NONE, Some(False)),
 ])
 def test_lt_gt(self, other):
     assert self < other
@@ -205,10 +205,10 @@ def test_le_ge():
 
 
 @pytest.mark.parametrize('self,other', [
-    (some(None), some(1)),
-    (some(1), some(None)),
-    (some(1), some('')),
-    (some(''), some(None)),
+    (Some(None), Some(1)),
+    (Some(1), Some(None)),
+    (Some(1), Some('')),
+    (Some(''), Some(None)),
 ])
 def test_lt_gt_type_error(self, other):
     with pytest.raises(TypeError):
@@ -223,10 +223,10 @@ def test_lt_gt_type_error(self, other):
 
 @pytest.mark.parametrize('obj,key,default,exp', [
     (NONE, 1, None, NONE),
-    (NONE, 1, 1, some(1)),
-    (some({}), '', None, NONE),
-    (some({'': ''}), '', None, some('')),
-    (some({'': ''}), 'aaa', 11, some(11)),
+    (NONE, 1, 1, Some(1)),
+    (Some({}), '', None, NONE),
+    (Some({'': ''}), '', None, Some('')),
+    (Some({'': ''}), 'aaa', 11, Some(11)),
 ])
 def test_get(obj, key, default, exp):
     assert obj.get(key, default) == exp

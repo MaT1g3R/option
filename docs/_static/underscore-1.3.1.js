@@ -184,7 +184,7 @@
   };
 
   // Determine if at least one element in the object matches a truth test.
-  // Delegates to **ECMAScript 5**'s native `some` if available.
+  // Delegates to **ECMAScript 5**'s native `Some` if available.
   // Aliased as `any`.
   var any = _.some = _.any = function(obj, iterator, context) {
     iterator || (iterator = _.identity);

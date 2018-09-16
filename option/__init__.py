@@ -27,8 +27,8 @@
 
     Represents a None value.
 """
-from .option_ import NONE, Option, maybe, some
-from .types_ import NoneError
+from .option_ import NONE, Option, Some, maybe
+from .result import Err, Ok, Result
 
 __version__ = '0.1.7'
-__all__ = ['NONE', 'Option', 'some', 'maybe', 'NoneError']
+__all__ = ['NONE', 'Option', 'Some', 'maybe', 'Result', 'Ok', 'Err']

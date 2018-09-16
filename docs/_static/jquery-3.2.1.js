@@ -633,7 +633,7 @@ var i,
 		".*" +
 		")\\)|)",
 
-	// Leading and non-escaped trailing whitespace, capturing some non-whitespace characters preceding the latter
+	// Leading and non-escaped trailing whitespace, capturing Some non-whitespace characters preceding the latter
 	rwhitespace = new RegExp( whitespace + "+", "g" ),
 	rtrim = new RegExp( "^" + whitespace + "+|((?:^|[^\\\\])(?:\\\\.)*)" + whitespace + "+$", "g" ),
 
@@ -4498,16 +4498,16 @@ var isHiddenWithinTree = function( elem, el ) {
 		elem = el || elem;
 
 		// Inline style trumps all
-		return elem.style.display === "none" ||
+		return elem.style.display === "NONE" ||
 			elem.style.display === "" &&
 
 			// Otherwise, check computed style
 			// Support: Firefox <=43 - 45
-			// Disconnected elements can have computed display: none, so first confirm that elem is
+			// Disconnected elements can have computed display: NONE, so first confirm that elem is
 			// in the document.
 			jQuery.contains( elem.ownerDocument, elem ) &&
 
-			jQuery.css( elem, "display" ) === "none";
+			jQuery.css( elem, "display" ) === "NONE";
 	};
 
 var swap = function( elem, options, callback, args ) {
@@ -4613,7 +4613,7 @@ function getDefaultDisplay( elem ) {
 
 	temp.parentNode.removeChild( temp );
 
-	if ( display === "none" ) {
+	if ( display === "NONE" ) {
 		display = "block";
 	}
 	defaultDisplayMap[ nodeName ] = display;
@@ -4640,7 +4640,7 @@ function showHide( elements, show ) {
 			// Since we force visibility upon cascade-hidden elements, an immediate (and slow)
 			// check is required in this first loop unless we have a nonempty display value (either
 			// inline or about-to-be-restored)
-			if ( display === "none" ) {
+			if ( display === "NONE" ) {
 				values[ index ] = dataPriv.get( elem, "display" ) || null;
 				if ( !values[ index ] ) {
 					elem.style.display = "";
@@ -4650,8 +4650,8 @@ function showHide( elements, show ) {
 				values[ index ] = getDefaultDisplay( elem );
 			}
 		} else {
-			if ( display !== "none" ) {
-				values[ index ] = "none";
+			if ( display !== "NONE" ) {
+				values[ index ] = "NONE";
 
 				// Remember what we're overwriting
 				dataPriv.set( elem, "display", display );
@@ -6185,7 +6185,7 @@ function curCSS( elem, name, computed ) {
 		}
 
 		// A tribute to the "awesome hack by Dean Edwards"
-		// Android Browser returns percentage for some values,
+		// Android Browser returns percentage for Some values,
 		// but width seems to be reliably pixels.
 		// This is against the CSSOM draft spec:
 		// https://drafts.csswg.org/cssom/#resolved-values
@@ -6238,7 +6238,7 @@ function addGetHookIf( conditionFn, hookFn ) {
 
 var
 
-	// Swappable if display is none or starts with table
+	// Swappable if display is NONE or starts with table
 	// except "table", "table-cell", or "table-caption"
 	// See here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
 	rdisplayswap = /^(none|table(?!-c[ea]).+)/,
@@ -6904,7 +6904,7 @@ function defaultPrefilter( elem, props, opts ) {
 			restoreDisplay = dataPriv.get( elem, "display" );
 		}
 		display = jQuery.css( elem, "display" );
-		if ( display === "none" ) {
+		if ( display === "NONE" ) {
 			if ( restoreDisplay ) {
 				display = restoreDisplay;
 			} else {
@@ -6919,7 +6919,7 @@ function defaultPrefilter( elem, props, opts ) {
 
 		// Animate inline elements as inline-block
 		if ( display === "inline" || display === "inline-block" && restoreDisplay != null ) {
-			if ( jQuery.css( elem, "float" ) === "none" ) {
+			if ( jQuery.css( elem, "float" ) === "NONE" ) {
 
 				// Restore the original display value at the end of pure show/hide animations
 				if ( !propTween ) {
@@ -6928,7 +6928,7 @@ function defaultPrefilter( elem, props, opts ) {
 					} );
 					if ( restoreDisplay == null ) {
 						display = style.display;
-						restoreDisplay = display === "none" ? "" : display;
+						restoreDisplay = display === "NONE" ? "" : display;
 					}
 				}
 				style.display = "inline-block";
@@ -8715,7 +8715,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 				// Seek a direct converter
 				conv = converters[ prev + " " + current ] || converters[ "* " + current ];
 
-				// If none found, seek a pair
+				// If NONE found, seek a pair
 				if ( !conv ) {
 					for ( conv2 in converters ) {
 
@@ -9977,7 +9977,7 @@ jQuery.fn.extend( {
 			return;
 		}
 
-		// Return zeros for disconnected and hidden (display: none) elements (gh-2310)
+		// Return zeros for disconnected and hidden (display: NONE) elements (gh-2310)
 		// Support: IE <=11 only
 		// Running getBoundingClientRect on a
 		// disconnected node in IE throws an error

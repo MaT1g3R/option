@@ -24,12 +24,7 @@
 
 from typing import TypeVar
 
-
-class NoneError(ValueError):
-    pass
-
-
-_NoneError = NoneError("Value is NONE.")
+_NoneError = ValueError("Value is NONE.")
 
 T = TypeVar('T')
 U = TypeVar('U')
@@ -39,3 +34,4 @@ K = TypeVar('K')
 V = TypeVar('V')
 
 E = TypeVar('E')
+F = TypeVar('F')

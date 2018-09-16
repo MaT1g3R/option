@@ -4,19 +4,19 @@
 
 A [rust-like](https://doc.rust-lang.org/std/option/enum.Option.html) `Option` type in Python, slotted and fully typed.
 
-An `Option` type represents an optional value, every `Option` is either `some` and contains some value, or `NONE`
+An `Option` type represents an optional value, every `Option` is either `Some` and contains Some value, or `NONE`
 
 Using an `Option` type forces you to deal with `None` values in your code and increase type safety.
 
 ## Quick Start
 ```Python
-from option import some, NONE, Option
+from option import Some, NONE, Option
 from requests import get
 
 def call_api(url, params) -> Option[dict]:
     result = get(url, params)
     if result.status_code == 200:
-        return some(result.json())
+        return Some(result.json())
     return NONE
 
 # Instead of checking for None, the NONE case is always dealt with.
