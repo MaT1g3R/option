@@ -68,7 +68,7 @@ def test_ok_err(ok):
         assert res.err() == Some(1)
 
 
-@parametrize('objmcall,exp', [
+@parametrize('obj,call,exp', [
     (Ok(1), str, Ok('1')),
     (Err(1), str, Err(1))
 ])
@@ -81,7 +81,7 @@ def test_map(obj, call, exp):
     (Err(1), str, Err('1'))
 ])
 def test_map_err(obj, call, exp):
-    assert obj.map(call) == exp
+    assert obj.map_err(call) == exp
 
 
 @parametrize('obj,exp,ok', [
