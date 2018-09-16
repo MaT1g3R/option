@@ -237,3 +237,15 @@ def test_lt_gt_type_error(self, other):
 ])
 def test_get(obj, key, default, exp):
     assert obj.get(key, default) == exp
+
+
+@parametrize('obj1,obj2,eq', [
+    (Some(1), Some(1), True),
+    (NONE, NONE, True),
+    (Some(1), None, False)
+])
+def test_hash(obj1, obj2, eq):
+    if eq:
+        assert hash(obj1) == hash(obj2)
+    else:
+        assert hash(obj1) != hash(obj2)
