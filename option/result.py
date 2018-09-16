@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 """This module contains the Result type."""
-from typing import Any, Callable, Generic, Union
+from typing import Any, Callable, Generic, Union, cast
 
 from option.option_ import NONE, Option
 from option.types_ import E, F, T, U
@@ -125,7 +125,7 @@ class Result(Generic[T, E]):
         """
         return not self._is_ok
 
-    def ok(self) -> Option[T]:
+    def ok(self) -> Union[Option[T], Option[None]]:
         """
         Converts from :class`Result`[T, E] to :class:`Option`[T].
 
@@ -139,9 +139,11 @@ class Result(Generic[T, E]):
             >>> Err(1).ok()
             NONE
         """
-        return Option.Some(self._val) if self._is_ok else NONE
+        if self._is_ok:
+            return Option.Some(cast(T, self._val))
+        return NONE
 
-    def err(self) -> Option[E]:
+    def err(self) -> Union[Option[E], Option[None]]:
         """
         Converts from :class:`Result`[T, E] to :class:`Option`[E].
 
@@ -155,9 +157,11 @@ class Result(Generic[T, E]):
             >>> Err(1).err()
             Some(1)
         """
-        return NONE if self._is_ok else Option.Some(self._val)
+        if self._is_ok:
+            return NONE
+        return Option.Some(cast(E, self._val))
 
-    def map(self, op: Callable[[T], U]) -> 'Result[U, E]':
+    def map(self, op: Callable[[T], U]) -> 'Union[Result[U, E], Result[T, E]]':
         """
         Applies a function to the contained :meth:`Result.Ok` value.
 
@@ -175,9 +179,11 @@ class Result(Generic[T, E]):
             >>> Err(1).map(lambda x: x * 2)
             Err(1)
         """
-        return self._type.Ok(op(self._val)) if self._is_ok else self
+        if self._is_ok:
+            return self._type.Ok(op(cast(T, self._val)))
+        return self
 
-    def map_err(self, op: Callable[[E], F]) -> 'Result[T, F]':
+    def map_err(self, op: Callable[[E], F]) -> 'Union[Result[T, F], Result[T, E]]':
         """
         Applies a function to the contained :meth:`Result.Err` value.
 
@@ -195,7 +201,9 @@ class Result(Generic[T, E]):
             >>> Err(1).map_err(lambda x: x * 2)
             Err(2)
         """
-        return self if self._is_ok else self._type.Err(op(self._val))
+        if self._is_ok:
+            return self
+        return self._type.Err(op(cast(E, self._val)))
 
     def unwrap(self) -> T:
         """
@@ -218,7 +226,7 @@ class Result(Generic[T, E]):
             1
         """
         if self._is_ok:
-            return self._val
+            return cast(T, self._val)
         raise ValueError(self._val)
 
     def unwrap_or(self, optb: T) -> T:
@@ -242,7 +250,7 @@ class Result(Generic[T, E]):
             >>> Err(1).unwrap_or(2)
             2
         """
-        return self._val if self._is_ok else optb
+        return cast(T, self._val) if self._is_ok else optb
 
     def unwrap_or_else(self, op: Callable[[E], U]) -> Union[T, U]:
         """
@@ -262,7 +270,7 @@ class Result(Generic[T, E]):
             >>> Err(1).unwrap_or_else(lambda e: e * 10)
             10
         """
-        return self._val if self._is_ok else op(self._val)
+        return cast(T, self._val) if self._is_ok else op(cast(E, self._val))
 
     def expect(self, msg) -> T:
         """
@@ -290,7 +298,7 @@ class Result(Generic[T, E]):
             no
         """
         if self._is_ok:
-            return self._val
+            return cast(T, self._val)
         raise ValueError(msg)
 
     def unwrap_err(self) -> E:
@@ -316,7 +324,7 @@ class Result(Generic[T, E]):
         """
         if self._is_ok:
             raise ValueError(self._val)
-        return self._val
+        return cast(E, self._val)
 
     def expect_err(self, msg) -> E:
         """
@@ -345,7 +353,7 @@ class Result(Generic[T, E]):
         """
         if self._is_ok:
             raise ValueError(msg)
-        return self._val
+        return cast(E, self._val)
 
     def __repr__(self):
         return f'Ok({self._val!r})' if self._is_ok else f'Err({self._val!r})'
