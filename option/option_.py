@@ -141,7 +141,7 @@ class Option(Generic[T]):
         """
         return not self.__bool__()
 
-    def except_(self, msg) -> T:
+    def expect(self, msg) -> T:
         """
         Unwraps the option. Raises an exception if the value is :py:data:`NONE`.
 
@@ -155,10 +155,10 @@ class Option(Generic[T]):
             ValueErro with message provided by ``msg`` if the value is :py:data:`NONE`.
 
         Examples:
-            >>> Some(0).except_('sd')
+            >>> Some(0).expect('sd')
             0
             >>> try:
-            ...     NONE.except_('Oh No!')
+            ...     NONE.expect('Oh No!')
             ... except ValueError as e:
             ...     print(e)
             Oh No!

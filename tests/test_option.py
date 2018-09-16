@@ -85,9 +85,9 @@ def test_bool(obj, truth):
 def test_except(obj, raise_):
     if raise_:
         with pytest.raises(ValueError):
-            obj.except_('asd')
+            obj.expect('asd')
     else:
-        assert obj.except_('asd') == 1
+        assert obj.expect('asd') == 1
 
 
 @pytest.mark.parametrize('obj,raise_', [
