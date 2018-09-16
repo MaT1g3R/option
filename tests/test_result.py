@@ -161,6 +161,8 @@ def test_hash(obj1, obj2, eq):
 ])
 def test_eq(o1, o2):
     assert o1 == o2
+    assert not o1 == o1._val
+    assert not o1._val == o1
 
 
 @parametrize('o1,o2', [
@@ -172,6 +174,8 @@ def test_eq(o1, o2):
 ])
 def test_neq(o1, o2):
     assert o1 != o2
+    assert o1 != o1._val
+    assert o1._val != o1
 
 
 @parametrize('o1,o2', [
@@ -193,3 +197,22 @@ def test_lt_gt(o1, o2):
 def test_le_ge(o1, o2):
     assert o1 <= o2
     assert o1 >= o2
+
+
+@parametrize('self,other', [
+    (Err(None), Err(1)),
+    (Ok(1), Ok(None)),
+    (Ok(1), Ok('')),
+    (Ok(''), Ok(None)),
+    (Ok(1), 1),
+    (1, Err(1))
+])
+def test_lt_gt_type_error(self, other):
+    with pytest.raises(TypeError):
+        self < other
+    with pytest.raises(TypeError):
+        self <= other
+    with pytest.raises(TypeError):
+        self > other
+    with pytest.raises(TypeError):
+        self >= other

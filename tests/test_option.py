@@ -177,6 +177,8 @@ def test_or(a, b, exp):
 ])
 def test_eq(self, other):
     assert self == other
+    assert not self == self._val
+    assert not self._val == self
 
 
 @parametrize('self,other', [
@@ -186,6 +188,8 @@ def test_eq(self, other):
 ])
 def test_ne(self, other):
     assert self != other
+    assert self != self._val
+    assert self._val != self
 
 
 @parametrize('self,other', [
@@ -210,6 +214,8 @@ def test_le_ge():
     (Some(1), Some(None)),
     (Some(1), Some('')),
     (Some(''), Some(None)),
+    (Some(1), 1),
+    (1, Some(1))
 ])
 def test_lt_gt_type_error(self, other):
     with pytest.raises(TypeError):
