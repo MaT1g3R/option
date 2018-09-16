@@ -14,21 +14,21 @@
 #
 # import os
 # import sys
-# sys.path.insert(0, os.path.abspath('.'))
+# sys.path.insert(0, '/run/media/umi/HDD/Projects/Python/option/option')
 
 
 # -- Project information -----------------------------------------------------
+
 from option import __version__
 
-project = 'Option'
+project = 'option'
 copyright = '2018, Peijun Ma'
 author = 'Peijun Ma'
-autodoc_member_order = 'bysource'
 
 # The short X.Y version
-version = ''
 # The full version, including alpha/beta/rc tags
-release = __version__
+release = version = __version__
+
 
 # -- General configuration ---------------------------------------------------
 
@@ -41,10 +41,8 @@ release = __version__
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.doctest',
-    'sphinx.ext.coverage',
     'sphinx.ext.viewcode',
-    'sphinx.ext.githubpages',
+    'sphinx.ext.todo',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -64,7 +62,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -73,6 +71,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = None
+
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -106,7 +105,8 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'Optiondoc'
+htmlhelp_basename = 'optiondoc'
+
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -132,18 +132,20 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'Option.tex', 'Option Documentation',
-     'Peijun Ma', 'manual'),
+    (master_doc, 'option.tex', 'option Documentation',
+     'Author', 'manual'),
 ]
+
 
 # -- Options for manual page output ------------------------------------------
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'option', 'Option Documentation',
+    (master_doc, 'option', 'option Documentation',
      [author], 1)
 ]
+
 
 # -- Options for Texinfo output ----------------------------------------------
 
@@ -151,10 +153,11 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'Option', 'Option Documentation',
-     author, 'Option', 'One line description of project.',
+    (master_doc, 'option', 'option Documentation',
+     author, 'option', 'One line description of project.',
      'Miscellaneous'),
 ]
+
 
 # -- Options for Epub output -------------------------------------------------
 
@@ -173,4 +176,10 @@ epub_title = project
 # A list of files that should not be packed into the epub file.
 epub_exclude_files = ['search.html']
 
+
 # -- Extension configuration -------------------------------------------------
+
+# -- Options for todo extension ----------------------------------------------
+
+# If true, `todo` and `todoList` produce output, else they produce nothing.
+todo_include_todos = True

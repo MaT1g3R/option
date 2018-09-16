@@ -34,7 +34,7 @@ class Result(Generic[T, E]):
 
     To create an Ok value, use :meth:`Result.Ok` or :func:`Ok`.
 
-    To create a Err value, use :meth:`Result:Err` or :func:`Err`.
+    To create a Err value, use :meth:`Result.Err` or :func:`Err`.
 
     Calling the :class:`Result` constructor directly will raise a ``TypeError``.
 
@@ -127,11 +127,11 @@ class Result(Generic[T, E]):
 
     def ok(self) -> Union[Option[T], Option[None]]:
         """
-        Converts from :class`Result`[T, E] to :class:`Option`[T].
+        Converts from :class:`Result` [T, E] to :class:`option.option_.Option` [T].
 
         Returns:
             :class:`Option` containing the success value if `self` is
-            :meth:`Result.Ok`, otherwise :data:`NONE`.
+            :meth:`Result.Ok`, otherwise :data:`option.option_.NONE`.
 
         Examples:
             >>> Ok(1).ok()
@@ -145,11 +145,11 @@ class Result(Generic[T, E]):
 
     def err(self) -> Union[Option[E], Option[None]]:
         """
-        Converts from :class:`Result`[T, E] to :class:`Option`[E].
+        Converts from :class:`Result` [T, E] to :class:`option.option_.Option` [E].
 
         Returns:
             :class:`Option` containing the error value if `self` is
-            :meth:`Result.Err`, otherwise :data:`NONE`.
+            :meth:`Result.Err`, otherwise :data:`option.option_.NONE`.
 
         Examples:
             >>> Ok(1).err()
