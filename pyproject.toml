@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "option"
 version = "0.2.1"
-description = "Rust like Option type in Python"
+description = "Rust like Option and Result types in Python"
 authors = ["Peijun Ma <peijun.ma@protonmail.com>"]
 readme = "README.md"
 license = "MIT"
