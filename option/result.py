@@ -23,8 +23,8 @@
 """This module contains the Result type."""
 from typing import Any, Callable, Generic, Union
 
-from .option_ import Option
-from .types_ import E, F, T, U
+from option.option_ import NONE, Option
+from option.types_ import E, F, T, U
 
 
 class Result(Generic[T, E]):
@@ -44,7 +44,7 @@ class Result(Generic[T, E]):
         >>> Result.Err('Fail!')
         Err('Fail!')
     """
-    __slots__ = ('_val', '_is_ok')
+    __slots__ = ('_val', '_is_ok', '_type')
 
     def __init__(self, val: Union[T, E], is_ok: bool, *, _force=False) -> None:
         if not _force:
@@ -54,6 +54,7 @@ class Result(Generic[T, E]):
             )
         self._val = val
         self._is_ok = is_ok
+        self._type = type(self)
 
     @classmethod
     def Ok(cls, val: T) -> 'Result[T, Any]':
@@ -73,7 +74,7 @@ class Result(Generic[T, E]):
             >>> res.is_ok
             True
         """
-        pass
+        return cls(val, True, _force=True)
 
     @classmethod
     def Err(cls, err: E) -> 'Result[Any, E]':
@@ -93,7 +94,7 @@ class Result(Generic[T, E]):
             >>> res.is_err
             True
         """
-        pass
+        return cls(err, False, _force=True)
 
     def __bool__(self):
         return self._is_ok
@@ -134,11 +135,11 @@ class Result(Generic[T, E]):
 
         Examples:
             >>> Ok(1).ok()
-            Option(1)
+            Some(1)
             >>> Err(1).ok()
             NONE
         """
-        pass
+        return Option.Some(self._val) if self._is_ok else NONE
 
     def err(self) -> Option[E]:
         """
@@ -152,9 +153,9 @@ class Result(Generic[T, E]):
             >>> Ok(1).err()
             NONE
             >>> Err(1).err()
-            Option(1)
+            Some(1)
         """
-        pass
+        return NONE if self._is_ok else Option.Some(self._val)
 
     def map(self, op: Callable[[T], U]) -> 'Result[U, E]':
         """
@@ -174,7 +175,7 @@ class Result(Generic[T, E]):
             >>> Err(1).map(lambda x: x * 2)
             Err(1)
         """
-        pass
+        return self._type.Ok(op(self._val)) if self._is_ok else self
 
     def map_err(self, op: Callable[[E], F]) -> 'Result[T, F]':
         """
@@ -189,12 +190,12 @@ class Result(Generic[T, E]):
             `self`.
 
         Examples:
-            >>> Ok(1).map(lambda x: x * 2)
+            >>> Ok(1).map_err(lambda x: x * 2)
             Ok(1)
-            >>> Err(1).map(lambda x: x * 2)
+            >>> Err(1).map_err(lambda x: x * 2)
             Err(2)
         """
-        pass
+        return self if self._is_ok else self._type.Err(op(self._val))
 
     def unwrap(self) -> T:
         """
@@ -216,7 +217,9 @@ class Result(Generic[T, E]):
             ...     print(e)
             1
         """
-        pass
+        if self._is_ok:
+            return self._val
+        raise ValueError(self._val)
 
     def unwrap_or(self, optb: T) -> T:
         """
@@ -239,7 +242,7 @@ class Result(Generic[T, E]):
             >>> Err(1).unwrap_or(2)
             2
         """
-        pass
+        return self._val if self._is_ok else optb
 
     def unwrap_or_else(self, op: Callable[[E], U]) -> Union[T, U]:
         """
@@ -259,7 +262,7 @@ class Result(Generic[T, E]):
             >>> Err(1).unwrap_or_else(lambda e: e * 10)
             10
         """
-        pass
+        return self._val if self._is_ok else op(self._val)
 
     def expect(self, msg) -> T:
         """
@@ -286,7 +289,9 @@ class Result(Generic[T, E]):
             ...     print(e)
             no
         """
-        pass
+        if self._is_ok:
+            return self._val
+        raise ValueError(msg)
 
     def unwrap_err(self) -> E:
         """
@@ -309,7 +314,9 @@ class Result(Generic[T, E]):
             >>> Err('Oh No').unwrap_err()
             'Oh No'
         """
-        pass
+        if self._is_ok:
+            raise ValueError(self._val)
+        return self._val
 
     def expect_err(self, msg) -> E:
         """
@@ -336,31 +343,53 @@ class Result(Generic[T, E]):
             >>> Err(1).expect_err('Yes')
             1
         """
-        pass
+        if self._is_ok:
+            raise ValueError(msg)
+        return self._val
 
     def __repr__(self):
         return f'Ok({self._val!r})' if self._is_ok else f'Err({self._val!r})'
 
     def __hash__(self):
-        pass
+        return hash((self._type, self._is_ok, self._val))
 
     def __eq__(self, other):
-        pass
+        return (isinstance(other, self._type)
+                and self._is_ok == other._is_ok
+                and self._val == other._val)
 
     def __ne__(self, other):
-        pass
+        return (not isinstance(other, self._type)
+                or self._is_ok != other._is_ok
+                or self._val != other._val)
 
     def __lt__(self, other):
-        pass
+        if isinstance(other, self._type):
+            if self._is_ok == other._is_ok:
+                return self._val < other._val
+            return self._is_ok
+        return NotImplemented
 
     def __le__(self, other):
-        pass
+        if isinstance(other, self._type):
+            if self._is_ok == other._is_ok:
+                return self._val <= other._val
+            return self._is_ok
+        return NotImplemented
 
     def __gt__(self, other):
-        pass
+        if isinstance(other, self._type):
+            if self._is_ok == other._is_ok:
+                return self._val > other._val
+            return other._is_ok
+        return NotImplemented
 
     def __ge__(self, other):
-        pass
+        if isinstance(other, self._type):
+            if self._is_ok == other._is_ok:
+                return self._val >= other._val
+            return other._is_ok
+        return NotImplemented
 
 
 def Ok(val: T) -> Result[T, Any]:
@@ -371,3 +400,9 @@ def Ok(val: T) -> Result[T, Any]:
 def Err(err: E) -> Result[Any, E]:
     """Shortcut function for :meth:`Result.Err`."""
     return Result.Err(err)
+
+
+if __name__ == '__main__':
+    import doctest
+
+    doctest.testmod()
