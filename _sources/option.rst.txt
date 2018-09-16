@@ -2,7 +2,7 @@ option package
 ==============
 
 Modules
-----------
+-------------
 
 option.option\_ module
 ----------------------
@@ -12,12 +12,11 @@ option.option\_ module
     :undoc-members:
     :show-inheritance:
 
-option.types\_ module
----------------------
+option.result module
+--------------------
 
-.. automodule:: option.types_
+.. automodule:: option.result
     :members:
     :undoc-members:
     :show-inheritance:
-
 

@@ -1,0 +1,513 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>option.result &#8212; option 0.1.7 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for option.result</h1><div class="highlight"><pre>
+<span></span><span class="c1"># MIT License</span>
+
+<span class="c1"># Copyright (c) 2018 Peijun Ma</span>
+
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+
+<span class="c1"># The above copyright notice and this permission notice shall be included in all</span>
+<span class="c1"># copies or substantial portions of the Software.</span>
+
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+
+<span class="sd">&quot;&quot;&quot;This module contains the Result type.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">from</span> <span class="nn">option.option_</span> <span class="k">import</span> <span class="n">NONE</span><span class="p">,</span> <span class="n">Option</span>
+<span class="kn">from</span> <span class="nn">option.types_</span> <span class="k">import</span> <span class="n">E</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">U</span>
+
+
+<div class="viewcode-block" id="Result"><a class="viewcode-back" href="../../option.html#option.result.Result">[docs]</a><span class="k">class</span> <span class="nc">Result</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">E</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    :class:`Result` is a type that either success (:meth:`Result.Ok`)</span>
+<span class="sd">    or failure (:meth:`Result.Err`).</span>
+
+<span class="sd">    To create an Ok value, use :meth:`Result.Ok` or :func:`Ok`.</span>
+
+<span class="sd">    To create a Err value, use :meth:`Result.Err` or :func:`Err`.</span>
+
+<span class="sd">    Calling the :class:`Result` constructor directly will raise a ``TypeError``.</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        &gt;&gt;&gt; Result.Ok(1)</span>
+<span class="sd">        Ok(1)</span>
+<span class="sd">        &gt;&gt;&gt; Result.Err(&#39;Fail!&#39;)</span>
+<span class="sd">        Err(&#39;Fail!&#39;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_val&#39;</span><span class="p">,</span> <span class="s1">&#39;_is_ok&#39;</span><span class="p">,</span> <span class="s1">&#39;_type&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">E</span><span class="p">],</span> <span class="n">is_ok</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">_force</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_force</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s1">&#39;Cannot directly initialize, &#39;</span>
+                <span class="s1">&#39;please use one of the factory functions instead.&#39;</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="o">=</span> <span class="n">is_ok</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Result.Ok"><a class="viewcode-back" href="../../option.html#option.result.Result.Ok">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">Ok</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Result[T, Any]&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Contains the success value.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">             val: The success value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">             The :class:`Result` containing the success value.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; res = Result.Ok(1)</span>
+<span class="sd">            &gt;&gt;&gt; res</span>
+<span class="sd">            Ok(1)</span>
+<span class="sd">            &gt;&gt;&gt; res.is_ok</span>
+<span class="sd">            True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">_force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Result.Err"><a class="viewcode-back" href="../../option.html#option.result.Result.Err">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">Err</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span> <span class="n">E</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Result[Any, E]&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Contains the error value.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            err: The error value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The :class:`Result` containing the error value.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; res = Result.Err(&#39;Oh No&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; res</span>
+<span class="sd">            Err(&#39;Oh No&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; res.is_err</span>
+<span class="sd">            True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="n">_force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_ok</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns `True` if the result is :meth:`Result.Ok`.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; Ok(1).is_ok</span>
+<span class="sd">            True</span>
+<span class="sd">            &gt;&gt;&gt; Err(1).is_ok</span>
+<span class="sd">            False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_err</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns `True` if the result is :meth:`Result.Err`.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; Ok(1).is_err</span>
+<span class="sd">            False</span>
+<span class="sd">            &gt;&gt;&gt; Err(1).is_err</span>
+<span class="sd">            True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span>
+
+<div class="viewcode-block" id="Result.ok"><a class="viewcode-back" href="../../option.html#option.result.Result.ok">[docs]</a>    <span class="k">def</span> <span class="nf">ok</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Option</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">Option</span><span class="p">[</span><span class="kc">None</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts from :class:`Result` [T, E] to :class:`option.option_.Option` [T].</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :class:`Option` containing the success value if `self` is</span>
+<span class="sd">            :meth:`Result.Ok`, otherwise :data:`option.option_.NONE`.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; Ok(1).ok()</span>
+<span class="sd">            Some(1)</span>
+<span class="sd">            &gt;&gt;&gt; Err(1).ok()</span>
+<span class="sd">            NONE</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Option</span><span class="o">.</span><span class="n">Some</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">NONE</span></div>
+
+<div class="viewcode-block" id="Result.err"><a class="viewcode-back" href="../../option.html#option.result.Result.err">[docs]</a>    <span class="k">def</span> <span class="nf">err</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Option</span><span class="p">[</span><span class="n">E</span><span class="p">],</span> <span class="n">Option</span><span class="p">[</span><span class="kc">None</span><span class="p">]]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Converts from :class:`Result` [T, E] to :class:`option.option_.Option` [E].</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            :class:`Option` containing the error value if `self` is</span>
+<span class="sd">            :meth:`Result.Err`, otherwise :data:`option.option_.NONE`.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; Ok(1).err()</span>
+<span class="sd">            NONE</span>
+<span class="sd">            &gt;&gt;&gt; Err(1).err()</span>
+<span class="sd">            Some(1)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">NONE</span>
+        <span class="k">return</span> <span class="n">Option</span><span class="o">.</span><span class="n">Some</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Result.map"><a class="viewcode-back" href="../../option.html#option.result.Result.map">[docs]</a>    <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T</span><span class="p">],</span> <span class="n">U</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Union[Result[U, E], Result[T, E]]&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies a function to the contained :meth:`Result.Ok` value.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            op: The function to apply to the :meth:`Result.Ok` value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A :class:`Result` with its success value as the function result</span>
+<span class="sd">            if `self` is an :meth:`Result.Ok` value, otherwise returns</span>
+<span class="sd">            `self`.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; Ok(1).map(lambda x: x * 2)</span>
+<span class="sd">            Ok(2)</span>
+<span class="sd">            &gt;&gt;&gt; Err(1).map(lambda x: x * 2)</span>
+<span class="sd">            Err(1)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="o">.</span><span class="n">Ok</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Result.map_err"><a class="viewcode-back" href="../../option.html#option.result.Result.map_err">[docs]</a>    <span class="k">def</span> <span class="nf">map_err</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">E</span><span class="p">],</span> <span class="n">F</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Union[Result[T, F], Result[T, E]]&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies a function to the contained :meth:`Result.Err` value.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            op: The function to apply to the :meth:`Result.Err` value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A :class:`Result` with its error value as the function result</span>
+<span class="sd">            if `self` is a :meth:`Result.Err` value, otherwise returns</span>
+<span class="sd">            `self`.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; Ok(1).map_err(lambda x: x * 2)</span>
+<span class="sd">            Ok(1)</span>
+<span class="sd">            &gt;&gt;&gt; Err(1).map_err(lambda x: x * 2)</span>
+<span class="sd">            Err(2)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="o">.</span><span class="n">Err</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)))</span></div>
+
+<div class="viewcode-block" id="Result.unwrap"><a class="viewcode-back" href="../../option.html#option.result.Result.unwrap">[docs]</a>    <span class="k">def</span> <span class="nf">unwrap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the success value in the :class:`Result`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The success value in the :class:`Result`.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ``ValueError`` with the message provided by the error value</span>
+<span class="sd">             if the :class:`Result` is a :meth:`Result.Err` value.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; Ok(1).unwrap()</span>
+<span class="sd">            1</span>
+<span class="sd">            &gt;&gt;&gt; try:</span>
+<span class="sd">            ...     Err(1).unwrap()</span>
+<span class="sd">            ... except ValueError as e:</span>
+<span class="sd">            ...     print(e)</span>
+<span class="sd">            1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Result.unwrap_or"><a class="viewcode-back" href="../../option.html#option.result.Result.unwrap_or">[docs]</a>    <span class="k">def</span> <span class="nf">unwrap_or</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optb</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the success value in the :class:`Result` or ``optb``.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            optb: The default return value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The success value in the :class:`Result` if it is a</span>
+<span class="sd">            :meth:`Result.Ok` value, otherwise ``optb``.</span>
+
+<span class="sd">        Notes:</span>
+<span class="sd">            If you wish to use a result of a function call as the default,</span>
+<span class="sd">            it is recommnded to use :meth:`unwrap_or_else` instead.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; Ok(1).unwrap_or(2)</span>
+<span class="sd">            1</span>
+<span class="sd">            &gt;&gt;&gt; Err(1).unwrap_or(2)</span>
+<span class="sd">            2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="k">else</span> <span class="n">optb</span></div>
+
+<div class="viewcode-block" id="Result.unwrap_or_else"><a class="viewcode-back" href="../../option.html#option.result.Result.unwrap_or_else">[docs]</a>    <span class="k">def</span> <span class="nf">unwrap_or_else</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">E</span><span class="p">],</span> <span class="n">U</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">U</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the sucess value in the :class:`Result` or computes a default</span>
+<span class="sd">        from the error value.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            op: The function to computes default with.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The success value in the :class:`Result` if it is</span>
+<span class="sd">             a :meth:`Result.Ok` value, otherwise ``op(E)``.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; Ok(1).unwrap_or_else(lambda e: e * 10)</span>
+<span class="sd">            1</span>
+<span class="sd">            &gt;&gt;&gt; Err(1).unwrap_or_else(lambda e: e * 10)</span>
+<span class="sd">            10</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="k">else</span> <span class="n">op</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Result.expect"><a class="viewcode-back" href="../../option.html#option.result.Result.expect">[docs]</a>    <span class="k">def</span> <span class="nf">expect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the success value in the :class:`Result` or raises</span>
+<span class="sd">        a ``ValueError`` with a provided message.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            msg: The error message.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The success value in the :class:`Result` if it is</span>
+<span class="sd">            a :meth:`Result.Ok` value.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ``ValueError`` with ``msg`` as the message if the</span>
+<span class="sd">            :class:`Result` is a :meth:`Result.Err` value.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; Ok(1).expect(&#39;no&#39;)</span>
+<span class="sd">            1</span>
+<span class="sd">            &gt;&gt;&gt; try:</span>
+<span class="sd">            ...     Err(1).expect(&#39;no&#39;)</span>
+<span class="sd">            ... except ValueError as e:</span>
+<span class="sd">            ...     print(e)</span>
+<span class="sd">            no</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Result.unwrap_err"><a class="viewcode-back" href="../../option.html#option.result.Result.unwrap_err">[docs]</a>    <span class="k">def</span> <span class="nf">unwrap_err</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">E</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the error value in a :class:`Result`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The error value in the :class:`Result` if it is a</span>
+<span class="sd">            :meth:`Result.Err` value.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ``ValueError`` with the message provided by the success value</span>
+<span class="sd">             if the :class:`Result` is a :meth:`Result.Ok` value.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; try:</span>
+<span class="sd">            ...     Ok(1).unwrap_err()</span>
+<span class="sd">            ... except ValueError as e:</span>
+<span class="sd">            ...     print(e)</span>
+<span class="sd">            1</span>
+<span class="sd">            &gt;&gt;&gt; Err(&#39;Oh No&#39;).unwrap_err()</span>
+<span class="sd">            &#39;Oh No&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Result.expect_err"><a class="viewcode-back" href="../../option.html#option.result.Result.expect_err">[docs]</a>    <span class="k">def</span> <span class="nf">expect_err</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">E</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the error value in a :class:`Result`, or raises a</span>
+<span class="sd">        ``ValueError`` with the provided message.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            msg: The error message.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The error value in the :class:`Result` if it is a</span>
+<span class="sd">            :meth:`Result.Err` value.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            ``ValueError`` with the message provided by ``msg`` if</span>
+<span class="sd">            the :class:`Result` is a :meth:`Result.Ok` value.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; try:</span>
+<span class="sd">            ...     Ok(1).expect_err(&#39;Oh No&#39;)</span>
+<span class="sd">            ... except ValueError as e:</span>
+<span class="sd">            ...     print(e)</span>
+<span class="sd">            Oh No</span>
+<span class="sd">            &gt;&gt;&gt; Err(1).expect_err(&#39;Yes&#39;)</span>
+<span class="sd">            1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;Ok(</span><span class="si">{self._val!r}</span><span class="s1">)&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="k">else</span> <span class="n">f</span><span class="s1">&#39;Err(</span><span class="si">{self._val!r}</span><span class="s1">)&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_ok</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_val</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">)</span>
+                <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_ok</span>
+                <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">_val</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">_val</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">_val</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">_val</span>
+            <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_ok</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span>
+
+    <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">_val</span>
+            <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_ok</span>
+        <span class="k">return</span> <span class="bp">NotImplemented</span></div>
+
+
+<div class="viewcode-block" id="Ok"><a class="viewcode-back" href="../../option.html#option.result.Ok">[docs]</a><span class="k">def</span> <span class="nf">Ok</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Shortcut function for :meth:`Result.Ok`.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Result</span><span class="o">.</span><span class="n">Ok</span><span class="p">(</span><span class="n">val</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Err"><a class="viewcode-back" href="../../option.html#option.result.Err">[docs]</a><span class="k">def</span> <span class="nf">Err</span><span class="p">(</span><span class="n">err</span><span class="p">:</span> <span class="n">E</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">E</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Shortcut function for :meth:`Result.Err`.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">Result</span><span class="o">.</span><span class="n">Err</span><span class="p">(</span><span class="n">err</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">option</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../option.html">option package</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2018, Peijun Ma.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

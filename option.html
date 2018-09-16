@@ -2,11 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>option package &#8212; Option 0.1.7 documentation</title>
+    <title>option package &#8212; option 0.1.7 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -16,7 +16,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="option" href="modules.html" />
+    <link rel="prev" title="Welcome to option’s documentation!" href="index.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -52,22 +52,22 @@
 <em class="property">class </em><code class="descclassname">option.option_.</code><code class="descname">Option</code><span class="sig-paren">(</span><em>value: T</em>, <em>is_some: bool</em>, <em>*</em>, <em>_force: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/option/option_.html#Option"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
 <p><a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> represents an optional value. Every <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>
-is either <code class="docutils literal notranslate"><span class="pre">some</span></code> and contains a value, or <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> and
+is either <code class="docutils literal notranslate"><span class="pre">Some</span></code> and contains a value, or <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> and
 does not.</p>
-<p>To create a <code class="docutils literal notranslate"><span class="pre">some</span></code> value, please use <a class="reference internal" href="#option.option_.Option.some" title="option.option_.Option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.some()</span></code></a> or <a class="reference internal" href="#option.option_.some" title="option.option_.some"><code class="xref py py-func docutils literal notranslate"><span class="pre">some()</span></code></a>.</p>
-<p>To create a <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> value, please use <a class="reference internal" href="#option.option_.Option.none" title="option.option_.Option.none"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.none()</span></code></a> or import the
+<p>To create a <code class="docutils literal notranslate"><span class="pre">Some</span></code> value, please use <a class="reference internal" href="#option.option_.Option.Some" title="option.option_.Option.Some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.Some()</span></code></a> or <a class="reference internal" href="#option.option_.Some" title="option.option_.Some"><code class="xref py py-func docutils literal notranslate"><span class="pre">Some()</span></code></a>.</p>
+<p>To create a <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> value, please use <a class="reference internal" href="#option.option_.Option.NONE" title="option.option_.Option.NONE"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.NONE()</span></code></a> or import the
 constant <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> directly.</p>
 <p>To let <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> guess the type of <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> to create,
 please use <a class="reference internal" href="#option.option_.Option.maybe" title="option.option_.Option.maybe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.maybe()</span></code></a> or <a class="reference internal" href="#option.option_.maybe" title="option.option_.maybe"><code class="xref py py-func docutils literal notranslate"><span class="pre">maybe()</span></code></a>.</p>
 <p>Calling the <code class="docutils literal notranslate"><span class="pre">__init__</span></code>  method directly will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
 <dl class="docutils">
 <dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">some</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">some(1)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">none</span><span class="p">()</span>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">Some</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">Some(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">NONE</span><span class="p">()</span>
 <span class="go">NONE</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">some(1)</span>
+<span class="go">Some(1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
 <span class="go">NONE</span>
 </pre></div>
@@ -75,72 +75,20 @@ please use <a class="reference internal" href="#option.option_.Option.maybe" tit
 </dd>
 </dl>
 <dl class="classmethod">
-<dt id="option.option_.Option.some">
-<em class="property">classmethod </em><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.some" title="Permalink to this definition">¶</a></dt>
-<dd><p>Some value <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="option.option_.Option.none">
-<em class="property">classmethod </em><code class="descname">none</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; option.option_.Option[None]<a class="reference internal" href="_modules/option/option_.html#Option.none"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.none" title="Permalink to this definition">¶</a></dt>
+<dt id="option.option_.Option.NONE">
+<em class="property">classmethod </em><code class="descname">NONE</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; option.option_.Option[NoneType][None]<a class="reference internal" href="_modules/option/option_.html#Option.NONE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.NONE" title="Permalink to this definition">¶</a></dt>
 <dd><p>No Value.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="option.option_.Option.maybe">
-<em class="property">classmethod </em><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#Option.maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.maybe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shortcut method to return <code class="docutils literal notranslate"><span class="pre">some</span></code> or <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> based on <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>val: Some value.</dd>
-<dt>Returns:</dt>
-<dd><code class="docutils literal notranslate"><span class="pre">some(val)</span></code> if the <code class="docutils literal notranslate"><span class="pre">val</span></code> is not None, otherwise <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">some(0)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-<span class="go">NONE</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="option.option_.Option.is_some">
-<code class="descname">is_some</code><a class="headerlink" href="#option.option_.Option.is_some" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the option is a <code class="docutils literal notranslate"><span class="pre">some</span></code> value.</p>
-<dl class="docutils">
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">is_some</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">is_some</span>
-<span class="go">False</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="option.option_.Option.is_none">
-<code class="descname">is_none</code><a class="headerlink" href="#option.option_.Option.is_none" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the option is a <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> value.</p>
-<dl class="docutils">
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">is_none</span>
-<span class="go">False</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">is_none</span>
-<span class="go">True</span>
-</pre></div>
-</div>
-</dd>
-</dl>
+<dt id="option.option_.Option.Some">
+<em class="property">classmethod </em><code class="descname">Some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#Option.Some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.Some" title="Permalink to this definition">¶</a></dt>
+<dd><p>Some value <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="option.option_.Option.except_">
-<code class="descname">except_</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/option_.html#Option.except_"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.except_" title="Permalink to this definition">¶</a></dt>
+<dt id="option.option_.Option.expect">
+<code class="descname">expect</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/option_.html#Option.expect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.expect" title="Permalink to this definition">¶</a></dt>
 <dd><p>Unwraps the option. Raises an exception if the value is <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -148,13 +96,13 @@ please use <a class="reference internal" href="#option.option_.Option.maybe" tit
 <dt>Returns:</dt>
 <dd>The wrapped value.</dd>
 <dt>Raises:</dt>
-<dd>NoneError with message provided by <code class="docutils literal notranslate"><span class="pre">msg</span></code> if the value is <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</dd>
+<dd><code class="docutils literal notranslate"><span class="pre">ValueError</span></code> with message provided by <code class="docutils literal notranslate"><span class="pre">msg</span></code> if the value is <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</dd>
 <dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">except_</span><span class="p">(</span><span class="s1">&#39;sd&#39;</span><span class="p">)</span>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s1">&#39;sd&#39;</span><span class="p">)</span>
 <span class="go">0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">NONE</span><span class="o">.</span><span class="n">except_</span><span class="p">(</span><span class="s1">&#39;Oh No!&#39;</span><span class="p">)</span>
-<span class="gp">... </span><span class="k">except</span> <span class="n">NoneError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">NONE</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s1">&#39;Oh No!&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 <span class="go">Oh No!</span>
 </pre></div>
@@ -164,152 +112,8 @@ please use <a class="reference internal" href="#option.option_.Option.maybe" tit
 </dd></dl>
 
 <dl class="method">
-<dt id="option.option_.Option.unwrap">
-<code class="descname">unwrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/option_.html#Option.unwrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the value in the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> if it is <code class="docutils literal notranslate"><span class="pre">some</span></code>.</p>
-<dl class="docutils">
-<dt>Returns:</dt>
-<dd>The <code class="docutils literal notranslate"><span class="pre">`some</span></code> value of the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>.</dd>
-<dt>Raises:</dt>
-<dd>NoneError if the value is <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="n">NONE</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
-<span class="gp">... </span><span class="k">except</span> <span class="n">NoneError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<span class="go">Value is NONE.</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="option.option_.Option.value">
-<code class="descname">value</code><a class="headerlink" href="#option.option_.Option.value" title="Permalink to this definition">¶</a></dt>
-<dd><p>Property version of <a class="reference internal" href="#option.option_.Option.unwrap" title="option.option_.Option.unwrap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap()</span></code></a>.</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="option.option_.Option.unwrap_or">
-<code class="descname">unwrap_or</code><span class="sig-paren">(</span><em>default: U</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap_or" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the contained value or <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>default: The default value.</dd>
-<dt>Returns:</dt>
-<dd>The contained value if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <code class="docutils literal notranslate"><span class="pre">some</span></code>,
-otherwise <code class="docutils literal notranslate"><span class="pre">default</span></code>.</dd>
-<dt>Notes:</dt>
-<dd>If you wish to use a result of a function call as the default,
-it is recommnded to use <code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap_or_elsed()</span></code> instead.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="go">0</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="option.option_.Option.unwrap_or_else">
-<code class="descname">unwrap_or_else</code><span class="sig-paren">(</span><em>callback: Callable[U]</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap_or_else" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the contained value or computes it from <code class="docutils literal notranslate"><span class="pre">callback</span></code>.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>callback: The the default callback.</dd>
-<dt>Returns:</dt>
-<dd>The contained value if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <code class="docutils literal notranslate"><span class="pre">some</span></code>,
-otherwise <code class="docutils literal notranslate"><span class="pre">callback()</span></code>.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">111</span><span class="p">)</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="s1">&#39;ha&#39;</span><span class="p">)</span>
-<span class="go">&#39;ha&#39;</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="option.option_.Option.map">
-<code class="descname">map</code><span class="sig-paren">(</span><em>callback: Callable[T, U]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[U], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map" title="Permalink to this definition">¶</a></dt>
-<dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">callback</span></code> with the contained value as its argument or
-returns <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>callback: The callback to apply to the contained value.</dd>
-<dt>Returns:</dt>
-<dd>The <code class="docutils literal notranslate"><span class="pre">callback</span></code> result wrapped in an <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> if the
-contained value is <code class="docutils literal notranslate"><span class="pre">some</span></code>, otherwise <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a></dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
-<span class="go">some(100)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
-<span class="go">NONE</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="option.option_.Option.map_or">
-<code class="descname">map_or</code><span class="sig-paren">(</span><em>callback: Callable[T, U], default: A</em><span class="sig-paren">)</span> &#x2192; Union[U, A]<a class="reference internal" href="_modules/option/option_.html#Option.map_or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map_or" title="Permalink to this definition">¶</a></dt>
-<dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">callback</span></code> to the contained value or returns <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>callback: The callback to apply to the contained value.
-default: The default value.</dd>
-<dt>Returns:</dt>
-<dd>The <code class="docutils literal notranslate"><span class="pre">callback</span></code> result if the contained value is <code class="docutils literal notranslate"><span class="pre">some</span></code>,
-otherwise <code class="docutils literal notranslate"><span class="pre">default</span></code>.</dd>
-<dt>Notes:</dt>
-<dd>If you wish to use the result of a function call as <code class="docutils literal notranslate"><span class="pre">default</span></code>,
-it is recommended to use <a class="reference internal" href="#option.option_.Option.map_or_else" title="option.option_.Option.map_or_else"><code class="xref py py-meth docutils literal notranslate"><span class="pre">map_or_else()</span></code></a> instead.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">map_or</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
-<span class="go">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">map_or</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">1</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
-<dt id="option.option_.Option.map_or_else">
-<code class="descname">map_or_else</code><span class="sig-paren">(</span><em>callback: Callable[T, U], default: Callable[A]</em><span class="sig-paren">)</span> &#x2192; Union[U, A]<a class="reference internal" href="_modules/option/option_.html#Option.map_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map_or_else" title="Permalink to this definition">¶</a></dt>
-<dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">callback</span></code> to the contained value or computes a default
-with <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
-<dl class="docutils">
-<dt>Args:</dt>
-<dd>callback: The callback to apply to the contained value.
-default: The callback fot the default value.</dd>
-<dt>Returns:</dt>
-<dd>The <code class="docutils literal notranslate"><span class="pre">callback</span></code> result if the contained value is <code class="docutils literal notranslate"><span class="pre">some</span></code>,
-otherwise the result of <code class="docutils literal notranslate"><span class="pre">default</span></code>.</dd>
-<dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">map_or_else</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">map_or_else</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">1</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="method">
 <dt id="option.option_.Option.filter">
-<code class="descname">filter</code><span class="sig-paren">(</span><em>predicate: Callable[T, bool]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[T], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.filter" title="Permalink to this definition">¶</a></dt>
+<code class="descname">filter</code><span class="sig-paren">(</span><em>predicate: Callable[[T], bool]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~T][T], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/option_.html#Option.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>,
 otherwise filter the contained value by <code class="docutils literal notranslate"><span class="pre">predicate</span></code>.</p>
 <dl class="docutils">
@@ -326,10 +130,10 @@ otherwise filter the contained value by <code class="docutils literal notranslat
 </dl>
 </dd>
 <dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">NONE</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-<span class="go">some(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">Some(1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">True</span><span class="p">)</span>
 <span class="go">NONE</span>
 </pre></div>
@@ -340,7 +144,7 @@ otherwise filter the contained value by <code class="docutils literal notranslat
 
 <dl class="method">
 <dt id="option.option_.Option.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>key: K</em>, <em>default=None</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[V], option.option_.Option[None]]<a class="reference internal" href="_modules/option/option_.html#Option.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.get" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>key: K</em>, <em>default=None</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~V][V], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/option_.html#Option.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a mapping value by key in the contained value or returns
 <code class="docutils literal notranslate"><span class="pre">default</span></code> if the key doesn’t exist.</p>
 <dl class="docutils">
@@ -350,21 +154,21 @@ default: The defauilt value.</dd>
 <dt>Returns:</dt>
 <dd><ul class="first last simple">
 <li><dl class="first docutils">
-<dt><code class="docutils literal notranslate"><span class="pre">some</span></code> variant of the mapping value if the key exists</dt>
+<dt><code class="docutils literal notranslate"><span class="pre">Some</span></code> variant of the mapping value if the key exists</dt>
 <dd>and the value is not None.</dd>
 </dl>
 </li>
-<li><code class="docutils literal notranslate"><span class="pre">some(default)</span></code> if <code class="docutils literal notranslate"><span class="pre">default</span></code> is not None.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Some(default)</span></code> if <code class="docutils literal notranslate"><span class="pre">default</span></code> is not None.</li>
 <li><a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> if <code class="docutils literal notranslate"><span class="pre">default</span></code> is None.</li>
 </ul>
 </dd>
 <dt>Examples:</dt>
-<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">({</span><span class="s1">&#39;hi&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
-<span class="go">some(1)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">some</span><span class="p">({})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
-<span class="go">some(12)</span>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">({</span><span class="s1">&#39;hi&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+<span class="go">Some(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">({})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+<span class="go">Some(12)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
-<span class="go">some(12)</span>
+<span class="go">Some(12)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
 <span class="go">NONE</span>
 </pre></div>
@@ -373,27 +177,567 @@ default: The defauilt value.</dd>
 </dl>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="option.option_.Option.is_none">
+<code class="descname">is_none</code><a class="headerlink" href="#option.option_.Option.is_none" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the option is a <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> value.</p>
+<dl class="docutils">
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">is_none</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">is_none</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="option.option_.Option.is_some">
+<code class="descname">is_some</code><a class="headerlink" href="#option.option_.Option.is_some" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if the option is a <code class="docutils literal notranslate"><span class="pre">Some</span></code> value.</p>
+<dl class="docutils">
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">is_some</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">is_some</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.option_.Option.map">
+<code class="descname">map</code><span class="sig-paren">(</span><em>callback: Callable[[T], U]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~U][U], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/option_.html#Option.map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">callback</span></code> with the contained value as its argument or
+returns <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>callback: The callback to apply to the contained value.</dd>
+<dt>Returns:</dt>
+<dd>The <code class="docutils literal notranslate"><span class="pre">callback</span></code> result wrapped in an <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> if the
+contained value is <code class="docutils literal notranslate"><span class="pre">Some</span></code>, otherwise <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a></dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">Some(100)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+<span class="go">NONE</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.option_.Option.map_or">
+<code class="descname">map_or</code><span class="sig-paren">(</span><em>callback: Callable[[T], U], default: A</em><span class="sig-paren">)</span> &#x2192; Union[U, A]<a class="reference internal" href="_modules/option/option_.html#Option.map_or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map_or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">callback</span></code> to the contained value or returns <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>callback: The callback to apply to the contained value.
+default: The default value.</dd>
+<dt>Returns:</dt>
+<dd>The <code class="docutils literal notranslate"><span class="pre">callback</span></code> result if the contained value is <code class="docutils literal notranslate"><span class="pre">Some</span></code>,
+otherwise <code class="docutils literal notranslate"><span class="pre">default</span></code>.</dd>
+<dt>Notes:</dt>
+<dd>If you wish to use the result of a function call as <code class="docutils literal notranslate"><span class="pre">default</span></code>,
+it is recommended to use <a class="reference internal" href="#option.option_.Option.map_or_else" title="option.option_.Option.map_or_else"><code class="xref py py-meth docutils literal notranslate"><span class="pre">map_or_else()</span></code></a> instead.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">map_or</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">map_or</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.option_.Option.map_or_else">
+<code class="descname">map_or_else</code><span class="sig-paren">(</span><em>callback: Callable[[T], U], default: Callable[[], A]</em><span class="sig-paren">)</span> &#x2192; Union[U, A]<a class="reference internal" href="_modules/option/option_.html#Option.map_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map_or_else" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">callback</span></code> to the contained value or computes a default
+with <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>callback: The callback to apply to the contained value.
+default: The callback fot the default value.</dd>
+<dt>Returns:</dt>
+<dd>The <code class="docutils literal notranslate"><span class="pre">callback</span></code> result if the contained value is <code class="docutils literal notranslate"><span class="pre">Some</span></code>,
+otherwise the result of <code class="docutils literal notranslate"><span class="pre">default</span></code>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">map_or_else</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">map_or_else</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="option.option_.Option.maybe">
+<em class="property">classmethod </em><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#Option.maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.maybe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortcut method to return <code class="docutils literal notranslate"><span class="pre">Some</span></code> or <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> based on <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>val: Some value.</dd>
+<dt>Returns:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">Some(val)</span></code> if the <code class="docutils literal notranslate"><span class="pre">val</span></code> is not None, otherwise <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">Some(0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">NONE</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.option_.Option.unwrap">
+<code class="descname">unwrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/option_.html#Option.unwrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value in the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> if it is <code class="docutils literal notranslate"><span class="pre">Some</span></code>.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>The <code class="docutils literal notranslate"><span class="pre">`Some</span></code> value of the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a>.</dd>
+<dt>Raises:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">ValueError</span></code> if the value is <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">NONE</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">Value is NONE.</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.option_.Option.unwrap_or">
+<code class="descname">unwrap_or</code><span class="sig-paren">(</span><em>default: U</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap_or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the contained value or <code class="docutils literal notranslate"><span class="pre">default</span></code>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>default: The default value.</dd>
+<dt>Returns:</dt>
+<dd>The contained value if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <code class="docutils literal notranslate"><span class="pre">Some</span></code>,
+otherwise <code class="docutils literal notranslate"><span class="pre">default</span></code>.</dd>
+<dt>Notes:</dt>
+<dd>If you wish to use a result of a function call as the default,
+it is recommnded to use <a class="reference internal" href="#option.option_.Option.unwrap_or_else" title="option.option_.Option.unwrap_or_else"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap_or_else()</span></code></a> instead.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">0</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.option_.Option.unwrap_or_else">
+<code class="descname">unwrap_or_else</code><span class="sig-paren">(</span><em>callback: Callable[[], U]</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/option_.html#Option.unwrap_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.unwrap_or_else" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the contained value or computes it from <code class="docutils literal notranslate"><span class="pre">callback</span></code>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>callback: The the default callback.</dd>
+<dt>Returns:</dt>
+<dd>The contained value if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <code class="docutils literal notranslate"><span class="pre">Some</span></code>,
+otherwise <code class="docutils literal notranslate"><span class="pre">callback()</span></code>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="mi">111</span><span class="p">)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="s1">&#39;ha&#39;</span><span class="p">)</span>
+<span class="go">&#39;ha&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="option.option_.Option.value">
+<code class="descname">value</code><a class="headerlink" href="#option.option_.Option.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property version of <a class="reference internal" href="#option.option_.Option.unwrap" title="option.option_.Option.unwrap"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap()</span></code></a>.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="function">
-<dt id="option.option_.some">
-<code class="descclassname">option.option_.</code><code class="descname">some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.some" title="Permalink to this definition">¶</a></dt>
-<dd><p>Shortcut function to <a class="reference internal" href="#option.option_.Option.some" title="option.option_.Option.some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.some()</span></code></a>.</p>
+<dt id="option.option_.Some">
+<code class="descclassname">option.option_.</code><code class="descname">Some</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#Some"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Some" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortcut function to <a class="reference internal" href="#option.option_.Option.Some" title="option.option_.Option.Some"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.Some()</span></code></a>.</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="option.option_.maybe">
-<code class="descclassname">option.option_.</code><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[T]<a class="reference internal" href="_modules/option/option_.html#maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.maybe" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">option.option_.</code><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.maybe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shortcut function to <a class="reference internal" href="#option.option_.Option.maybe" title="option.option_.Option.maybe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.maybe()</span></code></a>.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-option.types_">
-<span id="option-types-module"></span><h2>option.types_ module<a class="headerlink" href="#module-option.types_" title="Permalink to this headline">¶</a></h2>
-<dl class="exception">
-<dt id="option.types_.NoneError">
-<em class="property">exception </em><code class="descclassname">option.types_.</code><code class="descname">NoneError</code><a class="reference internal" href="_modules/option/types_.html#NoneError"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.types_.NoneError" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ValueError</span></code></p>
+<div class="section" id="module-option.result">
+<span id="option-result-module"></span><h2>option.result module<a class="headerlink" href="#module-option.result" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the Result type.</p>
+<dl class="function">
+<dt id="option.result.Err">
+<code class="descclassname">option.result.</code><code class="descname">Err</code><span class="sig-paren">(</span><em>err: E</em><span class="sig-paren">)</span> &#x2192; option.result.Result[typing.Any, ~E][Any, E]<a class="reference internal" href="_modules/option/result.html#Err"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Err" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortcut function for <a class="reference internal" href="#option.result.Result.Err" title="option.result.Result.Err"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Err()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="option.result.Ok">
+<code class="descclassname">option.result.</code><code class="descname">Ok</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.result.Result[~T, typing.Any][T, Any]<a class="reference internal" href="_modules/option/result.html#Ok"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Ok" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shortcut function for <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="option.result.Result">
+<em class="property">class </em><code class="descclassname">option.result.</code><code class="descname">Result</code><span class="sig-paren">(</span><em>val: Union[T, E], is_ok: bool, *, _force=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/option/result.html#Result"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">typing.Generic</span></code></p>
+<p><a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> is a type that either success (<a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a>)
+or failure (<a class="reference internal" href="#option.result.Result.Err" title="option.result.Result.Err"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Err()</span></code></a>).</p>
+<p>To create an Ok value, use <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a> or <a class="reference internal" href="#option.result.Ok" title="option.result.Ok"><code class="xref py py-func docutils literal notranslate"><span class="pre">Ok()</span></code></a>.</p>
+<p>To create a Err value, use <a class="reference internal" href="#option.result.Result.Err" title="option.result.Result.Err"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Err()</span></code></a> or <a class="reference internal" href="#option.result.Err" title="option.result.Err"><code class="xref py py-func docutils literal notranslate"><span class="pre">Err()</span></code></a>.</p>
+<p>Calling the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> constructor directly will raise a <code class="docutils literal notranslate"><span class="pre">TypeError</span></code>.</p>
+<dl class="docutils">
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Result</span><span class="o">.</span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">Ok(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Result</span><span class="o">.</span><span class="n">Err</span><span class="p">(</span><span class="s1">&#39;Fail!&#39;</span><span class="p">)</span>
+<span class="go">Err(&#39;Fail!&#39;)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="classmethod">
+<dt id="option.result.Result.Err">
+<em class="property">classmethod </em><code class="descname">Err</code><span class="sig-paren">(</span><em>err: E</em><span class="sig-paren">)</span> &#x2192; option.result.Result[typing.Any, ~E][Any, E]<a class="reference internal" href="_modules/option/result.html#Result.Err"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.Err" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains the error value.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>err: The error value.</dd>
+<dt>Returns:</dt>
+<dd>The <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> containing the error value.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">Result</span><span class="o">.</span><span class="n">Err</span><span class="p">(</span><span class="s1">&#39;Oh No&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span>
+<span class="go">Err(&#39;Oh No&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">is_err</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="option.result.Result.Ok">
+<em class="property">classmethod </em><code class="descname">Ok</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.result.Result[~T, typing.Any][T, Any]<a class="reference internal" href="_modules/option/result.html#Result.Ok"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.Ok" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains the success value.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>val: The success value.</dd>
+<dt>Returns:</dt>
+<dd>The <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> containing the success value.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">Result</span><span class="o">.</span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span>
+<span class="go">Ok(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span><span class="o">.</span><span class="n">is_ok</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.result.Result.err">
+<code class="descname">err</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~E][E], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/result.html#Result.err"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.err" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> [T, E] to <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">option.option_.Option</span></code></a> [E].</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code> containing the error value if <cite>self</cite> is
+<a class="reference internal" href="#option.result.Result.Err" title="option.result.Result.Err"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Err()</span></code></a>, otherwise <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">option.option_.NONE</span></code></a>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">err</span><span class="p">()</span>
+<span class="go">NONE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Err</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">err</span><span class="p">()</span>
+<span class="go">Some(1)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.result.Result.expect">
+<code class="descname">expect</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/result.html#Result.expect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.expect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the success value in the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> or raises
+a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> with a provided message.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>msg: The error message.</dd>
+<dt>Returns:</dt>
+<dd>The success value in the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> if it is
+a <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a> value.</dd>
+<dt>Raises:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">ValueError</span></code> with <code class="docutils literal notranslate"><span class="pre">msg</span></code> as the message if the
+<a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> is a <a class="reference internal" href="#option.result.Result.Err" title="option.result.Result.Err"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Err()</span></code></a> value.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s1">&#39;no&#39;</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">Err</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="s1">&#39;no&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">no</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.result.Result.expect_err">
+<code class="descname">expect_err</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span> &#x2192; E<a class="reference internal" href="_modules/option/result.html#Result.expect_err"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.expect_err" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the error value in a <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>, or raises a
+<code class="docutils literal notranslate"><span class="pre">ValueError</span></code> with the provided message.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>msg: The error message.</dd>
+<dt>Returns:</dt>
+<dd>The error value in the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> if it is a
+<a class="reference internal" href="#option.result.Result.Err" title="option.result.Result.Err"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Err()</span></code></a> value.</dd>
+<dt>Raises:</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">ValueError</span></code> with the message provided by <code class="docutils literal notranslate"><span class="pre">msg</span></code> if
+the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> is a <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a> value.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expect_err</span><span class="p">(</span><span class="s1">&#39;Oh No&#39;</span><span class="p">)</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">Oh No</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Err</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expect_err</span><span class="p">(</span><span class="s1">&#39;Yes&#39;</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="option.result.Result.is_err">
+<code class="descname">is_err</code><a class="headerlink" href="#option.result.Result.is_err" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>True</cite> if the result is <a class="reference internal" href="#option.result.Result.Err" title="option.result.Result.Err"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Err()</span></code></a>.</p>
+<dl class="docutils">
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_err</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Err</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_err</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="option.result.Result.is_ok">
+<code class="descname">is_ok</code><a class="headerlink" href="#option.result.Result.is_ok" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns <cite>True</cite> if the result is <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a>.</p>
+<dl class="docutils">
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_ok</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Err</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">is_ok</span>
+<span class="go">False</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.result.Result.map">
+<code class="descname">map</code><span class="sig-paren">(</span><em>op: Callable[[T], U]</em><span class="sig-paren">)</span> &#x2192; Union[option.result.Result[~U, ~E][U, E], option.result.Result[~T, ~E][T, E]]<a class="reference internal" href="_modules/option/result.html#Result.map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a function to the contained <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a> value.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>op: The function to apply to the <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a> value.</dd>
+<dt>Returns:</dt>
+<dd>A <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> with its success value as the function result
+if <cite>self</cite> is an <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a> value, otherwise returns
+<cite>self</cite>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">Ok(2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Err</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">Err(1)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.result.Result.map_err">
+<code class="descname">map_err</code><span class="sig-paren">(</span><em>op: Callable[[E], F]</em><span class="sig-paren">)</span> &#x2192; Union[option.result.Result[~T, ~F][T, F], option.result.Result[~T, ~E][T, E]]<a class="reference internal" href="_modules/option/result.html#Result.map_err"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.map_err" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a function to the contained <a class="reference internal" href="#option.result.Result.Err" title="option.result.Result.Err"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Err()</span></code></a> value.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>op: The function to apply to the <a class="reference internal" href="#option.result.Result.Err" title="option.result.Result.Err"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Err()</span></code></a> value.</dd>
+<dt>Returns:</dt>
+<dd>A <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> with its error value as the function result
+if <cite>self</cite> is a <a class="reference internal" href="#option.result.Result.Err" title="option.result.Result.Err"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Err()</span></code></a> value, otherwise returns
+<cite>self</cite>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">map_err</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">Ok(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Err</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">map_err</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="go">Err(2)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.result.Result.ok">
+<code class="descname">ok</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~T][T], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/result.html#Result.ok"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.ok" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts from <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> [T, E] to <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">option.option_.Option</span></code></a> [T].</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code> containing the success value if <cite>self</cite> is
+<a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a>, otherwise <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">option.option_.NONE</span></code></a>.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ok</span><span class="p">()</span>
+<span class="go">Some(1)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Err</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">ok</span><span class="p">()</span>
+<span class="go">NONE</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.result.Result.unwrap">
+<code class="descname">unwrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/result.html#Result.unwrap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.unwrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the success value in the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>The success value in the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>.</dd>
+<dt>Raises:</dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ValueError</span></code> with the message provided by the error value</dt>
+<dd>if the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> is a <a class="reference internal" href="#option.result.Result.Err" title="option.result.Result.Err"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Err()</span></code></a> value.</dd>
+</dl>
+</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">Err</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.result.Result.unwrap_err">
+<code class="descname">unwrap_err</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; E<a class="reference internal" href="_modules/option/result.html#Result.unwrap_err"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.unwrap_err" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the error value in a <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>.</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd>The error value in the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> if it is a
+<a class="reference internal" href="#option.result.Result.Err" title="option.result.Result.Err"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Err()</span></code></a> value.</dd>
+<dt>Raises:</dt>
+<dd><dl class="first last docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">ValueError</span></code> with the message provided by the success value</dt>
+<dd>if the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> is a <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a> value.</dd>
+</dl>
+</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">try</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_err</span><span class="p">()</span>
+<span class="gp">... </span><span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Err</span><span class="p">(</span><span class="s1">&#39;Oh No&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_err</span><span class="p">()</span>
+<span class="go">&#39;Oh No&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.result.Result.unwrap_or">
+<code class="descname">unwrap_or</code><span class="sig-paren">(</span><em>optb: T</em><span class="sig-paren">)</span> &#x2192; T<a class="reference internal" href="_modules/option/result.html#Result.unwrap_or"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.unwrap_or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the success value in the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> or <code class="docutils literal notranslate"><span class="pre">optb</span></code>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>optb: The default return value.</dd>
+<dt>Returns:</dt>
+<dd>The success value in the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> if it is a
+<a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a> value, otherwise <code class="docutils literal notranslate"><span class="pre">optb</span></code>.</dd>
+<dt>Notes:</dt>
+<dd>If you wish to use a result of a function call as the default,
+it is recommnded to use <a class="reference internal" href="#option.result.Result.unwrap_or_else" title="option.result.Result.unwrap_or_else"><code class="xref py py-meth docutils literal notranslate"><span class="pre">unwrap_or_else()</span></code></a> instead.</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Err</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">2</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.result.Result.unwrap_or_else">
+<code class="descname">unwrap_or_else</code><span class="sig-paren">(</span><em>op: Callable[[E], U]</em><span class="sig-paren">)</span> &#x2192; Union[T, U]<a class="reference internal" href="_modules/option/result.html#Result.unwrap_or_else"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.unwrap_or_else" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the sucess value in the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> or computes a default
+from the error value.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>op: The function to computes default with.</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>The success value in the <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> if it is</dt>
+<dd>a <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a> value, otherwise <code class="docutils literal notranslate"><span class="pre">op(E)</span></code>.</dd>
+</dl>
+</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Err</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unwrap_or_else</span><span class="p">(</span><span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="n">e</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -406,7 +750,7 @@ default: The defauilt value.</dd>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="index.html">Option</a></h1>
+<h1 class="logo"><a href="index.html">option</a></h1>
 
 
 
@@ -418,8 +762,10 @@ default: The defauilt value.</dd>
 <h3>Navigation</h3>
 <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">option</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">option package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">option package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-option.option_">option.option_ module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-option.result">option.result module</a></li>
 </ul>
 </li>
 </ul>
@@ -428,9 +774,7 @@ default: The defauilt value.</dd>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="index.html">Documentation overview</a><ul>
-  <li><a href="modules.html">option</a><ul>
-      <li>Previous: <a href="modules.html" title="previous chapter">option</a></li>
-  </ul></li>
+      <li>Previous: <a href="index.html" title="previous chapter">Welcome to option’s documentation!</a></li>
   </ul></li>
 </ul>
 </div>
