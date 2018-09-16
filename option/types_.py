@@ -24,8 +24,6 @@
 
 from typing import TypeVar
 
-_NoneError = ValueError("Value is NONE.")
-
 T = TypeVar('T')
 U = TypeVar('U')
 A = TypeVar('A')

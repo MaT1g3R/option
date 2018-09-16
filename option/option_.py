@@ -30,7 +30,7 @@ This module contains the Option class.
 
 from typing import Callable, Generic, Mapping, Union
 
-from option.types_ import A, K, T, U, V, _NoneError
+from option.types_ import A, K, T, U, V
 
 
 class Option(Generic[T]):
@@ -41,7 +41,7 @@ class Option(Generic[T]):
 
     To create a ``Some`` value, please use :py:meth:`Option.Some` or :py:func:`Some`.
 
-    To create a :py:data:`NONE` value, please use :py:meth:`Option.none` or import the
+    To create a :py:data:`NONE` value, please use :py:meth:`Option.NONE` or import the
     constant :py:data:`NONE` directly.
 
     To let :py:class:`Option` guess the type of :py:class:`Option` to create,
@@ -152,7 +152,7 @@ class Option(Generic[T]):
             The wrapped value.
 
         Raises:
-            ValueErro with message provided by ``msg`` if the value is :py:data:`NONE`.
+            ``ValueError`` with message provided by ``msg`` if the value is :py:data:`NONE`.
 
         Examples:
             >>> Some(0).expect('sd')
@@ -175,7 +175,7 @@ class Option(Generic[T]):
             The ```Some`` value of the :py:class:`Option`.
 
         Raises:
-            ValueError if the value is :py:data:`NONE`.
+            ``ValueError`` if the value is :py:data:`NONE`.
 
         Examples:
             >>> Some(0).unwrap()
@@ -193,7 +193,7 @@ class Option(Generic[T]):
         """Property version of :py:meth:`unwrap`."""
         if self._is_some:
             return self._val
-        raise _NoneError
+        raise ValueError('Value is NONE.')
 
     def unwrap_or(self, default: U) -> Union[T, U]:
         """
@@ -208,7 +208,7 @@ class Option(Generic[T]):
 
         Notes:
             If you wish to use a result of a function call as the default,
-            it is recommnded to use :py:meth:`unwrap_or_elsed` instead.
+            it is recommnded to use :py:meth:`unwrap_or_else` instead.
 
         Examples:
             >>> Some(0).unwrap_or(3)
