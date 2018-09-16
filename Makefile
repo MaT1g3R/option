@@ -10,6 +10,7 @@ cov:
 
 docs:
 	PYTHONPATH=.. make -C docs html
+	touch docs/_build/html/.nojekyll
 
 lint:
 	mypy option
