@@ -10,17 +10,23 @@ Using an `Option` type forces you to deal with `None` values in your code and in
 
 ## Quick Start
 ```Python
-from option import Some, NONE, Option
+from option import Result, Option, Ok, Err
 from requests import get
 
-def call_api(url, params) -> Option[dict]:
-    result = get(url, params)
-    if result.status_code == 200:
-        return Some(result.json())
-    return NONE
 
-# Instead of checking for None, the NONE case is always dealt with.
-dict_len = call_api(url, params).map(len)
+def call_api(url, params) -> Result[dict, int]:
+    result = get(url, params)
+    code = result.status_code
+    if code == 200:
+        return Ok(result.json())
+    return Err(code)
+
+
+def calculate(url, params) -> Option[int]:
+    return call_api(url, params).ok().map(len)
+
+
+dict_len = calculate('https://example.com', {})
 ```
 
 ## Install
