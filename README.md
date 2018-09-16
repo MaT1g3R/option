@@ -2,11 +2,15 @@
 [![Build Status](https://travis-ci.org/MaT1g3R/option.svg?branch=master)](https://travis-ci.org/MaT1g3R/option)
 [![codecov](https://codecov.io/gh/MaT1g3R/option/branch/master/graph/badge.svg)](https://codecov.io/gh/MaT1g3R/option)
 
-A [rust-like](https://doc.rust-lang.org/std/option/enum.Option.html) `Option` type in Python, slotted and fully typed.
+Rust-like [Option](https://doc.rust-lang.org/std/option/enum.Option.html) and [Result](https://doc.rust-lang.org/std/result/enum.Result.html) types in Python, slotted and fully typed.
 
 An `Option` type represents an optional value, every `Option` is either `Some` and contains Some value, or `NONE`
 
+A `Result` type represents a value that might be an error. Every `Result` is either `Ok` and contains a success value, or `Err` and contains an error value.
+
 Using an `Option` type forces you to deal with `None` values in your code and increase type safety.
+
+Using a `Result` type simplifies error handling and reduces `try` `except` blocks.
 
 ## Quick Start
 ```Python
