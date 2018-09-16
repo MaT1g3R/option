@@ -44,6 +44,7 @@ deploy:
   local-dir: docs/_build/html
   on:
     branch: master
+    condition: $UPLOAD_COV = true
 
 notifications:
   email: false
