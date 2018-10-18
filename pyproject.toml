@@ -13,6 +13,8 @@ classifiers = [
     "Topic :: Software Development :: Libraries",
 ]
 
+include = ['option/py.typed', 'option/**/*.py']
+
 [tool.poetry.dependencies]
 python = ">=3.6"
 
