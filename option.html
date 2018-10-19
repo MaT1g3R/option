@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>option package &#8212; option 0.2.3 documentation</title>
+    <title>option package &#8212; option 0.2.5 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -144,7 +144,7 @@ otherwise filter the contained value by <code class="docutils literal notranslat
 
 <dl class="method">
 <dt id="option.option_.Option.get">
-<code class="descname">get</code><span class="sig-paren">(</span><em>key: K</em>, <em>default=None</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~V][V], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/option_.html#Option.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.get" title="Permalink to this definition">¶</a></dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>key: K</em>, <em>default=None</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~V][V]<a class="reference internal" href="_modules/option/option_.html#Option.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Gets a mapping value by key in the contained value or returns
 <code class="docutils literal notranslate"><span class="pre">default</span></code> if the key doesn’t exist.</p>
 <dl class="docutils">
@@ -281,7 +281,7 @@ otherwise the result of <code class="docutils literal notranslate"><span class="
 
 <dl class="classmethod">
 <dt id="option.option_.Option.maybe">
-<em class="property">classmethod </em><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#Option.maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.maybe" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: Optional[T]</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#Option.maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.maybe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shortcut method to return <code class="docutils literal notranslate"><span class="pre">Some</span></code> or <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> based on <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p>
 <dl class="docutils">
 <dt>Args:</dt>
@@ -383,7 +383,7 @@ otherwise <code class="docutils literal notranslate"><span class="pre">callback(
 
 <dl class="function">
 <dt id="option.option_.maybe">
-<code class="descclassname">option.option_.</code><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: T</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.maybe" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">option.option_.</code><code class="descname">maybe</code><span class="sig-paren">(</span><em>val: Optional[T]</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#maybe"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.maybe" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shortcut function to <a class="reference internal" href="#option.option_.Option.maybe" title="option.option_.Option.maybe"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.maybe()</span></code></a>.</p>
 </dd></dl>
 

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>option.option_ &#8212; option 0.2.3 documentation</title>
+    <title>option.option_ &#8212; option 0.2.5 documentation</title>
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
@@ -63,7 +63,7 @@
 <span class="sd">    Represents a None value.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
-<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span>
 
 <span class="kn">from</span> <span class="nn">option.types_</span> <span class="k">import</span> <span class="n">A</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span>
 
@@ -117,7 +117,7 @@
         <span class="k">return</span> <span class="n">NONE</span></div>
 
 <div class="viewcode-block" id="Option.maybe"><a class="viewcode-back" href="../../option.html#option.option_.Option.maybe">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">maybe</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Option[T]&#39;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">maybe</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Option[T]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shortcut method to return ``Some`` or :py:data:`NONE` based on ``val``.</span>
 
@@ -133,7 +133,9 @@
 <span class="sd">            &gt;&gt;&gt; Option.maybe(None)</span>
 <span class="sd">            NONE</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">NONE</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Some</span><span class="p">(</span><span class="n">val</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">NONE</span>  <span class="c1">#type: ignore</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Some</span><span class="p">(</span><span class="n">val</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -370,7 +372,7 @@
             <span class="bp">self</span><span class="p">:</span> <span class="s1">&#39;Option[Mapping[K,V]]&#39;</span><span class="p">,</span>
             <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="kc">None</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Union[Option[V], Option[None]]&#39;</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Option[V]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets a mapping value by key in the contained value or returns</span>
 <span class="sd">        ``default`` if the key doesn&#39;t exist.</span>
@@ -451,7 +453,7 @@
     <span class="k">return</span> <span class="n">Option</span><span class="o">.</span><span class="n">Some</span><span class="p">(</span><span class="n">val</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="maybe"><a class="viewcode-back" href="../../option.html#option.option_.maybe">[docs]</a><span class="k">def</span> <span class="nf">maybe</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Option</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<div class="viewcode-block" id="maybe"><a class="viewcode-back" href="../../option.html#option.option_.maybe">[docs]</a><span class="k">def</span> <span class="nf">maybe</span><span class="p">(</span><span class="n">val</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Option</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Shortcut function to :py:meth:`Option.maybe`.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">Option</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="n">val</span><span class="p">)</span></div>
 
