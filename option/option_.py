@@ -98,9 +98,9 @@ class Option(Generic[T]):
             >>> Option.maybe(None)
             NONE
         """
-        if val:
-            return cls.Some(val)
-        return NONE  #type: ignore
+        if val is None:
+            return NONE  #type: ignore
+        return cls.Some(val)
 
     def __bool__(self):
         """
