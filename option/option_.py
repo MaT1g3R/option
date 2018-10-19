@@ -28,7 +28,7 @@ This module contains the Option class.
     Represents a None value.
 """
 
-from typing import Callable, Generic, Mapping, Union
+from typing import Callable, Generic, Mapping, Union, Optional
 
 from option.types_ import A, K, T, U, V
 
@@ -82,7 +82,7 @@ class Option(Generic[T]):
         return NONE
 
     @classmethod
-    def maybe(cls, val: T) -> 'Option[T]':
+    def maybe(cls, val: Optional[T]) -> 'Option[T]':
         """
         Shortcut method to return ``Some`` or :py:data:`NONE` based on ``val``.
 
@@ -98,7 +98,9 @@ class Option(Generic[T]):
             >>> Option.maybe(None)
             NONE
         """
-        return NONE if val is None else cls.Some(val)
+        if val:
+            return cls.Some(val)
+        return NONE  #type: ignore
 
     def __bool__(self):
         """
@@ -335,7 +337,7 @@ class Option(Generic[T]):
             self: 'Option[Mapping[K,V]]',
             key: K,
             default=None
-    ) -> 'Union[Option[V], Option[None]]':
+    ) -> 'Option[V]':
         """
         Gets a mapping value by key in the contained value or returns
         ``default`` if the key doesn't exist.
@@ -416,7 +418,7 @@ def Some(val: T) -> Option[T]:
     return Option.Some(val)
 
 
-def maybe(val: T) -> Option[T]:
+def maybe(val: Optional[T]) -> Option[T]:
     """Shortcut function to :py:meth:`Option.maybe`."""
     return Option.maybe(val)
 
