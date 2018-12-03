@@ -30,5 +30,5 @@
 from .option_ import NONE, Option, Some, maybe
 from .result import Err, Ok, Result
 
-__version__ = '0.2.5'
+__version__ = '0.3.0'
 __all__ = ['NONE', 'Option', 'Some', 'maybe', 'Result', 'Ok', 'Err']
