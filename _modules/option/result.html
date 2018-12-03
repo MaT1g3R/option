@@ -13,7 +13,6 @@
     <script type="text/javascript" src="../../_static/jquery.js"></script>
     <script type="text/javascript" src="../../_static/underscore.js"></script>
     <script type="text/javascript" src="../../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
    
@@ -160,7 +159,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span>
 
-<div class="viewcode-block" id="Result.ok"><a class="viewcode-back" href="../../option.html#option.result.Result.ok">[docs]</a>    <span class="k">def</span> <span class="nf">ok</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Option</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">Option</span><span class="p">[</span><span class="kc">None</span><span class="p">]]:</span>
+<div class="viewcode-block" id="Result.ok"><a class="viewcode-back" href="../../option.html#option.result.Result.ok">[docs]</a>    <span class="k">def</span> <span class="nf">ok</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Option</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts from :class:`Result` [T, E] to :class:`option.option_.Option` [T].</span>
 
@@ -174,11 +173,9 @@
 <span class="sd">            &gt;&gt;&gt; Err(1).ok()</span>
 <span class="sd">            NONE</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Option</span><span class="o">.</span><span class="n">Some</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">NONE</span></div>
+        <span class="k">return</span> <span class="n">Option</span><span class="o">.</span><span class="n">Some</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">))</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="k">else</span> <span class="n">cast</span><span class="p">(</span><span class="n">Option</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">NONE</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Result.err"><a class="viewcode-back" href="../../option.html#option.result.Result.err">[docs]</a>    <span class="k">def</span> <span class="nf">err</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Option</span><span class="p">[</span><span class="n">E</span><span class="p">],</span> <span class="n">Option</span><span class="p">[</span><span class="kc">None</span><span class="p">]]:</span>
+<div class="viewcode-block" id="Result.err"><a class="viewcode-back" href="../../option.html#option.result.Result.err">[docs]</a>    <span class="k">def</span> <span class="nf">err</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Option</span><span class="p">[</span><span class="n">E</span><span class="p">]:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts from :class:`Result` [T, E] to :class:`option.option_.Option` [E].</span>
 
@@ -192,9 +189,7 @@
 <span class="sd">            &gt;&gt;&gt; Err(1).err()</span>
 <span class="sd">            Some(1)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">NONE</span>
-        <span class="k">return</span> <span class="n">Option</span><span class="o">.</span><span class="n">Some</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">))</span></div>
+        <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">Option</span><span class="p">[</span><span class="n">E</span><span class="p">],</span> <span class="n">NONE</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="k">else</span> <span class="n">Option</span><span class="o">.</span><span class="n">Some</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Result.map"><a class="viewcode-back" href="../../option.html#option.result.Result.map">[docs]</a>    <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T</span><span class="p">],</span> <span class="n">U</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Union[Result[U, E], Result[T, E]]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -214,9 +209,35 @@
 <span class="sd">            &gt;&gt;&gt; Err(1).map(lambda x: x * 2)</span>
 <span class="sd">            Err(1)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="o">.</span><span class="n">Ok</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)))</span>
-        <span class="k">return</span> <span class="bp">self</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="o">.</span><span class="n">Ok</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)))</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="k">else</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="Result.flatmap"><a class="viewcode-back" href="../../option.html#option.result.Result.flatmap">[docs]</a>    <span class="k">def</span> <span class="nf">flatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">:</span> <span class="s1">&#39;Callable[[T], Result[U, E]]&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Result[U, E]&#39;</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies a function to the contained :meth:`Result.Ok` value.</span>
+
+<span class="sd">        This is different than :meth:`Result.map` because the function</span>
+<span class="sd">        result is not wrapped in a new :class:`Result`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            op: The function to apply to the contained :meth:`Result.Ok` value.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The result of the function if `self` is an :meth:`Result.Ok` value,</span>
+<span class="sd">             otherwise returns `self`.</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; def sq(x): return Ok(x * x)</span>
+<span class="sd">            &gt;&gt;&gt; def err(x): return Err(x)</span>
+<span class="sd">            &gt;&gt;&gt; Ok(2).flatmap(sq).flatmap(sq)</span>
+<span class="sd">            Ok(16)</span>
+<span class="sd">            &gt;&gt;&gt; Ok(2).flatmap(sq).flatmap(err)</span>
+<span class="sd">            Err(4)</span>
+<span class="sd">            &gt;&gt;&gt; Ok(2).flatmap(err).flatmap(sq)</span>
+<span class="sd">            Err(2)</span>
+<span class="sd">            &gt;&gt;&gt; Err(3).flatmap(sq).flatmap(sq)</span>
+<span class="sd">            Err(3)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">op</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">))</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="k">else</span> <span class="n">cast</span><span class="p">(</span><span class="s1">&#39;Result[U, E]&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Result.map_err"><a class="viewcode-back" href="../../option.html#option.result.Result.map_err">[docs]</a>    <span class="k">def</span> <span class="nf">map_err</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">op</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">E</span><span class="p">],</span> <span class="n">F</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s1">&#39;Union[Result[T, F], Result[T, E]]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -236,9 +257,10 @@
 <span class="sd">            &gt;&gt;&gt; Err(1).map_err(lambda x: x * 2)</span>
 <span class="sd">            Err(2)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="o">.</span><span class="n">Err</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)))</span></div>
+        <span class="k">return</span> <span class="bp">self</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_ok</span> <span class="k">else</span> <span class="n">cast</span><span class="p">(</span>
+            <span class="s1">&#39;Result[T, F]&#39;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="o">.</span><span class="n">Err</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">)))</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Result.unwrap"><a class="viewcode-back" href="../../option.html#option.result.Result.unwrap">[docs]</a>    <span class="k">def</span> <span class="nf">unwrap</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -493,6 +515,14 @@
     </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -501,8 +531,8 @@
       &copy;2018, Peijun Ma.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
 

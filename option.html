@@ -13,7 +13,6 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Welcome to option’s documentation!" href="index.html" />
@@ -76,7 +75,7 @@ please use <a class="reference internal" href="#option.option_.Option.maybe" tit
 </dl>
 <dl class="classmethod">
 <dt id="option.option_.Option.NONE">
-<em class="property">classmethod </em><code class="descname">NONE</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; option.option_.Option[NoneType][None]<a class="reference internal" href="_modules/option/option_.html#Option.NONE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.NONE" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">NONE</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#Option.NONE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.NONE" title="Permalink to this definition">¶</a></dt>
 <dd><p>No Value.</p>
 </dd></dl>
 
@@ -113,7 +112,7 @@ please use <a class="reference internal" href="#option.option_.Option.maybe" tit
 
 <dl class="method">
 <dt id="option.option_.Option.filter">
-<code class="descname">filter</code><span class="sig-paren">(</span><em>predicate: Callable[[T], bool]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~T][T], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/option_.html#Option.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.filter" title="Permalink to this definition">¶</a></dt>
+<code class="descname">filter</code><span class="sig-paren">(</span><em>predicate: Callable[[T], bool]</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/option_.html#Option.filter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.filter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> if the <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a> is <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>,
 otherwise filter the contained value by <code class="docutils literal notranslate"><span class="pre">predicate</span></code>.</p>
 <dl class="docutils">
@@ -135,6 +134,38 @@ otherwise filter the contained value by <code class="docutils literal notranslat
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
 <span class="go">Some(1)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="kc">True</span><span class="p">)</span>
+<span class="go">NONE</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.option_.Option.flatmap">
+<code class="descname">flatmap</code><span class="sig-paren">(</span><em>callback: Callable[[T], option.option_.Option[~U][U]]</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~U][U]<a class="reference internal" href="_modules/option/option_.html#Option.flatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.flatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the callback to the contained value if the option
+is not <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</p>
+<p>This is different than <a class="reference internal" href="#option.option_.Option.map" title="option.option_.Option.map"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Option.map()</span></code></a> because the result
+of the callback isn’t wrapped in a new <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">Option</span></code></a></p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>callback: The callback to apply to the contained value.</dd>
+<dt>Returns:</dt>
+<dd><p class="first"><a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a> if the option is <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</p>
+<p class="last">otherwise calls <cite>callback</cite> with the contained value and
+returns the result.</p>
+</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">Some</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">nope</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">NONE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">square</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
+<span class="go">Some(16)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">square</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">nope</span><span class="p">)</span>
+<span class="go">NONE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Some</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">nope</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
+<span class="go">NONE</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">NONE</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">square</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">square</span><span class="p">)</span>
 <span class="go">NONE</span>
 </pre></div>
 </div>
@@ -211,7 +242,7 @@ default: The defauilt value.</dd>
 
 <dl class="method">
 <dt id="option.option_.Option.map">
-<code class="descname">map</code><span class="sig-paren">(</span><em>callback: Callable[[T], U]</em><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~U][U], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/option_.html#Option.map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map" title="Permalink to this definition">¶</a></dt>
+<code class="descname">map</code><span class="sig-paren">(</span><em>callback: Callable[[T], U]</em><span class="sig-paren">)</span> &#x2192; option.option_.Option[~U][U]<a class="reference internal" href="_modules/option/option_.html#Option.map"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.option_.Option.map" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies the <code class="docutils literal notranslate"><span class="pre">callback</span></code> with the contained value as its argument or
 returns <a class="reference internal" href="#option.option_.NONE" title="option.option_.NONE"><code class="xref py py-data docutils literal notranslate"><span class="pre">NONE</span></code></a>.</p>
 <dl class="docutils">
@@ -466,7 +497,7 @@ or failure (<a class="reference internal" href="#option.result.Result.Err" title
 
 <dl class="method">
 <dt id="option.result.Result.err">
-<code class="descname">err</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~E][E], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/result.html#Result.err"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.err" title="Permalink to this definition">¶</a></dt>
+<code class="descname">err</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; option.option_.Option[~E][E]<a class="reference internal" href="_modules/option/result.html#Result.err"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.err" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts from <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> [T, E] to <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">option.option_.Option</span></code></a> [E].</p>
 <dl class="docutils">
 <dt>Returns:</dt>
@@ -533,6 +564,38 @@ the <a class="reference internal" href="#option.result.Result" title="option.res
 <span class="go">Oh No</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">Err</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expect_err</span><span class="p">(</span><span class="s1">&#39;Yes&#39;</span><span class="p">)</span>
 <span class="go">1</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="option.result.Result.flatmap">
+<code class="descname">flatmap</code><span class="sig-paren">(</span><em>op: Callable[[T], option.result.Result[~U, ~E][U, E]]</em><span class="sig-paren">)</span> &#x2192; option.result.Result[~U, ~E][U, E]<a class="reference internal" href="_modules/option/result.html#Result.flatmap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.flatmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a function to the contained <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a> value.</p>
+<p>This is different than <a class="reference internal" href="#option.result.Result.map" title="option.result.Result.map"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.map()</span></code></a> because the function
+result is not wrapped in a new <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a>.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>op: The function to apply to the contained <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a> value.</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>The result of the function if <cite>self</cite> is an <a class="reference internal" href="#option.result.Result.Ok" title="option.result.Result.Ok"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a> value,</dt>
+<dd>otherwise returns <cite>self</cite>.</dd>
+</dl>
+</dd>
+<dt>Examples:</dt>
+<dd><div class="first last highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">sq</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">Ok</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">err</span><span class="p">(</span><span class="n">x</span><span class="p">):</span> <span class="k">return</span> <span class="n">Err</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">sq</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">sq</span><span class="p">)</span>
+<span class="go">Ok(16)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">sq</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<span class="go">Err(4)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ok</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">err</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">sq</span><span class="p">)</span>
+<span class="go">Err(2)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Err</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">sq</span><span class="p">)</span><span class="o">.</span><span class="n">flatmap</span><span class="p">(</span><span class="n">sq</span><span class="p">)</span>
+<span class="go">Err(3)</span>
 </pre></div>
 </div>
 </dd>
@@ -617,7 +680,7 @@ if <cite>self</cite> is a <a class="reference internal" href="#option.result.Res
 
 <dl class="method">
 <dt id="option.result.Result.ok">
-<code class="descname">ok</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; Union[option.option_.Option[~T][T], option.option_.Option[NoneType][None]]<a class="reference internal" href="_modules/option/result.html#Result.ok"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.ok" title="Permalink to this definition">¶</a></dt>
+<code class="descname">ok</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; option.option_.Option[~T][T]<a class="reference internal" href="_modules/option/result.html#Result.ok"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#option.result.Result.ok" title="Permalink to this definition">¶</a></dt>
 <dd><p>Converts from <a class="reference internal" href="#option.result.Result" title="option.result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> [T, E] to <a class="reference internal" href="#option.option_.Option" title="option.option_.Option"><code class="xref py py-class docutils literal notranslate"><span class="pre">option.option_.Option</span></code></a> [T].</p>
 <dl class="docutils">
 <dt>Returns:</dt>
@@ -790,6 +853,14 @@ from the error value.</p>
     </div>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
         </div>
       </div>
       <div class="clearer"></div>
@@ -798,8 +869,8 @@ from the error value.</p>
       &copy;2018, Peijun Ma.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.0</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
       <a href="_sources/option.rst.txt"
