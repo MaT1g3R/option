@@ -125,7 +125,7 @@ class Result(Generic[T, E]):
         """
         return not self._is_ok
 
-    def ok(self) -> Union[Option[T], Option[None]]:
+    def ok(self) -> Option[T]:
         """
         Converts from :class:`Result` [T, E] to :class:`option.option_.Option` [T].
 
@@ -139,11 +139,9 @@ class Result(Generic[T, E]):
             >>> Err(1).ok()
             NONE
         """
-        if self._is_ok:
-            return Option.Some(cast(T, self._val))
-        return NONE
+        return Option.Some(cast(T, self._val)) if self._is_ok else cast(Option[T], NONE)
 
-    def err(self) -> Union[Option[E], Option[None]]:
+    def err(self) -> Option[E]:
         """
         Converts from :class:`Result` [T, E] to :class:`option.option_.Option` [E].
 
@@ -157,9 +155,7 @@ class Result(Generic[T, E]):
             >>> Err(1).err()
             Some(1)
         """
-        if self._is_ok:
-            return NONE
-        return Option.Some(cast(E, self._val))
+        return cast(Option[E], NONE) if self._is_ok else Option.Some(cast(E, self._val))
 
     def map(self, op: Callable[[T], U]) -> 'Union[Result[U, E], Result[T, E]]':
         """
@@ -179,9 +175,35 @@ class Result(Generic[T, E]):
             >>> Err(1).map(lambda x: x * 2)
             Err(1)
         """
-        if self._is_ok:
-            return self._type.Ok(op(cast(T, self._val)))
-        return self
+        return self._type.Ok(op(cast(T, self._val))) if self._is_ok else self
+
+    def flatmap(self, op: 'Callable[[T], Result[U, E]]') -> 'Result[U, E]':
+        """
+        Applies a function to the contained :meth:`Result.Ok` value.
+
+        This is different than :meth:`Result.map` because the function
+        result is not wrapped in a new :class:`Result`.
+
+        Args:
+            op: The function to apply to the contained :meth:`Result.Ok` value.
+
+        Returns:
+            The result of the function if `self` is an :meth:`Result.Ok` value,
+             otherwise returns `self`.
+
+        Examples:
+            >>> def sq(x): return Ok(x * x)
+            >>> def err(x): return Err(x)
+            >>> Ok(2).flatmap(sq).flatmap(sq)
+            Ok(16)
+            >>> Ok(2).flatmap(sq).flatmap(err)
+            Err(4)
+            >>> Ok(2).flatmap(err).flatmap(sq)
+            Err(2)
+            >>> Err(3).flatmap(sq).flatmap(sq)
+            Err(3)
+        """
+        return op(cast(T, self._val)) if self._is_ok else cast('Result[U, E]', self)
 
     def map_err(self, op: Callable[[E], F]) -> 'Union[Result[T, F], Result[T, E]]':
         """
@@ -201,9 +223,10 @@ class Result(Generic[T, E]):
             >>> Err(1).map_err(lambda x: x * 2)
             Err(2)
         """
-        if self._is_ok:
-            return self
-        return self._type.Err(op(cast(E, self._val)))
+        return self if self._is_ok else cast(
+            'Result[T, F]',
+            self._type.Err(op(cast(E, self._val)))
+        )
 
     def unwrap(self) -> T:
         """

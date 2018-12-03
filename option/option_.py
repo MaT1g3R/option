@@ -28,7 +28,7 @@ This module contains the Option class.
     Represents a None value.
 """
 
-from typing import Callable, Generic, Mapping, Union, Optional
+from typing import Callable, Generic, Mapping, Optional, Union, cast
 
 from option.types_ import A, K, T, U, V
 
@@ -77,9 +77,9 @@ class Option(Generic[T]):
         return cls(val, True, _force=True)
 
     @classmethod
-    def NONE(cls) -> 'Option[None]':
+    def NONE(cls) -> 'Option[T]':
         """No Value."""
-        return NONE
+        return cast('Option[T]', NONE)
 
     @classmethod
     def maybe(cls, val: Optional[T]) -> 'Option[T]':
@@ -98,9 +98,7 @@ class Option(Generic[T]):
             >>> Option.maybe(None)
             NONE
         """
-        if val is None:
-            return NONE  #type: ignore
-        return cls.Some(val)
+        return cast('Option[T]', NONE) if val is None else cls.Some(val)
 
     def __bool__(self):
         """
@@ -128,7 +126,7 @@ class Option(Generic[T]):
             >>> NONE.is_some
             False
         """
-        return self.__bool__()
+        return self._is_some
 
     @property
     def is_none(self) -> bool:
@@ -141,7 +139,7 @@ class Option(Generic[T]):
             >>> NONE.is_none
             True
         """
-        return not self.__bool__()
+        return not self._is_some
 
     def expect(self, msg) -> T:
         """
@@ -239,7 +237,7 @@ class Option(Generic[T]):
         """
         return self._val if self._is_some else callback()
 
-    def map(self, callback: Callable[[T], U]) -> 'Union[Option[U], Option[None]]':
+    def map(self, callback: Callable[[T], U]) -> 'Option[U]':
         """
         Applies the ``callback`` with the contained value as its argument or
         returns :py:data:`NONE`.
@@ -257,10 +255,7 @@ class Option(Generic[T]):
             >>> NONE.map(lambda x: x * x)
             NONE
         """
-        if self._is_some:
-            return self._type.Some(callback(self._val))
-        else:
-            return NONE
+        return self._type.Some(callback(self._val)) if self._is_some else cast('Option[U]', NONE)
 
     def map_or(self, callback: Callable[[T], U], default: A) -> Union[U, A]:
         """
@@ -307,7 +302,38 @@ class Option(Generic[T]):
         """
         return callback(self._val) if self._is_some else default()
 
-    def filter(self, predicate: Callable[[T], bool]) -> 'Union[Option[T], Option[None]]':
+    def flatmap(self, callback: 'Callable[[T], Option[U]]') -> 'Option[U]':
+        """
+        Applies the callback to the contained value if the option
+        is not :py:data:`NONE`.
+
+        This is different than :py:meth:`Option.map` because the result
+        of the callback isn't wrapped in a new :py:class:`Option`
+
+        Args:
+            callback: The callback to apply to the contained value.
+
+        Returns:
+            :py:data:`NONE` if the option is :py:data:`NONE`.
+
+            otherwise calls `callback` with the contained value and
+            returns the result.
+
+        Examples:
+            >>> def square(x): return Some(x * x)
+            >>> def nope(x): return NONE
+            >>> Some(2).flatmap(square).flatmap(square)
+            Some(16)
+            >>> Some(2).flatmap(square).flatmap(nope)
+            NONE
+            >>> Some(2).flatmap(nope).flatmap(square)
+            NONE
+            >>> NONE.flatmap(square).flatmap(square)
+            NONE
+        """
+        return callback(self._val) if self._is_some else cast('Option[U]', NONE)
+
+    def filter(self, predicate: Callable[[T], bool]) -> 'Option[T]':
         """
         Returns :py:data:`NONE` if the :py:class:`Option` is :py:data:`NONE`,
         otherwise filter the contained value by ``predicate``.
@@ -330,8 +356,7 @@ class Option(Generic[T]):
         """
         if self._is_some and predicate(self._val):
             return self
-        else:
-            return NONE
+        return cast('Option[T]', NONE)
 
     def get(
             self: 'Option[Mapping[K,V]]',
