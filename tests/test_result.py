@@ -23,7 +23,7 @@
 import pytest
 
 from option import Err, NONE, Ok, Result, Some
-from tests import parametrize
+from tests.conftest import parametrize
 
 
 @parametrize('args', [

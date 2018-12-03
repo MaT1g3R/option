@@ -23,7 +23,7 @@
 import pytest
 
 from option import NONE, Option, Some, maybe
-from tests import parametrize
+from tests.conftest import parametrize
 
 
 @parametrize('is_some', [True, False])
