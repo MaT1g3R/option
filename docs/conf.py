@@ -22,7 +22,7 @@
 from option import __version__
 
 project = 'option'
-copyright = '2018, Peijun Ma'
+copyright = '2018-2019, Peijun Ma'
 author = 'Peijun Ma'
 
 # The short X.Y version
