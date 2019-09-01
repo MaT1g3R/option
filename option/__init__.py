@@ -31,4 +31,4 @@ from .option_ import NONE, Option, Some, maybe
 from .result import Err, Ok, Result
 
 __version__ = '1.0.0'
-__all__ = ['NONE', 'Option', 'Some', 'maybe', 'Result', 'Ok', 'Err']
+__all__ = ['NONE', 'Option', 'Some', 'maybe', 'Result', 'Ok', 'Err', '__version__']
