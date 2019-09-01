@@ -3,12 +3,12 @@ language: python
 matrix:
   include:
     - os: linux
-      dist: xenial
+      dist: bionic
       sudo: false
       python: '3.6'
       env: UPLOAD_COV=false
     - os: linux
-      dist: xenial
+      dist: bionic
       sudo: false
       python: '3.7'
       env: UPLOAD_COV=true
