@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "option"
-version = "1.0.0"
+version = "1.0.1"
 description = "Rust like Option and Result types in Python"
 authors = ["Peijun Ma <peijun.ma@protonmail.com>"]
 readme = "README.md"
