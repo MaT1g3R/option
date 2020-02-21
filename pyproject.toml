@@ -19,9 +19,8 @@ include = ['option/py.typed', 'option/**/*.py', 'LICENSE']
 python = ">=3.6"
 
 [tool.poetry.dev-dependencies]
-pytest = "^3.0"
-mypy = "^0.620.0"
-Sphinx = "^1.8"
-pylint = "^2.1"
-pytest-cov = "^2.6"
-bumpversion = "^0.5.3"
+pytest = "*"
+mypy = "*"
+Sphinx = "*"
+pylint = "*"
+pytest-cov = "*"
