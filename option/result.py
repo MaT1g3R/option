@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 """This module contains the Result type."""
-from typing import Any, Callable, Generic, Union, cast
+from typing import Any, Callable, Generic, Union
 
 from option.option_ import NONE, Option
 from option.types_ import E, F, T, U
@@ -139,7 +139,7 @@ class Result(Generic[T, E]):
             >>> Err(1).ok()
             NONE
         """
-        return Option.Some(cast(T, self._val)) if self._is_ok else cast(Option[T], NONE)
+        return Option.Some(self._val) if self._is_ok else NONE  # type: ignore
 
     def err(self) -> Option[E]:
         """
@@ -155,7 +155,7 @@ class Result(Generic[T, E]):
             >>> Err(1).err()
             Some(1)
         """
-        return cast(Option[E], NONE) if self._is_ok else Option.Some(cast(E, self._val))
+        return NONE if self._is_ok else Option.Some(self._val)  # type: ignore
 
     def map(self, op: Callable[[T], U]) -> 'Union[Result[U, E], Result[T, E]]':
         """
@@ -175,7 +175,7 @@ class Result(Generic[T, E]):
             >>> Err(1).map(lambda x: x * 2)
             Err(1)
         """
-        return self._type.Ok(op(cast(T, self._val))) if self._is_ok else self
+        return self._type.Ok(op(self._val)) if self._is_ok else self  # type: ignore
 
     def flatmap(self, op: 'Callable[[T], Result[U, E]]') -> 'Result[U, E]':
         """
@@ -203,7 +203,7 @@ class Result(Generic[T, E]):
             >>> Err(3).flatmap(sq).flatmap(sq)
             Err(3)
         """
-        return op(cast(T, self._val)) if self._is_ok else cast('Result[U, E]', self)
+        return op(self._val) if self._is_ok else self  # type: ignore
 
     def map_err(self, op: Callable[[E], F]) -> 'Union[Result[T, F], Result[T, E]]':
         """
@@ -223,10 +223,7 @@ class Result(Generic[T, E]):
             >>> Err(1).map_err(lambda x: x * 2)
             Err(2)
         """
-        return self if self._is_ok else cast(
-            'Result[T, F]',
-            self._type.Err(op(cast(E, self._val)))
-        )
+        return self if self._is_ok else self._type.Err(op(self._val))  # type: ignore
 
     def unwrap(self) -> T:
         """
@@ -249,7 +246,7 @@ class Result(Generic[T, E]):
             1
         """
         if self._is_ok:
-            return cast(T, self._val)
+            return self._val  # type: ignore
         raise ValueError(self._val)
 
     def unwrap_or(self, optb: T) -> T:
@@ -273,7 +270,7 @@ class Result(Generic[T, E]):
             >>> Err(1).unwrap_or(2)
             2
         """
-        return cast(T, self._val) if self._is_ok else optb
+        return self._val if self._is_ok else optb  # type: ignore
 
     def unwrap_or_else(self, op: Callable[[E], U]) -> Union[T, U]:
         """
@@ -293,7 +290,7 @@ class Result(Generic[T, E]):
             >>> Err(1).unwrap_or_else(lambda e: e * 10)
             10
         """
-        return cast(T, self._val) if self._is_ok else op(cast(E, self._val))
+        return self._val if self._is_ok else op(self._val)  # type: ignore
 
     def expect(self, msg) -> T:
         """
@@ -321,7 +318,7 @@ class Result(Generic[T, E]):
             no
         """
         if self._is_ok:
-            return cast(T, self._val)
+            return self._val  # type: ignore
         raise ValueError(msg)
 
     def unwrap_err(self) -> E:
@@ -347,7 +344,7 @@ class Result(Generic[T, E]):
         """
         if self._is_ok:
             raise ValueError(self._val)
-        return cast(E, self._val)
+        return self._val  # type: ignore
 
     def expect_err(self, msg) -> E:
         """
@@ -376,7 +373,7 @@ class Result(Generic[T, E]):
         """
         if self._is_ok:
             raise ValueError(msg)
-        return cast(E, self._val)
+        return self._val  # type: ignore
 
     def __repr__(self):
         return f'Ok({self._val!r})' if self._is_ok else f'Err({self._val!r})'

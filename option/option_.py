@@ -28,7 +28,7 @@ This module contains the Option class.
     Represents a None value.
 """
 
-from typing import Callable, Generic, Mapping, Optional, Union, cast
+from typing import Callable, Generic, Mapping, Optional, Union
 
 from option.types_ import A, K, T, U, V
 
@@ -79,7 +79,7 @@ class Option(Generic[T]):
     @classmethod
     def NONE(cls) -> 'Option[T]':
         """No Value."""
-        return cast('Option[T]', NONE)
+        return NONE  # type: ignore
 
     @classmethod
     def maybe(cls, val: Optional[T]) -> 'Option[T]':
@@ -98,7 +98,7 @@ class Option(Generic[T]):
             >>> Option.maybe(None)
             NONE
         """
-        return cast('Option[T]', NONE) if val is None else cls.Some(val)
+        return NONE if val is None else cls.Some(val)  # type: ignore
 
     def __bool__(self):
         """
@@ -255,7 +255,7 @@ class Option(Generic[T]):
             >>> NONE.map(lambda x: x * x)
             NONE
         """
-        return self._type.Some(callback(self._val)) if self._is_some else cast('Option[U]', NONE)
+        return self._type.Some(callback(self._val)) if self._is_some else NONE  # type: ignore
 
     def map_or(self, callback: Callable[[T], U], default: A) -> Union[U, A]:
         """
@@ -331,7 +331,7 @@ class Option(Generic[T]):
             >>> NONE.flatmap(square).flatmap(square)
             NONE
         """
-        return callback(self._val) if self._is_some else cast('Option[U]', NONE)
+        return callback(self._val) if self._is_some else NONE  # type: ignore
 
     def filter(self, predicate: Callable[[T], bool]) -> 'Option[T]':
         """
@@ -356,7 +356,7 @@ class Option(Generic[T]):
         """
         if self._is_some and predicate(self._val):
             return self
-        return cast('Option[T]', NONE)
+        return NONE  # type: ignore
 
     def get(
             self: 'Option[Mapping[K,V]]',
@@ -388,8 +388,8 @@ class Option(Generic[T]):
             NONE
         """
         if self._is_some:
-            return self._type.maybe(self._val.get(key, default))
-        return self._type.maybe(default)
+            return self._type.maybe(self._val.get(key, default))  # type: ignore
+        return self._type.maybe(default)  # type: ignore
 
     def __hash__(self):
         return hash((self.__class__, self._is_some, self._val))
