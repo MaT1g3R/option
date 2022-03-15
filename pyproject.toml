@@ -24,3 +24,8 @@ mypy = "^0.942"
 Sphinx = "^4.5.0"
 pylint = "^2.13.3"
 bump2version = "^1.0.0"
+
+[tool.mypy]
+strict = true
+show_column_numbers = true
+show_error_codes = true

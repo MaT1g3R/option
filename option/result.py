@@ -25,6 +25,8 @@ from typing import Any, Callable, Generic, Union
 
 from option.option_ import NONE, Option
 from option.types_ import E, F, T, U
+from option.types_ import SupportsDunderLT, SupportsDunderGT
+from option.types_ import SupportsDunderLE, SupportsDunderGE
 
 
 class Result(Generic[T, E]):
@@ -46,7 +48,7 @@ class Result(Generic[T, E]):
     """
     __slots__ = ('_val', '_is_ok', '_type')
 
-    def __init__(self, val: Union[T, E], is_ok: bool, *, _force=False) -> None:
+    def __init__(self, val: Union[T, E], is_ok: bool, *, _force: bool = False) -> None:
         if not _force:
             raise TypeError(
                 'Cannot directly initialize, '
@@ -96,7 +98,7 @@ class Result(Generic[T, E]):
         """
         return cls(err, False, _force=True)
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         return self._is_ok
 
     @property
@@ -292,7 +294,7 @@ class Result(Generic[T, E]):
         """
         return self._val if self._is_ok else op(self._val)  # type: ignore
 
-    def expect(self, msg) -> T:
+    def expect(self, msg: object) -> T:
         """
         Returns the success value in the :class:`Result` or raises
         a ``ValueError`` with a provided message.
@@ -346,7 +348,7 @@ class Result(Generic[T, E]):
             raise ValueError(self._val)
         return self._val  # type: ignore
 
-    def expect_err(self, msg) -> E:
+    def expect_err(self, msg: object) -> E:
         """
         Returns the error value in a :class:`Result`, or raises a
         ``ValueError`` with the provided message.
@@ -375,44 +377,44 @@ class Result(Generic[T, E]):
             raise ValueError(msg)
         return self._val  # type: ignore
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f'Ok({self._val!r})' if self._is_ok else f'Err({self._val!r})'
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash((self._type, self._is_ok, self._val))
 
-    def __eq__(self, other):
+    def __eq__(self, other: object) -> bool:
         return (isinstance(other, self._type)
                 and self._is_ok == other._is_ok
                 and self._val == other._val)
 
-    def __ne__(self, other):
+    def __ne__(self, other: object) -> bool:
         return (not isinstance(other, self._type)
                 or self._is_ok != other._is_ok
                 or self._val != other._val)
 
-    def __lt__(self, other):
+    def __lt__(self: 'Result[SupportsDunderLT, SupportsDunderLT]', other: object) -> bool:
         if isinstance(other, self._type):
             if self._is_ok == other._is_ok:
                 return self._val < other._val
             return self._is_ok
         return NotImplemented
 
-    def __le__(self, other):
+    def __le__(self: 'Result[SupportsDunderLE, SupportsDunderLE]', other: object) -> bool:
         if isinstance(other, self._type):
             if self._is_ok == other._is_ok:
                 return self._val <= other._val
             return self._is_ok
         return NotImplemented
 
-    def __gt__(self, other):
+    def __gt__(self: 'Result[SupportsDunderGT, SupportsDunderGT]', other: object) -> bool:
         if isinstance(other, self._type):
             if self._is_ok == other._is_ok:
                 return self._val > other._val
             return other._is_ok
         return NotImplemented
 
-    def __ge__(self, other):
+    def __ge__(self: 'Result[SupportsDunderGE, SupportsDunderGE]', other: object) -> bool:
         if isinstance(other, self._type):
             if self._is_ok == other._is_ok:
                 return self._val >= other._val

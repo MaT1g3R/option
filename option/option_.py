@@ -31,6 +31,8 @@ This module contains the Option class.
 from typing import Callable, Generic, Mapping, Optional, Union
 
 from option.types_ import A, K, T, U, V
+from option.types_ import SupportsDunderLT, SupportsDunderGT
+from option.types_ import SupportsDunderLE, SupportsDunderGE
 
 
 class Option(Generic[T]):
@@ -100,7 +102,7 @@ class Option(Generic[T]):
         """
         return NONE if val is None else cls.Some(val)  # type: ignore
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         """
         Returns the truth value of the :py:class:`Option` based on its value.
 
@@ -141,7 +143,7 @@ class Option(Generic[T]):
         """
         return not self._is_some
 
-    def expect(self, msg) -> T:
+    def expect(self, msg: object) -> T:
         """
         Unwraps the option. Raises an exception if the value is :py:data:`NONE`.
 
@@ -361,7 +363,7 @@ class Option(Generic[T]):
     def get(
             self: 'Option[Mapping[K,V]]',
             key: K,
-            default=None
+            default: Union[V, None] = None
     ) -> 'Option[V]':
         """
         Gets a mapping value by key in the contained value or returns
@@ -391,20 +393,20 @@ class Option(Generic[T]):
             return self._type.maybe(self._val.get(key, default))  # type: ignore
         return self._type.maybe(default)  # type: ignore
 
-    def __hash__(self):
+    def __hash__(self) -> int:
         return hash((self.__class__, self._is_some, self._val))
 
-    def __eq__(self, other):
+    def __eq__(self, other: object) -> bool:
         return (isinstance(other, self._type)
                 and self._is_some == other._is_some
                 and self._val == other._val)
 
-    def __ne__(self, other):
+    def __ne__(self, other: object) -> bool:
         return (not isinstance(other, self._type)
                 or self._is_some != other._is_some
                 or self._val != other._val)
 
-    def __lt__(self, other):
+    def __lt__(self: 'Option[SupportsDunderLT]', other: object) -> bool:
         if isinstance(other, self._type):
             if self._is_some == other._is_some:
                 return self._val < other._val if self._is_some else False
@@ -412,14 +414,14 @@ class Option(Generic[T]):
                 return other._is_some
         return NotImplemented
 
-    def __le__(self, other):
+    def __le__(self: 'Option[SupportsDunderLE]', other: object) -> bool:
         if isinstance(other, self._type):
             if self._is_some == other._is_some:
                 return self._val <= other._val if self._is_some else True
             return other._is_some
         return NotImplemented
 
-    def __gt__(self, other):
+    def __gt__(self: 'Option[SupportsDunderGT]', other: object) -> bool:
         if isinstance(other, self._type):
             if self._is_some == other._is_some:
                 return self._val > other._val if self._is_some else False
@@ -427,14 +429,14 @@ class Option(Generic[T]):
                 return self._is_some
         return NotImplemented
 
-    def __ge__(self, other):
+    def __ge__(self: 'Option[SupportsDunderGE]', other: object) -> bool:
         if isinstance(other, self._type):
             if self._is_some == other._is_some:
                 return self._val >= other._val if self._is_some else True
             return self._is_some
         return NotImplemented
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return 'NONE' if self.is_none else f'Some({self._val!r})'
 
 
