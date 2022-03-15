@@ -22,7 +22,7 @@
 
 # pylint: skip-file
 
-from typing import TypeVar
+from typing import Protocol, TypeVar
 
 T = TypeVar('T')
 U = TypeVar('U')
@@ -33,3 +33,19 @@ V = TypeVar('V')
 
 E = TypeVar('E')
 F = TypeVar('F')
+
+
+class SupportsDunderLT(Protocol):
+    def __lt__(self, __other: object) -> bool: ...
+
+
+class SupportsDunderGT(Protocol):
+    def __gt__(self, __other: object) -> bool: ...
+
+
+class SupportsDunderLE(Protocol):
+    def __le__(self, __other: object) -> bool: ...
+
+
+class SupportsDunderGE(Protocol):
+    def __ge__(self, __other: object) -> bool: ...
