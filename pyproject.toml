@@ -21,6 +21,7 @@ include = ['option/py.typed', 'option/**/*.py', 'LICENSE']
 
 [tool.poetry.dependencies]
 python = ">=3.7,<4"
+typing-extensions = { version = ">=4.0", python = "<3.8" }
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.1"

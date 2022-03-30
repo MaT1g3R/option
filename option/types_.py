@@ -22,7 +22,14 @@
 
 # pylint: skip-file
 
-from typing import Protocol, TypeVar
+import sys
+from typing import TypeVar
+
+if sys.version_info >= (3, 8):
+    from typing import Protocol
+else:
+    from typing_extensions import Protocol
+
 
 T = TypeVar('T')
 U = TypeVar('U')
