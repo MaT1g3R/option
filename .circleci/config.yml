@@ -1,0 +1,134 @@
+version: 2.1
+
+workflows:
+  main:
+    jobs:
+      - checkout
+      - deps:
+          requires:
+            - checkout
+          matrix:
+            parameters:
+              python_version:
+                - '3.7'
+                - '3.8'
+                - '3.9'
+                - '3.10'
+      - lint:
+          requires:
+            - checkout
+            - deps
+          matrix:
+            parameters:
+              python_version:
+                - '3.7'
+                - '3.8'
+                - '3.9'
+                - '3.10'
+      - test:
+          requires:
+            - checkout
+            - deps
+          name: test-<< matrix.python_version >>
+          matrix:
+            parameters:
+              python_version:
+                - '3.7'
+                - '3.8'
+                - '3.9'
+                - '3.10'
+      - release:
+          requires:
+            - checkout
+            - deps
+            - lint
+            - test
+          filters:
+            branches:
+              only: master
+
+jobs:
+  checkout:
+    docker:
+      - image: cimg/base:stable
+    resource_class: small
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: '.'
+          paths:
+            - '*'
+
+  deps:
+    parameters:
+      python_version:
+        type: string
+    docker:
+      - image: cimg/python:<<parameters.python_version>>
+    resource_class: medium
+    steps:
+      - attach_workspace:
+          at: '.'
+      - restore_cache:
+          key: '{{ checksum "poetry.lock" }}-<<parameters.python_version>>'
+      - run:
+          name: Install deps
+          command: |
+            python -m venv venv-<<parameters.python_version>>
+            source ./venv-<<parameters.python_version>>/bin/activate
+            poetry install --no-root -n
+      - save_cache:
+          paths:
+            - "venv-<<parameters.python_version>>"
+          key: '{{ checksum "poetry.lock" }}-<<parameters.python_version>>'
+      - persist_to_workspace:
+          root: '.'
+          paths:
+            - 'venv-*'
+
+  lint:
+    parameters:
+      python_version:
+        type: string
+    docker:
+      - image: cimg/python:<<parameters.python_version>>
+    resource_class: medium
+    steps:
+      - attach_workspace:
+          at: '.'
+      - run:
+          name: Lint
+          command: |
+            source ./venv-<<parameters.python_version>>/bin/activate
+            make lint
+
+  test:
+    parameters:
+      python_version:
+        type: string
+    docker:
+      - image: cimg/python:<<parameters.python_version>>
+    steps:
+      - attach_workspace:
+          at: '.'
+      - run:
+          name: Run tests
+          command: |
+            source ./venv-<<parameters.python_version>>/bin/activate
+            make test
+
+  release:
+    parameters:
+      python_version:
+        type: string
+        default: '3.10'
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - attach_workspace:
+          at: '.'
+      - run:
+          name: Release
+          command: |
+            source ./venv-<<parameters.python_version>>/bin/activate
+            poetry publish  -u __token__ -p $PYPI_TOKEN --build
