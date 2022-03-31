@@ -15,7 +15,3 @@ docs:
 lint:
 	mypy option
 	pylint option
-
-ci_install:
-	pip install poetry
-	poetry install
