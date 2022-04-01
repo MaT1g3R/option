@@ -130,7 +130,7 @@ jobs:
       - run:
           name: Release
           command: |
-            if [ ! $(git log -1 --pretty=%B | grep -Fi '[no release]') ]; then
+            if [ -n "$(git log -1 --pretty=%B | grep -Fi '[release]')" ]; then
               source ./venv-<<parameters.python_version>>/bin/activate
               poetry publish  -u __token__ -p $PYPI_TOKEN --build
             fi
