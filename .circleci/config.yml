@@ -1,7 +1,7 @@
 # dummy CI config to make CCI happy
 version: 2.1
 jobs:
-  dummy:
+  build:
     docker:
       - image: cimg/base:stable
     steps:
