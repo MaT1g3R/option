@@ -137,6 +137,9 @@ jobs:
       - run:
           name: Deploy GitHub pages
           command: |
+            sudo apt-get update -y
+            sudo apt-get install rsync -y
+
             source ./venv-<<parameters.python_version>>/bin/activate
             make docs
             rsync --list-only  -r docs/_build/html/  | awk '{ print $5 }' | tail -n+2 > list.txt
