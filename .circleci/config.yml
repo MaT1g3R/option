@@ -146,5 +146,9 @@ jobs:
             git checkout gh-pages
             rsync --files-from=list.txt -R docs/_build/html/ .
             cat list.txt | xargs  git add
+
+            git config --global user.email "peijun.ma@pm.me"
+            git config --global user.name "Peijun Ma"
+
             git commit -m "Deploy to GitHub pages"
             git push --force-with-lease origin gh-pages
