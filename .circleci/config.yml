@@ -134,3 +134,14 @@ jobs:
               source ./venv-<<parameters.python_version>>/bin/activate
               poetry publish  -u __token__ -p $PYPI_TOKEN --build
             fi
+      - run:
+          name: Deploy GitHub pages
+          command: |
+            source ./venv-<<parameters.python_version>>/bin/activate
+            make docs
+            rsync --list-only  -r docs/_build/html/  | awk '{ print $5 }' | tail -n+2 > list.txt
+            git checkout gh-pages
+            rsync --files-from=list.txt -R docs/_build/html/ .
+            cat list.txt | xargs  git add
+            git commit -m "Deploy to GitHub pages"
+            git push --force-with-lease origin gh-pages
