@@ -1,0 +1,8 @@
+# dummy CI config to make CCI happy
+version: 2.1
+jobs:
+  dummy:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "placeholder"
