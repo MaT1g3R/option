@@ -1,6 +1,5 @@
 # Option
-[![Build Status](https://travis-ci.org/MaT1g3R/option.svg?branch=master)](https://travis-ci.org/MaT1g3R/option)
-[![codecov](https://codecov.io/gh/MaT1g3R/option/branch/master/graph/badge.svg)](https://codecov.io/gh/MaT1g3R/option)
+[![CircleCI](https://circleci.com/gh/MaT1g3R/option/tree/master.svg?style=svg)](https://circleci.com/gh/MaT1g3R/option/tree/master)
 
 Rust-like [Option](https://doc.rust-lang.org/std/option/enum.Option.html) and [Result](https://doc.rust-lang.org/std/result/enum.Result.html) types in Python, slotted and fully typed.
 
