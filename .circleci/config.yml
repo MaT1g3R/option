@@ -128,11 +128,21 @@ jobs:
       - attach_workspace:
           at: '.'
       - run:
+          name: Setup Git
+          command: |
+            git config --global user.email "peijun.ma@pm.me"
+            git config --global user.name "Peijun Ma"
+      - run:
           name: Release
           command: |
             if [ -n "$(git log -1 --pretty=%B | grep -Fi '[release]')" ]; then
               source ./venv-<<parameters.python_version>>/bin/activate
               poetry publish  -u __token__ -p $PYPI_TOKEN --build
+
+              _version=$(poetry version | awk '{ print $2 }')
+
+              git tag -a "${_version}" -m "Releasing version ${_version}"
+              git push origin "${_version}"
             fi
       - run:
           name: Deploy GitHub pages
@@ -146,9 +156,6 @@ jobs:
             git checkout gh-pages
             rsync --files-from=list.txt -R docs/_build/html/ .
             cat list.txt | xargs  git add
-
-            git config --global user.email "peijun.ma@pm.me"
-            git config --global user.name "Peijun Ma"
 
             mkdir -p ~/.ssh
             echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
