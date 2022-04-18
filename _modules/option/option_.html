@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>option.option_ &#8212; option 2.0.0 documentation</title>
+    <title>option.option_ &#8212; option 2.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -64,6 +64,8 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">from</span> <span class="nn">option.types_</span> <span class="kn">import</span> <span class="n">A</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">U</span><span class="p">,</span> <span class="n">V</span>
+<span class="kn">from</span> <span class="nn">option.types_</span> <span class="kn">import</span> <span class="n">SupportsDunderLT</span><span class="p">,</span> <span class="n">SupportsDunderGT</span>
+<span class="kn">from</span> <span class="nn">option.types_</span> <span class="kn">import</span> <span class="n">SupportsDunderLE</span><span class="p">,</span> <span class="n">SupportsDunderGE</span>
 
 
 <div class="viewcode-block" id="Option"><a class="viewcode-back" href="../../option.html#option.option_.Option">[docs]</a><span class="k">class</span> <span class="nc">Option</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
@@ -133,7 +135,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">NONE</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Some</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>  <span class="c1"># type: ignore</span></div>
 
-    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the truth value of the :py:class:`Option` based on its value.</span>
 
@@ -174,7 +176,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span>
 
-<div class="viewcode-block" id="Option.expect"><a class="viewcode-back" href="../../option.html#option.option_.Option.expect">[docs]</a>    <span class="k">def</span> <span class="nf">expect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<div class="viewcode-block" id="Option.expect"><a class="viewcode-back" href="../../option.html#option.option_.Option.expect">[docs]</a>    <span class="k">def</span> <span class="nf">expect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Unwraps the option. Raises an exception if the value is :py:data:`NONE`.</span>
 
@@ -394,7 +396,7 @@
 <div class="viewcode-block" id="Option.get"><a class="viewcode-back" href="../../option.html#option.option_.Option.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">:</span> <span class="s1">&#39;Option[Mapping[K,V]]&#39;</span><span class="p">,</span>
             <span class="n">key</span><span class="p">:</span> <span class="n">K</span><span class="p">,</span>
-            <span class="n">default</span><span class="o">=</span><span class="kc">None</span>
+            <span class="n">default</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">V</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;Option[V]&#39;</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Gets a mapping value by key in the contained value or returns</span>
@@ -424,20 +426,20 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">))</span>  <span class="c1"># type: ignore</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="o">.</span><span class="n">maybe</span><span class="p">(</span><span class="n">default</span><span class="p">)</span>  <span class="c1"># type: ignore</span></div>
 
-    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">)</span>
                 <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_some</span>
                 <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_val</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">)</span>
                 <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_some</span>
                 <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">_val</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s1">&#39;Option[SupportsDunderLT]&#39;</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_some</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">_val</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span> <span class="k">else</span> <span class="kc">False</span>
@@ -445,14 +447,14 @@
                 <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_some</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span>
 
-    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s1">&#39;Option[SupportsDunderLE]&#39;</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_some</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">_val</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span> <span class="k">else</span> <span class="kc">True</span>
             <span class="k">return</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_some</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span>
 
-    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s1">&#39;Option[SupportsDunderGT]&#39;</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_some</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">_val</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span> <span class="k">else</span> <span class="kc">False</span>
@@ -460,14 +462,14 @@
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span>
 
-    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s1">&#39;Option[SupportsDunderGE]&#39;</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">_is_some</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_val</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">_val</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span> <span class="k">else</span> <span class="kc">True</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_some</span>
         <span class="k">return</span> <span class="bp">NotImplemented</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="s1">&#39;NONE&#39;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_none</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;Some(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_val</span><span class="si">!r}</span><span class="s1">)&#39;</span></div>
 
 
