@@ -164,5 +164,5 @@ jobs:
             rsync --files-from=list.txt -R docs/_build/html/ .
             cat list.txt | xargs  git add
 
-            git commit -m "Deploy to GitHub pages"
+            git commit --allow-empty -m "Deploy to GitHub pages"
             git push --force-with-lease origin gh-pages
