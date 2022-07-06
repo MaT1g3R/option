@@ -25,7 +25,7 @@ typing-extensions = { version = ">=4.0", python = "<3.8" }
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.1"
-mypy = "^0.942"
+mypy = "^0.961"
 Sphinx = "^4.5.0"
 pylint = "^2.13.3"
 bump2version = "^1.0.0"
