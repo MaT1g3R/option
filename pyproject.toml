@@ -27,7 +27,7 @@ typing-extensions = { version = ">=4.0", python = "<3.8" }
 pytest = "^7.1.2"
 mypy = "^0.961"
 Sphinx = "^4.5.0"
-pylint = "^2.13.3"
+pylint = "^2.13.9"
 bump2version = "^1.0.0"
 
 [tool.mypy]
