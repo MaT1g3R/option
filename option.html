@@ -14,6 +14,7 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Welcome to option’s documentation!" href="index.html" />
@@ -790,8 +791,54 @@ from the error value.</p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">option package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#modules">Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-option.option_">option.option_ module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-option.result">option.result module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-option.option_">option.option_ module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#option.option_.NONE"><code class="docutils literal notranslate"><span class="pre">NONE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#option.option_.Option"><code class="docutils literal notranslate"><span class="pre">Option</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.NONE"><code class="docutils literal notranslate"><span class="pre">Option.NONE()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.Some"><code class="docutils literal notranslate"><span class="pre">Option.Some()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.expect"><code class="docutils literal notranslate"><span class="pre">Option.expect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.filter"><code class="docutils literal notranslate"><span class="pre">Option.filter()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.flatmap"><code class="docutils literal notranslate"><span class="pre">Option.flatmap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.get"><code class="docutils literal notranslate"><span class="pre">Option.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.is_none"><code class="docutils literal notranslate"><span class="pre">Option.is_none</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.is_some"><code class="docutils literal notranslate"><span class="pre">Option.is_some</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.map"><code class="docutils literal notranslate"><span class="pre">Option.map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.map_or"><code class="docutils literal notranslate"><span class="pre">Option.map_or()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.map_or_else"><code class="docutils literal notranslate"><span class="pre">Option.map_or_else()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.maybe"><code class="docutils literal notranslate"><span class="pre">Option.maybe()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.unwrap"><code class="docutils literal notranslate"><span class="pre">Option.unwrap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.unwrap_or"><code class="docutils literal notranslate"><span class="pre">Option.unwrap_or()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.unwrap_or_else"><code class="docutils literal notranslate"><span class="pre">Option.unwrap_or_else()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.option_.Option.value"><code class="docutils literal notranslate"><span class="pre">Option.value</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#option.option_.Some"><code class="docutils literal notranslate"><span class="pre">Some()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#option.option_.maybe"><code class="docutils literal notranslate"><span class="pre">maybe()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-option.result">option.result module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#option.result.Err"><code class="docutils literal notranslate"><span class="pre">Err()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#option.result.Ok"><code class="docutils literal notranslate"><span class="pre">Ok()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#option.result.Result"><code class="docutils literal notranslate"><span class="pre">Result</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.Err"><code class="docutils literal notranslate"><span class="pre">Result.Err()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.Ok"><code class="docutils literal notranslate"><span class="pre">Result.Ok()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.err"><code class="docutils literal notranslate"><span class="pre">Result.err()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.expect"><code class="docutils literal notranslate"><span class="pre">Result.expect()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.expect_err"><code class="docutils literal notranslate"><span class="pre">Result.expect_err()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.flatmap"><code class="docutils literal notranslate"><span class="pre">Result.flatmap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.is_err"><code class="docutils literal notranslate"><span class="pre">Result.is_err</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.is_ok"><code class="docutils literal notranslate"><span class="pre">Result.is_ok</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.map"><code class="docutils literal notranslate"><span class="pre">Result.map()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.map_err"><code class="docutils literal notranslate"><span class="pre">Result.map_err()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.ok"><code class="docutils literal notranslate"><span class="pre">Result.ok()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.unwrap"><code class="docutils literal notranslate"><span class="pre">Result.unwrap()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.unwrap_err"><code class="docutils literal notranslate"><span class="pre">Result.unwrap_err()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.unwrap_or"><code class="docutils literal notranslate"><span class="pre">Result.unwrap_or()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#option.result.Result.unwrap_or_else"><code class="docutils literal notranslate"><span class="pre">Result.unwrap_or_else()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -830,7 +877,7 @@ from the error value.</p>
       &copy;2018-2022, Peijun Ma.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.1.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
